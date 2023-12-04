@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/localizations": "^1.26.10",
+    "@clerk/nextjs": "^4.27.2",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "20.9.2",
     "@types/react": "18.2.37",
