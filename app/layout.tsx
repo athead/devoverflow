@@ -40,7 +40,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${spaceGrotesk.className}`}>
-        <h1 className="h1-bold">DevOverflow</h1>
         <ClerkProvider
           localization={ruRU}
           appearance={{
