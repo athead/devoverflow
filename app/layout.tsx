@@ -1,8 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
 // eslint-disable-next-line camelcase
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Rubik } from "next/font/google";
 import React from "react";
+import { cookies } from "next/headers";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { ruRU } from "@clerk/localizations";
@@ -14,10 +15,10 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-spaceGrotesk",
+const rubik = Rubik({
+  subsets: ["cyrillic", "latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-rubik",
 });
 
 export const metadata: Metadata = {
@@ -37,9 +38,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const prefersDark = cookies().get("x-theme")?.value === "dark";
   return (
-    <html lang="en">
-      <body className={`${inter.className} ${spaceGrotesk.className}`}>
+    <html lang="en" className={`${prefersDark ? "dark" : ""}`}>
+      <body className={`${inter.className} ${rubik.className}`}>
         <ClerkProvider
           localization={ruRU}
           appearance={{

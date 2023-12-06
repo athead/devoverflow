@@ -4,9 +4,10 @@ import React, {
   createContext,
   useContext,
   useState,
-  useEffect,
   useCallback,
+  useEffect,
 } from "react";
+import { getCookie, hasCookie, setCookie } from "cookies-next";
 
 interface ThemeContextType {
   mode: string;
@@ -18,16 +19,22 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [mode, setMode] = useState("");
 
   const handleThemeChange = useCallback(() => {
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-clor-scheme: dark)").matches)
-    ) {
+    if (getCookie("x-theme") === "dark") {
       setMode("dark");
       document.documentElement.classList.add("dark");
     } else {
       setMode("light");
       document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (
+      !hasCookie("x-theme") &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      setCookie("x-theme", "dark");
+      handleThemeChange();
     }
   }, []);
 

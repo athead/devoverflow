@@ -1,46 +1,46 @@
 import { SidebarLink, ThemeType } from "@/types";
 
 export const themes: ThemeType[] = [
-  { value: "light", label: "Light", icon: "/assets/icons/sun.svg" },
-  { value: "dark", label: "Dark", icon: "/assets/icons/moon.svg" },
-  { value: "system", label: "System", icon: "/assets/icons/computer.svg" },
+  { value: "light", label: "Светлая", icon: "/assets/icons/sun.svg" },
+  { value: "dark", label: "Темная", icon: "/assets/icons/moon.svg" },
+  // { value: "system", label: "Системная", icon: "/assets/icons/computer.svg" },
 ];
 
 export const sidebarLinks: SidebarLink[] = [
   {
     imgURL: "/assets/icons/home.svg",
     route: "/",
-    label: "Home",
+    label: "Главная",
   },
   {
     imgURL: "/assets/icons/users.svg",
     route: "/community",
-    label: "Community",
+    label: "Сообщество",
   },
   {
     imgURL: "/assets/icons/star.svg",
     route: "/collection",
-    label: "Collections",
+    label: "Избранные",
   },
   {
     imgURL: "/assets/icons/suitcase.svg",
     route: "/jobs",
-    label: "Find Jobs",
+    label: "Работы",
   },
   {
     imgURL: "/assets/icons/tag.svg",
     route: "/tags",
-    label: "Tags",
+    label: "Теги",
   },
   {
     imgURL: "/assets/icons/user.svg",
     route: "/profile",
-    label: "Profile",
+    label: "Профиль",
   },
   {
     imgURL: "/assets/icons/question.svg",
     route: "/ask-question",
-    label: "Ask a question",
+    label: "Задать вопрос",
   },
 ];
 

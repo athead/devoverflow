@@ -5,38 +5,38 @@ import RenderTag from "../RenderTag";
 
 const hotQuestions = [
   {
-    _id: 1,
+    _id: "1",
     title:
       "Как использовать JavaScript в повседневной жизни или поиск работы навсегда",
   },
   {
-    _id: 2,
+    _id: "2",
     title:
       "Как использовать JavaScript в повседневной жизни или поиск работы навсегда",
   },
   {
-    _id: 3,
+    _id: "3",
     title:
       "Как использовать JavaScript в повседневной жизни или поиск работы навсегда",
   },
   {
-    _id: 4,
+    _id: "4",
     title:
       "Как использовать JavaScript в повседневной жизни или поиск работы навсегда",
   },
   {
-    _id: 5,
+    _id: "5",
     title:
       "Как использовать JavaScript в повседневной жизни или поиск работы навсегда",
   },
 ];
 
 const popularTags = [
-  { _id: 1, name: "JavaScript", totalQuestions: 5 },
-  { _id: 2, name: "React", totalQuestions: 10 },
-  { _id: 3, name: "Next", totalQuestions: 2 },
-  { _id: 4, name: "Vue", totalQuestions: 1 },
-  { _id: 5, name: "Redux", totalQuestions: 2 },
+  { _id: "1", name: "JavaScript", totalQuestions: 5 },
+  { _id: "2", name: "React", totalQuestions: 10 },
+  { _id: "3", name: "Next", totalQuestions: 2 },
+  { _id: "4", name: "Vue", totalQuestions: 1 },
+  { _id: "5", name: "Redux", totalQuestions: 2 },
 ];
 
 const RightSideBar = () => {
