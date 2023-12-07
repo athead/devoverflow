@@ -9,7 +9,8 @@ export interface IQuestion extends Document {
   downvotes: Types.ObjectId[];
   author: Types.ObjectId;
   answers: Types.ObjectId[];
-  //   createdAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 // Create a schema for answers

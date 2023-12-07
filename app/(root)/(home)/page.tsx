@@ -5,38 +5,12 @@ import NoResult from "@/components/shared/NoResult";
 import LocalSearchBar from "@/components/shared/search/LocalSearchBar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
+import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 import React from "react";
 
-const questions = [
-  {
-    _id: "1",
-    title: "Cascading Deletes is SQLAlchemy?",
-    tags: [
-      { _id: "1", name: "python" },
-      { _id: "2", name: "sql" },
-    ],
-    author: { _id: "1", name: "John Doe", avatar: "test.png" },
-    upvotes: 13451111,
-    views: 1012,
-    answers: [],
-    createdAt: new Date("2022-09-01T12:00:00.000Z"),
-  },
-  {
-    _id: "2",
-    title: "Do ya have som Machine Learning?",
-    tags: [
-      { _id: "3", name: "JS" },
-      { _id: "4", name: "ML" },
-    ],
-    author: { _id: "2", name: "John Cena", avatar: "test.png" },
-    upvotes: 153,
-    views: 23611,
-    answers: [],
-    createdAt: new Date("2022-08-01T12:00:00.000Z"),
-  },
-];
-const Home = () => {
+const Home = async () => {
+  const { questions } = await getQuestions({});
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -66,14 +40,15 @@ const Home = () => {
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {questions.length > 0 ? (
+          // TODO any
           questions.map((question) => (
             <QuestionCard
-              key={question._id}
+              key={JSON.stringify(question._id)}
               _id={question._id}
               title={question.title}
               tags={question.tags}
               author={question.author}
-              upvotes={question.upvotes}
+              upvotes={question.upvotes.length}
               createdAt={question.createdAt}
               views={question.views}
               answers={question.answers}

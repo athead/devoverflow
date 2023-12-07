@@ -1,10 +1,10 @@
 "use server";
 
-import Tag from "@/database/tag.model";
+import Tag, { ITag } from "@/database/tag.model";
 import { connectToDatabase } from "../mongoose";
 import Question from "@/database/question.model";
 import { GetQuestionsParams, CreateQuestionParams } from "./shares.types";
-import User from "@/database/user.model";
+import User, { IUser } from "@/database/user.model";
 import { revalidatePath } from "next/cache";
 
 export async function getQuestions(params: GetQuestionsParams) {
@@ -12,16 +12,17 @@ export async function getQuestions(params: GetQuestionsParams) {
     connectToDatabase();
 
     const questions = await Question.find({})
-      .populate({
+      .populate<{ tags: ITag[] }>({
         path: "tags",
         model: Tag,
       })
-      .populate({ path: "author", model: User })
+      .populate<{ author: IUser }>({ path: "author", model: User })
       .sort({ createdAt: -1 });
 
     return { questions };
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 

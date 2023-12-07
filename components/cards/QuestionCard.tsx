@@ -3,23 +3,28 @@ import React from "react";
 import RenderTag from "../shared/RenderTag";
 import Metric from "../shared/Metric";
 import { timeDifferenceStringFromNow } from "@/lib/utils";
+import { IUser } from "@/database/user.model";
+import { ITag } from "@/database/tag.model";
+// import { Types } from "mongoose";
 
-export type Tag = {
-  _id: string;
-  name: string;
-};
+// export type Tag = {
+//   _id: Types.ObjectId;
+//   name: string;
+// };
 
-export type User = {
-  _id: string;
-  name: string;
-  avatar: string;
-};
+// export type User = {
+//   _id: Types.ObjectId;
+//   name: string;
+//   avatar: string;
+// };
 
 interface QuestionCardProps {
   _id: string;
   title: string;
-  tags: Tag[];
-  author: User;
+  // TODO отвязать интерфейсы
+  tags: ITag[];
+  // TODO отвязать интерфейсы
+  author: IUser;
   upvotes: number;
   views: number;
   answers: Array<object>;
