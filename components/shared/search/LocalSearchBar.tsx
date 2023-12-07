@@ -17,7 +17,7 @@ const LocalSearchBar = (props: CustomInputProps) => {
     imgSrc,
     otherClasses,
     placeholder,
-    route,
+    // route,
   } = props;
   return (
     <div
