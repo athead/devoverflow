@@ -1,4 +1,4 @@
-import mongoose, { Types, Schema, Document } from "mongoose";
+import mongoose, { Types, Schema, Document, models } from "mongoose";
 
 export interface IUser extends Document {
   clerkId: string;
@@ -70,6 +70,6 @@ const userSchema = new Schema(
 );
 
 // Create models for both question and answer schemas
-const User = mongoose.model<IUser>("User", userSchema);
+const User = models.User || mongoose.model<IUser>("User", userSchema);
 
 export default User;

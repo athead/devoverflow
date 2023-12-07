@@ -1,4 +1,4 @@
-import mongoose, { Types, Schema, Document } from "mongoose";
+import mongoose, { Types, Schema, Document, models } from "mongoose";
 
 export interface IQuestion extends Document {
   title: string;
@@ -43,6 +43,7 @@ const questionSchema = new Schema(
 );
 
 // Create models for both question and answer schemas
-const Question = mongoose.model<IQuestion>("Question", questionSchema);
+const Question =
+  models.Question || mongoose.model<IQuestion>("Question", questionSchema);
 
 export default Question;

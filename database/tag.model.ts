@@ -1,4 +1,4 @@
-import mongoose, { Types, Schema, Document } from "mongoose";
+import mongoose, { Types, Schema, Document, models } from "mongoose";
 
 export interface ITag extends Document {
   name: string;
@@ -10,7 +10,7 @@ export interface ITag extends Document {
 }
 
 // Create a schema for answers
-const userSchema = new Schema(
+const tagSchema = new Schema(
   {
     name: {
       type: String,
@@ -33,6 +33,6 @@ const userSchema = new Schema(
 );
 
 // Create models for both question and answer schemas
-const Tag = mongoose.model<ITag>("Tag", userSchema);
+const Tag = models.Tag || mongoose.model<ITag>("Tag", tagSchema);
 
 export default Tag;
