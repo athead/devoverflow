@@ -7,6 +7,7 @@ import {
   GetQuestionsParams,
   CreateQuestionParams,
   GetQuestionByIdParams,
+  QuestionVoteParams,
 } from "./shares.types";
 import User, { IUser } from "@/database/user.model";
 import { revalidatePath } from "next/cache";
@@ -93,4 +94,75 @@ export async function createQuestion(params: CreateQuestionParams) {
 
     revalidatePath(path);
   } catch (error) {}
+}
+
+export async function upvoteQuestion(params: QuestionVoteParams) {
+  try {
+    connectToDatabase();
+    const { hasDownVoted, hasUpVoted, path, questionId, userId } = params;
+
+    let updateQuery = {};
+
+    if (hasUpVoted) {
+      updateQuery = { $pull: { upvotes: userId } };
+    } else if (hasDownVoted) {
+      updateQuery = {
+        $pull: { downvotes: userId },
+        $push: { upvotes: userId },
+      };
+    } else {
+      updateQuery = { $addToSet: { upvotes: userId } };
+    }
+
+    const question = await Question.findByIdAndUpdate(questionId, updateQuery, {
+      new: true,
+    });
+
+    if (!question) {
+      throw new Error("Вопрос не найден");
+    }
+
+    // increment repputations
+
+    revalidatePath(path);
+    return { question };
+  } catch (error) {
+    console.log(error);
+    throw new Error();
+  }
+}
+
+export async function downvoteQuestion(params: QuestionVoteParams) {
+  try {
+    connectToDatabase();
+    const { hasDownVoted, hasUpVoted, path, questionId, userId } = params;
+
+    let updateQuery = {};
+
+    if (hasDownVoted) {
+      updateQuery = { $pull: { downvotes: userId } };
+    } else if (hasUpVoted) {
+      updateQuery = {
+        $pull: { upvotes: userId },
+        $push: { downvotes: userId },
+      };
+    } else {
+      updateQuery = { $addToSet: { downvotes: userId } };
+    }
+
+    const question = await Question.findByIdAndUpdate(questionId, updateQuery, {
+      new: true,
+    });
+
+    if (!question) {
+      throw new Error("Вопрос не найден");
+    }
+
+    // increment repputations
+    revalidatePath(path);
+    return { question };
+  } catch (error) {
+    console.log(error);
+    throw new Error();
+  }
 }

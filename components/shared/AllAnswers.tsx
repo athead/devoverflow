@@ -20,10 +20,11 @@ interface AllAnswersProps {
   filter?: number;
 }
 const AllAnswers = async (props: AllAnswersProps) => {
-  const { questionId, userId, totalAnswers, page, filter } = props;
+  const { questionId, userId, totalAnswers } = props;
   const { answers } = await getAnswers({
     questionId,
   });
+
   return (
     <div className="mt-11">
       <div className="flex items-center justify-between">
@@ -63,7 +64,15 @@ const AllAnswers = async (props: AllAnswersProps) => {
                   </div>
                 </Link>
                 <div className="flex justify-end">
-                  <Votes />
+                  <Votes
+                    type="answer"
+                    itemId={JSON.stringify(answer._id)}
+                    userId={JSON.stringify(userId)}
+                    upvotes={answer.upvotes.length}
+                    hasUpVoted={answer.upvotes.includes(userId)}
+                    downvotes={answer.downvotes.length}
+                    hasDownVoted={answer.downvotes.includes(userId)}
+                  />
                 </div>
               </div>
             </div>

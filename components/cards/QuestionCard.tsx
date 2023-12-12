@@ -3,14 +3,12 @@ import React from "react";
 import RenderTag from "../shared/RenderTag";
 import Metric from "../shared/Metric";
 import { timeDifferenceStringFromNow } from "@/lib/utils";
-import { IUser } from "@/database/user.model";
-import { ITag } from "@/database/tag.model";
 // import { Types } from "mongoose";
 
-// export type Tag = {
-//   _id: Types.ObjectId;
-//   name: string;
-// };
+export type Tag = {
+  _id: string;
+  name: string;
+};
 
 // export type User = {
 //   _id: Types.ObjectId;
@@ -21,10 +19,8 @@ import { ITag } from "@/database/tag.model";
 interface QuestionCardProps {
   _id: string;
   title: string;
-  // TODO отвязать интерфейсы
-  tags: ITag[];
-  // TODO отвязать интерфейсы
-  author: IUser;
+  tags: string;
+  author: string;
   upvotes: number;
   views: number;
   answers: Array<object>;
@@ -50,17 +46,18 @@ const QuestionCard = (props: QuestionCardProps) => {
         {/* Если залогигнен - показывать кнопки */}
       </div>
       <div className="mt-3.5 flex flex-wrap gap-2">
-        {tags.map((tag) => (
+        {/* TODO убрать any */}
+        {JSON.parse(tags).map((tag: Tag) => (
           <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
         ))}
       </div>
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
         <Metric
-          imgSrc="/assets/icons/avatar.svg"
+          imgSrc={JSON.parse(author).avatar}
           alt="User"
-          value={author.name}
+          value={JSON.parse(author).name}
           title={` - ${timeDifferenceStringFromNow(createdAt)}`}
-          href={`/profile/${author._id}`}
+          href={`/profile/${JSON.parse(author)._id}`}
           isAuthor
           textStyles="body-medium text-dark400_light700"
         />
