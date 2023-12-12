@@ -1,5 +1,10 @@
 import { BADGE_CRITERIA } from "@/constants";
 
+export interface FilterType {
+  name: string;
+  value: string;
+}
+
 export interface ThemeType {
   value: string;
   label: string;

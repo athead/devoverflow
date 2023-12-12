@@ -7,23 +7,24 @@ export function cn(...inputs: ClassValue[]) {
 
 export const getNumberNamecasesString = (
   num: number | string,
-  namecases?: [string, string, string]
-) => {
+  namecases?: [string, string, string],
+  withNum?: boolean
+): string => {
   if (!namecases) return "";
   if (typeof num === "string") num = parseInt(num);
   let n = Math.abs(num);
   n %= 100;
   if (n >= 5 && n <= 20) {
-    return namecases[2];
+    return withNum ? `${num} ${namecases[2]}` : `${namecases[2]}`;
   }
   n %= 10;
   if (n === 1) {
-    return namecases[0];
+    return withNum ? `${num} ${namecases[0]}` : `${namecases[0]}`;
   }
   if (n >= 2 && n <= 4) {
-    return namecases[1];
+    return withNum ? `${num} ${namecases[1]}` : `${namecases[1]}`;
   }
-  return namecases[2];
+  return withNum ? `${num} ${namecases[2]}` : `${namecases[2]}`;
 };
 
 export const timeDifferenceStringFromNow = (previous: Date): string => {

@@ -30,3 +30,9 @@ export const askQuestionFormSchema = z.object({
       message: "Нельзя добавить более 3 тегов.",
     }),
 });
+
+export const AnswerSchema = z.object({
+  answer: z.string().min(100, {
+    message: "Ответ не может быть менее 100 символов.",
+  }),
+});

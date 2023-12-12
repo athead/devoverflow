@@ -1,10 +1,11 @@
+import { PATHS } from "@/constants/paths";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const Logo = () => {
   return (
-    <Link href="/" className="flex items-center gap-1">
+    <Link href={PATHS.HOME} className="flex items-center gap-1">
       <Image
         src="/assets/images/site-logo.svg"
         width={23}

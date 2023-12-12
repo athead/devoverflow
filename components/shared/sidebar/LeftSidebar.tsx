@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SignedOut } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import { PATHS } from "@/constants/paths";
 
 const LeftSidebar = () => {
   const pathname = usePathname();
@@ -47,7 +48,7 @@ const LeftSidebar = () => {
       </div>
       <SignedOut>
         <div className="flex flex-col gap-3">
-          <Link href="/sign-in">
+          <Link href={PATHS.SIGN_IN}>
             <Button size={"sm"} variant={"simpleSecondary"} block={"full"}>
               <Image
                 src="/assets/icons/account.svg"
@@ -59,7 +60,7 @@ const LeftSidebar = () => {
               <span className="primary-text-gradient max-lg:hidden">Войти</span>
             </Button>
           </Link>
-          <Link href="/sign-up">
+          <Link href={PATHS.SIGN_UP}>
             <Button size={"sm"} variant={"simpleSecondary"} block={"full"}>
               <Image
                 src="/assets/icons/sign-up.svg"

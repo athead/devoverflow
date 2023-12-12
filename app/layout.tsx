@@ -1,3 +1,4 @@
+import "../styles/prism.css";
 import "./globals.css";
 import type { Metadata } from "next";
 // eslint-disable-next-line camelcase

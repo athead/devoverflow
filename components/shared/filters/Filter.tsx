@@ -1,4 +1,5 @@
 "use client";
+import { FilterType } from "@/types";
 import {
   Select,
   SelectContent,
@@ -6,23 +7,23 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "../../ui/select";
 import React from "react";
-
-interface FilterType {
-  name: string;
-  value: string;
-}
 
 interface FilterComponentProps {
   filters: FilterType[];
-  placeholder: string;
+  placeholder?: string;
   otherClasses?: string;
   containerClasses?: string;
 }
 
 const Filter = (props: FilterComponentProps) => {
-  const { filters, placeholder, containerClasses, otherClasses } = props;
+  const {
+    filters,
+    placeholder = "Фильтр",
+    containerClasses,
+    otherClasses,
+  } = props;
   return (
     <div className={`relative ${containerClasses}`}>
       <Select>
@@ -33,10 +34,14 @@ const Filter = (props: FilterComponentProps) => {
             <SelectValue placeholder={placeholder} />
           </div>
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="background-light900_dark200 text-dark400_light700">
           <SelectGroup>
             {filters.map((filter) => (
-              <SelectItem key={filter.value} value={filter.value}>
+              <SelectItem
+                key={filter.value}
+                value={filter.value}
+                className="cursor-pointer"
+              >
                 {filter.name}
               </SelectItem>
             ))}

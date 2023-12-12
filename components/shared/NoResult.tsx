@@ -33,7 +33,7 @@ const NoResult = (props: NoResultComponentProps) => {
       </p>
       {linkUrl && (
         <Link href={linkUrl}>
-          <Button className="paragraph-medium mt-5 min-h-[46px] rounded-lg bg-primary-500 px-3 py-4 text-light-900 hover:bg-primary-500 dark:bg-primary-500 dark:text-light-900">
+          <Button className="paragraph-medium mt-5 min-h-[46px] rounded-lg bg-primary-500 px-6 py-4 text-light-900 hover:bg-primary-500 dark:bg-primary-500 dark:text-light-900">
             {linkText || "Нажми тут"}
           </Button>
         </Link>

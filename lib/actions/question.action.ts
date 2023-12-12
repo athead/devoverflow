@@ -2,8 +2,12 @@
 
 import Tag, { ITag } from "@/database/tag.model";
 import { connectToDatabase } from "../mongoose";
-import Question from "@/database/question.model";
-import { GetQuestionsParams, CreateQuestionParams } from "./shares.types";
+import Question, { IQuestion } from "@/database/question.model";
+import {
+  GetQuestionsParams,
+  CreateQuestionParams,
+  GetQuestionByIdParams,
+} from "./shares.types";
 import User, { IUser } from "@/database/user.model";
 import { revalidatePath } from "next/cache";
 
@@ -20,6 +24,31 @@ export async function getQuestions(params: GetQuestionsParams) {
       .sort({ createdAt: -1 });
 
     return { questions };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getQuestionById(params: GetQuestionByIdParams) {
+  try {
+    connectToDatabase();
+
+    const { questionId } = params;
+
+    const question = await Question.findById<IQuestion>(questionId)
+      .populate<{ tags: ITag[] }>({
+        path: "tags",
+        model: Tag,
+        select: "_id name",
+      })
+      .populate<{ author: IUser }>({
+        path: "author",
+        model: User,
+        select: "_id clerkId name avatar",
+      });
+    // if (!question) throw new Error("Ошибка получения вопроса");
+    return question;
   } catch (error) {
     console.log(error);
     throw error;

@@ -5,6 +5,7 @@ import MobileNav from "./MobileNav";
 import GlobalSearch from "../search/GlobalSearch";
 import { cookies } from "next/headers";
 import Logo from "../Logo";
+import { PATHS } from "@/constants/paths";
 
 const Navbar = () => {
   const theme = cookies().get("x-theme")?.value;
@@ -16,7 +17,7 @@ const Navbar = () => {
         <Theme theme={theme === "dark" ? "dark" : "light"} />
         <SignedIn>
           <UserButton
-            afterSignOutUrl="/"
+            afterSignOutUrl={PATHS.HOME}
             appearance={{
               elements: { avatarBox: "h-10 w-10" },
               variables: { colorPrimary: "#ff7000" },

@@ -5,11 +5,26 @@ import { connectToDatabase } from "../mongoose";
 import {
   CreateUserParams,
   DeleteUserParams,
+  GetAllUsersParams,
   GetUserByIdParams,
   UpdateUserParams,
 } from "./shares.types";
 import { revalidatePath } from "next/cache";
 import Question from "@/database/question.model";
+
+export async function getAllUsers(params: GetAllUsersParams) {
+  try {
+    connectToDatabase();
+    const { page = 1, pageSize = 20, filter, searchQuery } = params;
+
+    const users = await User.find({}).sort({ createdAt: -1 });
+
+    return { users };
+  } catch (error) {
+    console.log(error);
+    throw new Error();
+  }
+}
 
 export async function getUserById(params: GetUserByIdParams) {
   try {
@@ -20,6 +35,7 @@ export async function getUserById(params: GetUserByIdParams) {
     return user;
   } catch (error) {
     console.log(error);
+    throw new Error();
   }
 }
 
@@ -31,6 +47,7 @@ export async function createUser(userData: CreateUserParams) {
     return newUser;
   } catch (error) {
     console.log(error);
+    throw new Error();
   }
 }
 
@@ -46,6 +63,7 @@ export async function updateUser(params: UpdateUserParams) {
     return newUser;
   } catch (error) {
     console.log(error);
+    throw new Error();
   }
 }
 
@@ -71,5 +89,6 @@ export async function deleteUser(params: DeleteUserParams) {
     return deletedUser;
   } catch (error) {
     console.log(error);
+    throw new Error();
   }
 }

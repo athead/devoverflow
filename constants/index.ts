@@ -1,4 +1,5 @@
 import { SidebarLink, ThemeType } from "@/types";
+import { PATHS } from "./paths";
 
 export const themes: ThemeType[] = [
   { value: "light", label: "Светлая", icon: "/assets/icons/sun.svg" },
@@ -9,37 +10,37 @@ export const themes: ThemeType[] = [
 export const sidebarLinks: SidebarLink[] = [
   {
     imgURL: "/assets/icons/home.svg",
-    route: "/",
+    route: PATHS.HOME,
     label: "Главная",
   },
   {
     imgURL: "/assets/icons/users.svg",
-    route: "/community",
+    route: PATHS.COMMUNITY,
     label: "Сообщество",
   },
   {
     imgURL: "/assets/icons/star.svg",
-    route: "/collection",
+    route: PATHS.COLLECTION,
     label: "Избранные",
   },
   {
     imgURL: "/assets/icons/suitcase.svg",
-    route: "/jobs",
+    route: PATHS.JOBS,
     label: "Работы",
   },
   {
     imgURL: "/assets/icons/tag.svg",
-    route: "/tags",
+    route: PATHS.TAGS,
     label: "Теги",
   },
   {
     imgURL: "/assets/icons/user.svg",
-    route: "/profile",
+    route: PATHS.PROFILE,
     label: "Профиль",
   },
   {
     imgURL: "/assets/icons/question.svg",
-    route: "/ask-question",
+    route: PATHS.ASK_QUESTION,
     label: "Задать вопрос",
   },
 ];

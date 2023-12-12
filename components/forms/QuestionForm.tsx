@@ -22,6 +22,7 @@ import Image from "next/image";
 import { useTheme } from "@/context/ThemeProvider";
 import { createQuestion } from "@/lib/actions/question.action";
 import { usePathname, useRouter } from "next/navigation";
+import { PATHS } from "@/constants/paths";
 
 interface QuestionFormProps {
   formType: "edit" | "create";
@@ -57,7 +58,7 @@ const QuestionForm = (props: QuestionFormProps) => {
         path: pathname,
       });
       // navigate to home page
-      router.push("/");
+      router.push(PATHS.HOME);
     } catch (error) {
     } finally {
       setIsSubmitting(false);
