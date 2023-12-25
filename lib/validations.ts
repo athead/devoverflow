@@ -36,3 +36,37 @@ export const AnswerSchema = z.object({
     message: "Ответ не может быть менее 100 символов.",
   }),
 });
+
+export const ProfileSchema = z.object({
+  name: z
+    .string()
+    .min(5, {
+      message: "Не может быть менее 5 символов.",
+    })
+    .max(50, { message: "Не может быть более 50 символов." }),
+  username: z
+    .string()
+    .min(5, {
+      message: "Не может быть менее 5 символов.",
+    })
+    .max(50, { message: "Не может быть более 50 символов." }),
+  portfolioWebsite: z
+    .string()
+    .url({ message: "Должно быть похоже на ссылку" })
+    .min(5, {
+      message: "Не может быть менее 5 символов.",
+    })
+    .max(150, { message: "Не может быть более 150 символов." }),
+  location: z
+    .string()
+    .min(5, {
+      message: "Не может быть менее 5 символов.",
+    })
+    .max(50, { message: "Не может быть более 50 символов." }),
+  bio: z
+    .string()
+    .min(10, {
+      message: "Не может быть менее 10 символов.",
+    })
+    .max(50, { message: "Не может быть более 50 символов." }),
+});

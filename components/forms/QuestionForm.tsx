@@ -20,16 +20,17 @@ import * as z from "zod";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { useTheme } from "@/context/ThemeProvider";
-import { createQuestion } from "@/lib/actions/question.action";
+import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { usePathname, useRouter } from "next/navigation";
 import { PATHS } from "@/constants/paths";
 
 interface QuestionFormProps {
   formType: "edit" | "create";
   userId: string;
+  questionDetails?: string;
 }
 const QuestionForm = (props: QuestionFormProps) => {
-  const { formType, userId } = props;
+  const { formType, userId, questionDetails } = props;
 
   const { mode: theme } = useTheme();
   const router = useRouter();
@@ -37,28 +38,45 @@ const QuestionForm = (props: QuestionFormProps) => {
 
   const editorRef = useRef<TinyMCEEditor | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const parsedQuestionDetails = questionDetails
+    ? JSON.parse(questionDetails)
+    : "";
+  // TODO remove any
+  const groupedTags = parsedQuestionDetails?.tags?.map((tag: any) => tag.name);
   //  form
   const form = useForm<z.infer<typeof askQuestionFormSchema>>({
     resolver: zodResolver(askQuestionFormSchema),
     defaultValues: {
-      title: "",
-      explanation: "",
-      tags: [],
+      title: parsedQuestionDetails.title || "",
+      explanation: parsedQuestionDetails.content || "",
+      tags: groupedTags || [],
     },
   });
   // submit handler.
   async function onSubmit(values: z.infer<typeof askQuestionFormSchema>) {
     setIsSubmitting(true);
     try {
-      await createQuestion({
-        title: values.title,
-        content: values.explanation,
-        tags: values.tags,
-        author: JSON.parse(userId),
-        path: pathname,
-      });
-      // navigate to home page
-      router.push(PATHS.HOME);
+      if (formType === "edit") {
+        await editQuestion({
+          title: values.title,
+          content: values.explanation,
+          questionId: parsedQuestionDetails._id,
+          path: pathname,
+        });
+        // navigate to question page
+        router.push(`${PATHS.QUESTION}/${parsedQuestionDetails._id}`);
+      } else {
+        await createQuestion({
+          title: values.title,
+          content: values.explanation,
+          tags: values.tags,
+          author: JSON.parse(userId),
+          path: pathname,
+        });
+        // navigate to home page
+        router.push(PATHS.HOME);
+      }
     } catch (error) {
     } finally {
       setIsSubmitting(false);
@@ -142,7 +160,7 @@ const QuestionForm = (props: QuestionFormProps) => {
                 <Editor
                   apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
                   onInit={(evt, editor) => (editorRef.current = editor)}
-                  initialValue=""
+                  initialValue={parsedQuestionDetails.content || ""}
                   onBlur={field.onBlur}
                   onEditorChange={(content) => field.onChange(content)}
                   init={{
@@ -195,6 +213,7 @@ const QuestionForm = (props: QuestionFormProps) => {
               <FormControl className="mt-3.5">
                 <>
                   <Input
+                    disabled={formType === "edit"}
                     placeholder="Добавьте тег..."
                     className="no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
                     onKeyDown={(e) => handleInputKeyDown(e, field)}
@@ -205,16 +224,22 @@ const QuestionForm = (props: QuestionFormProps) => {
                         <Badge
                           key={tag}
                           className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
+                          onClick={() =>
+                            formType !== "edit"
+                              ? handleTagRemove(tag, field)
+                              : () => {}
+                          }
                         >
                           <span>{tag}</span>
-                          <Image
-                            src="/assets/icons/close.svg"
-                            alt="x"
-                            width={12}
-                            height={12}
-                            className="cursor-pointer object-contain invert-0 dark:invert"
-                            onClick={() => handleTagRemove(tag, field)}
-                          />
+                          {formType !== "edit" && (
+                            <Image
+                              src="/assets/icons/close.svg"
+                              alt="x"
+                              width={12}
+                              height={12}
+                              className="cursor-pointer object-contain invert-0 dark:invert"
+                            />
+                          )}
                         </Badge>
                       ))}
                     </div>
@@ -233,13 +258,13 @@ const QuestionForm = (props: QuestionFormProps) => {
           className="primary-gradient w-fit !text-light-900"
           disabled={isSubmitting}
         >
-          {isSubmitting
-            ? formType === "create"
+          {formType === "create"
+            ? isSubmitting
               ? "Создание..."
-              : "Сохранение..."
-            : formType === "create"
-              ? "Задать вопрос"
-              : "Сохранить"}
+              : "Задать вопрос"
+            : isSubmitting
+              ? "Сохранение..."
+              : "Сохранить изменения"}
         </Button>
       </form>
     </Form>

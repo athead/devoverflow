@@ -125,3 +125,27 @@ export const nFormatter = (num: number, digits: number): string => {
     ? (num / item.value).toFixed(digits).replace(rx, "$1") + space + item.symbol
     : "0";
 };
+
+export function getJoinedMonthYear(date: Date): string {
+  const months: string[] = [
+    "января",
+    "февраля",
+    "марта",
+    "апреля",
+    "мая",
+    "июня",
+    "июля",
+    "августа",
+    "сентября",
+    "октября",
+    "ноября",
+    "декабря",
+  ];
+
+  const monthIndex: number = date.getMonth();
+  const year: number = date.getFullYear();
+
+  const cyrillicDate: string = `На сайте с ${months[monthIndex]} ${year}`;
+
+  return cyrillicDate;
+}

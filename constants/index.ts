@@ -21,12 +21,12 @@ export const sidebarLinks: SidebarLink[] = [
   {
     imgURL: "/assets/icons/star.svg",
     route: PATHS.COLLECTION,
-    label: "Избранные",
+    label: "Избранное",
   },
   {
     imgURL: "/assets/icons/suitcase.svg",
     route: PATHS.JOBS,
-    label: "Работы",
+    label: "Работа",
   },
   {
     imgURL: "/assets/icons/tag.svg",

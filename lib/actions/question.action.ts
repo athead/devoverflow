@@ -8,20 +8,24 @@ import {
   CreateQuestionParams,
   GetQuestionByIdParams,
   QuestionVoteParams,
+  DeleteQuestionParams,
+  EditQuestionParams,
 } from "./shares.types";
 import User, { IUser } from "@/database/user.model";
 import { revalidatePath } from "next/cache";
+import Answer from "@/database/answer.model";
+import Interaction from "@/database/interaction.model";
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
     connectToDatabase();
 
     const questions = await Question.find({})
-      .populate<{ tags: ITag[] }>({
+      .populate({
         path: "tags",
         model: Tag,
       })
-      .populate<{ author: IUser }>({ path: "author", model: User })
+      .populate({ path: "author", model: User })
       .sort({ createdAt: -1 });
 
     return { questions };
@@ -159,6 +163,46 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
     }
 
     // increment repputations
+    revalidatePath(path);
+    return { question };
+  } catch (error) {
+    console.log(error);
+    throw new Error();
+  }
+}
+
+export async function deleteQuestion(params: DeleteQuestionParams) {
+  try {
+    connectToDatabase();
+    const { path, questionId } = params;
+
+    const question = await Question.deleteOne({ _id: questionId });
+    await Answer.deleteMany({ question: questionId });
+    await Interaction.deleteMany({ question: questionId });
+    await Tag.updateMany(
+      { question: questionId },
+      { $pull: { question: questionId } }
+    );
+    revalidatePath(path);
+    return { question };
+  } catch (error) {
+    console.log(error);
+    throw new Error();
+  }
+}
+
+export async function editQuestion(params: EditQuestionParams) {
+  try {
+    connectToDatabase();
+    const { path, questionId, content, title } = params;
+
+    const question = await Question.findById(questionId).populate("tags");
+    if (!question) {
+      throw new Error("Вопрос не найден");
+    }
+    question.title = title;
+    question.content = content;
+    await question.save();
     revalidatePath(path);
     return { question };
   } catch (error) {

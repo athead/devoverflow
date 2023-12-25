@@ -1,6 +1,6 @@
 "use server";
 
-import User, { IUser } from "@/database/user.model";
+import User from "@/database/user.model";
 import { FilterQuery } from "mongoose";
 import { connectToDatabase } from "../mongoose";
 import {
@@ -9,12 +9,14 @@ import {
   GetAllUsersParams,
   GetSavedQuestionsParams,
   GetUserByIdParams,
+  GetUserStatsParams,
   ToggleSaveQuestionParams,
   UpdateUserParams,
 } from "./shares.types";
 import { revalidatePath } from "next/cache";
-import Question, { IQuestion } from "@/database/question.model";
+import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
+import Answer from "@/database/answer.model";
 
 export async function getAllUsers(params: GetAllUsersParams) {
   try {
@@ -136,13 +138,10 @@ export async function getUserCollection(params: GetSavedQuestionsParams) {
       ? { title: { $regex: new RegExp(searchQuery, "i") } }
       : {};
 
-    const user = await User.findOne<IUser>({ clerkId })
-      .populate<{
-        saved: IQuestion[];
-      }>({
+    const user = await User.findOne({ clerkId })
+      .populate({
         path: "saved",
         match: query,
-        model: Question,
         options: {
           sort: { createdAt: -1 },
         },
@@ -157,6 +156,74 @@ export async function getUserCollection(params: GetSavedQuestionsParams) {
 
     const savedQuestions = user.saved;
     return { questions: savedQuestions };
+  } catch (error) {
+    console.log(error);
+    throw new Error();
+  }
+}
+
+export async function getUserInfo(params: GetUserByIdParams) {
+  try {
+    connectToDatabase();
+    const { userId } = params;
+    const user = await User.findOne({ clerkId: userId });
+    if (!user) throw new Error("Пользователь не найден");
+
+    const totalQuestions = await Question.countDocuments({ author: user._id });
+    const totalAnswers = await Answer.countDocuments({ author: user._id });
+
+    return { user, totalAnswers, totalQuestions };
+  } catch (error) {
+    console.log(error);
+    throw new Error();
+  }
+}
+
+export async function getUserQuestions(params: GetUserStatsParams) {
+  try {
+    connectToDatabase();
+    const { userId, page = 1, pageSize = 10 } = params;
+    const user = await User.findOne({ userId });
+    if (!user) throw new Error("Пользователь не найден");
+
+    const totalQuestions = await Question.countDocuments({ author: user._id });
+    const userQuestions = await Question.find({ author: userId })
+      .sort({
+        views: -1,
+        upvotes: -1,
+      })
+      .populate({ path: "tags", select: "_id name" })
+      .populate({
+        path: "author",
+        select: "_id clerkId name avatar",
+      });
+
+    return { totalQuestions, questions: userQuestions };
+  } catch (error) {
+    console.log(error);
+    throw new Error();
+  }
+}
+
+export async function getUserAnswers(params: GetUserStatsParams) {
+  try {
+    connectToDatabase();
+    const { userId, page = 1, pageSize = 10 } = params;
+    const user = await User.findOne({ userId });
+    if (!user) throw new Error("Пользователь не найден");
+
+    const totalAnswers = await Answer.countDocuments({ author: user._id });
+    const userAnswers = await Answer.find({ author: user._id })
+      .sort({
+        upvotes: -1,
+      })
+      .populate({ path: "question", select: "_id title" })
+      .populate({
+        path: "author",
+        select: "_id clerkId name avatar",
+      });
+
+    return { totalAnswers, answers: userAnswers };
   } catch (error) {
     console.log(error);
     throw new Error();

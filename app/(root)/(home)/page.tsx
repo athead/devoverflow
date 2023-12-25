@@ -25,13 +25,11 @@ const Home = async () => {
         {questions.length > 0 ? (
           questions.map((question) => (
             <QuestionCard
-              key={JSON.stringify(question._id)}
+              key={question._id}
               _id={question._id}
               title={question.title}
-              //   TODO добавить тип
-              tags={JSON.stringify(question.tags)}
-              //   TODO добавить тип
-              author={JSON.stringify(question.author)}
+              tags={question.tags}
+              author={question.author}
               upvotes={question.upvotes.length}
               createdAt={question.createdAt}
               views={question.views}

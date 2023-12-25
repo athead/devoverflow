@@ -3,6 +3,8 @@ import React from "react";
 import RenderTag from "../shared/RenderTag";
 import Metric from "../shared/Metric";
 import { timeDifferenceStringFromNow } from "@/lib/utils";
+import { SignedIn } from "@clerk/nextjs";
+import EditDeleteAction from "../shared/EditDeleteAction";
 // import { Types } from "mongoose";
 
 export type Tag = {
@@ -19,17 +21,36 @@ export type Tag = {
 interface QuestionCardProps {
   _id: string;
   title: string;
-  tags: string;
-  author: string;
+  tags: {
+    _id: string;
+    name: string;
+  }[];
+  author: {
+    _id: string;
+    name: string;
+    avatar: string;
+    clerkId: string;
+  };
   upvotes: number;
   views: number;
   answers: Array<object>;
   createdAt: Date;
+  clerkId?: string | null;
 }
 
 const QuestionCard = (props: QuestionCardProps) => {
-  const { _id, answers, author, createdAt, tags, title, upvotes, views } =
-    props;
+  const {
+    _id,
+    answers,
+    author,
+    createdAt,
+    tags,
+    title,
+    upvotes,
+    views,
+    clerkId,
+  } = props;
+  const showActionButtons = clerkId && clerkId === author.clerkId;
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
@@ -43,21 +64,25 @@ const QuestionCard = (props: QuestionCardProps) => {
             </h3>
           </Link>
         </div>
-        {/* Если залогигнен - показывать кнопки */}
+        <SignedIn>
+          {showActionButtons && (
+            <EditDeleteAction type="question" itemId={JSON.stringify(_id)} />
+          )}
+        </SignedIn>
       </div>
       <div className="mt-3.5 flex flex-wrap gap-2">
         {/* TODO убрать any */}
-        {JSON.parse(tags).map((tag: Tag) => (
+        {tags.map((tag: Tag) => (
           <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
         ))}
       </div>
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
         <Metric
-          imgSrc={JSON.parse(author).avatar}
+          imgSrc={author.avatar}
           alt="User"
-          value={JSON.parse(author).name}
+          value={author.name}
           title={` - ${timeDifferenceStringFromNow(createdAt)}`}
-          href={`/profile/${JSON.parse(author)._id}`}
+          href={`/profile/${author._id}`}
           isAuthor
           textStyles="body-medium text-dark400_light700"
         />

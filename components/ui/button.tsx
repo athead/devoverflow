@@ -9,16 +9,18 @@ const buttonVariants = cva("paragraph-medium rounded-lg px-3 py-4 transition", {
     variant: {
       default:
         "bg-primary-500 text-light-900 hover:bg-primary-100 dark:bg-primary-500 dark:text-light-900",
+      secondary: "paragraph-medium btn-secondary text-dark300_light900",
       lightGradient: "primary-gradient hover:secondary-gradient text-light-900",
       //   destructive:
       //     "bg-destructive text-destructive-foreground hover:bg-destructive/90",
       //   outline:
       //     "border-input bg-background hover:bg-accent hover:text-accent-foreground border",
-      secondary: "body-medium rounded-lg shadow-none",
+      // secondary: "body-medium rounded-lg shadow-none",
       simpleSecondary:
         "bg-light-800 text-light-500 shadow-none hover:bg-light-700 dark:bg-dark-300 hover:dark:bg-dark-400",
       // simpleTertiary:
       //   "text-dark100_light900 background-light700_dark300 shadow-none",
+      // shadow: "paragraph-medium btn-secondary text-dark300_light900",
       tab: "tab",
       //     "bg-secondary text-secondary-foreground hover:bg-secondary/80",
       //   ghost: "hover:bg-accent hover:text-accent-foreground",
