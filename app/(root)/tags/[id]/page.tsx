@@ -19,8 +19,10 @@ const TagDetailsPage = async (props: URLProps) => {
       <div className="mt-10 flex w-full flex-col gap-6">
         <PageHeader
           title={tagTitle}
-          //   TODO поправить путь
-          search={{ placeholder: "Поиск вопросов по тегу", href: PATHS.TAGS }}
+          search={{
+            placeholder: "Поиск вопросов по тегу",
+            href: `${PATHS.TAGS}/${params.id}`,
+          }}
           filter={{
             type: "primary",
             values: QuestionFilters,

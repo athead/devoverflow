@@ -39,17 +39,15 @@ const QuestionForm = (props: QuestionFormProps) => {
   const editorRef = useRef<TinyMCEEditor | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const parsedQuestionDetails = questionDetails
-    ? JSON.parse(questionDetails)
-    : "";
+  const parsedQuestionDetails = questionDetails && JSON.parse(questionDetails);
   // TODO remove any
   const groupedTags = parsedQuestionDetails?.tags?.map((tag: any) => tag.name);
   //  form
   const form = useForm<z.infer<typeof askQuestionFormSchema>>({
     resolver: zodResolver(askQuestionFormSchema),
     defaultValues: {
-      title: parsedQuestionDetails.title || "",
-      explanation: parsedQuestionDetails.content || "",
+      title: parsedQuestionDetails?.title || "",
+      explanation: parsedQuestionDetails?.content || "",
       tags: groupedTags || [],
     },
   });
@@ -160,7 +158,7 @@ const QuestionForm = (props: QuestionFormProps) => {
                 <Editor
                   apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
                   onInit={(evt, editor) => (editorRef.current = editor)}
-                  initialValue={parsedQuestionDetails.content || ""}
+                  initialValue={parsedQuestionDetails?.content || ""}
                   onBlur={field.onBlur}
                   onEditorChange={(content) => field.onChange(content)}
                   init={{

@@ -4,16 +4,20 @@ import NoResult from "@/components/shared/NoResult";
 import { QuestionFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getUserCollection } from "@/lib/actions/user.action";
+import { SearchParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import React from "react";
 
-const CollectionPage = async () => {
+const CollectionPage = async (props: SearchParamsProps) => {
   const { userId } = auth();
-
+  const { searchParams } = props;
   if (!userId) redirect(PATHS.SIGN_IN);
 
-  const { questions } = await getUserCollection({ clerkId: userId });
+  const { questions } = await getUserCollection({
+    clerkId: userId,
+    searchQuery: searchParams.q,
+  });
   //   console.log(questions);
   return (
     <>

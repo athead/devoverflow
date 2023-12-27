@@ -4,10 +4,12 @@ import NoResult from "@/components/shared/NoResult";
 import { UserFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getAllUsers } from "@/lib/actions/user.action";
+import { SearchParamsProps } from "@/types";
 import React from "react";
 
-const CommunityPage = async () => {
-  const { users } = await getAllUsers({});
+const CommunityPage = async (props: SearchParamsProps) => {
+  const { searchParams } = props;
+  const { users } = await getAllUsers({ searchQuery: searchParams.q });
   return (
     <>
       <div className="mt-10 flex w-full flex-col gap-6">

@@ -9,13 +9,16 @@ import {
 } from "./shares.types";
 import Tag, { ITag } from "@/database/tag.model";
 import { FilterQuery } from "mongoose";
-import Question, { IQuestion } from "@/database/question.model";
+import Question from "@/database/question.model";
 
 export async function getAllTags(params: GetAllTagsParams) {
   try {
     connectToDatabase();
-    // const { page = 1, pageSize = 20, filter, searchQuery } = params;
-
+    const { searchQuery } = params;
+    const query: FilterQuery<typeof Tag> = {};
+    if (searchQuery) {
+      query.$or = [{ name: { $regex: new RegExp(searchQuery, "i") } }];
+    }
     const tags = await Tag.find({}).sort({ createdAt: -1 });
 
     return { tags };

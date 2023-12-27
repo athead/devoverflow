@@ -4,10 +4,12 @@ import NoResult from "@/components/shared/NoResult";
 import { HomePageFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getQuestions } from "@/lib/actions/question.action";
+import { SearchParamsProps } from "@/types";
 import React from "react";
 
-const Home = async () => {
-  const { questions } = await getQuestions({});
+const Home = async (props: SearchParamsProps) => {
+  const { searchParams } = props;
+  const { questions } = await getQuestions({ searchQuery: searchParams.q });
   return (
     <>
       <div className="mt-10 flex w-full flex-col gap-6">

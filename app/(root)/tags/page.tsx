@@ -4,10 +4,13 @@ import NoResult from "@/components/shared/NoResult";
 import { TagFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getAllTags } from "@/lib/actions/tag.actions";
+import { SearchParamsProps } from "@/types";
 import React from "react";
 
-const TagsPage = async () => {
-  const { tags } = await getAllTags({});
+const TagsPage = async (props: SearchParamsProps) => {
+  const { searchParams } = props;
+
+  const { tags } = await getAllTags({ searchQuery: searchParams.q });
   return (
     <>
       <div className="mt-10 flex w-full flex-col gap-6">
