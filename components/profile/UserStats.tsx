@@ -1,17 +1,22 @@
 import { getNumberNamecasesString, nFormatter } from "@/lib/utils";
 import React from "react";
 import StatsCard from "../cards/StatsCard";
+import { BadgeCounts } from "@/types";
 
 interface UserStatsProps {
+  reputation: number;
   totalAnswers: number;
   totalQuestions: number;
+  badges: BadgeCounts;
 }
 
 const UserStats = (props: UserStatsProps) => {
-  const { totalAnswers, totalQuestions } = props;
+  const { totalAnswers, totalQuestions, badges, reputation } = props;
   return (
     <div className="mt-10">
-      <h4 className="h3-semibold text-dark200_light900">Статистика</h4>
+      <h4 className="h3-semibold text-dark200_light900">
+        Репутация ${reputation}
+      </h4>
       <div className="mt-5 grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-4">
         <div className="light-border background-light900_dark300 flex flex-wrap items-center justify-evenly gap-4 rounded-md border p-6 shadow-light-300 dark:shadow-dark-200">
           <div>
@@ -43,7 +48,7 @@ const UserStats = (props: UserStatsProps) => {
           imgUrl="/assets/icons/gold-medal.svg"
           value={0}
           title={getNumberNamecasesString(
-            0,
+            badges.GOLD,
             ["Золотой знак", "Золотых знака", "Золотых знаков"],
             false
           )}
@@ -52,7 +57,7 @@ const UserStats = (props: UserStatsProps) => {
           imgUrl="/assets/icons/silver-medal.svg"
           value={0}
           title={getNumberNamecasesString(
-            0,
+            badges.SILVER,
             ["Серебрянный знак", "Серебрянных знака", "Серебрянных знаков"],
             false
           )}
@@ -61,7 +66,7 @@ const UserStats = (props: UserStatsProps) => {
           imgUrl="/assets/icons/bronze-medal.svg"
           value={0}
           title={getNumberNamecasesString(
-            0,
+            badges.BRONZE,
             ["Бронзовый знак", "Бронзовых знака", "Бронзовых знаков"],
             false
           )}

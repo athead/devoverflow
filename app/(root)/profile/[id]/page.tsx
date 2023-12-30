@@ -16,9 +16,10 @@ import AnswerTab from "@/components/profile/AnswerTab";
 const ProfilePage = async (props: URLProps) => {
   const { params, searchParams } = props;
   const { userId: clerkId } = auth();
-  const { user, totalAnswers, totalQuestions } = await getUserInfo({
-    userId: params.id,
-  });
+  const { user, totalAnswers, totalQuestions, badgeCounts, reputation } =
+    await getUserInfo({
+      userId: params.id,
+    });
   return (
     <>
       <div className="flex flex-col-reverse items-start justify-between sm:flex-row">
@@ -77,7 +78,12 @@ const ProfilePage = async (props: URLProps) => {
           </SignedIn>
         </div>
       </div>
-      <UserStats totalQuestions={totalQuestions} totalAnswers={totalAnswers} />
+      <UserStats
+        reputation={reputation}
+        totalQuestions={totalQuestions}
+        totalAnswers={totalAnswers}
+        badges={badgeCounts}
+      />
       <div className="mt-10 flex gap-10">
         <Tabs defaultValue="account" className="w-full">
           <TabsList className="background-light800_dark400 min-h-[42px] p-1">
