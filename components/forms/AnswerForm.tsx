@@ -21,15 +21,18 @@ import { createAnswer } from "@/lib/actions/answer.action";
 import { usePathname } from "next/navigation";
 
 interface AnswerFormProps {
-  // question: string;
+  question: string;
   questionId: string;
   authorId: string;
 }
 
 const AnswerForm = (props: AnswerFormProps) => {
   const pathname = usePathname();
-  const { authorId, questionId } = props;
+  const { authorId, questionId, question } = props;
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmittingAI, setIsSubmittingAI] = useState(false);
+
   const { mode: theme } = useTheme();
   const editorRef = useRef<TinyMCEEditor | null>(null);
 
@@ -61,6 +64,30 @@ const AnswerForm = (props: AnswerFormProps) => {
     }
   };
 
+  const handleGenerateAIAnswer = async () => {
+    if (!authorId) return;
+    setIsSubmittingAI(true);
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/chatgpt`,
+        { method: "POST", body: JSON.stringify({ question }) }
+      );
+      const aiAnswer = await response.json();
+
+      // convert text to html format
+      const formattedAnswer = aiAnswer.reply.replace(/\n/g, "<br />");
+      if (editorRef.current) {
+        const editor = editorRef.current;
+        editor.setContent(formattedAnswer);
+      }
+      // toast
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmittingAI(false);
+    }
+  };
   return (
     <div>
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
@@ -69,16 +96,22 @@ const AnswerForm = (props: AnswerFormProps) => {
         </h4>
         <Button
           className="btn light-border-2 flex items-center gap-1.5 rounded-md px-4 py-2.5 text-primary-500 shadow-none dark:text-primary-500"
-          onClick={() => {}}
+          onClick={handleGenerateAIAnswer}
         >
-          <Image
-            src="/assets/icons/stars.svg"
-            alt="star"
-            width={12}
-            height={12}
-            className="object-contain"
-          />
-          Спросить ИИ
+          {isSubmittingAI ? (
+            <>Генерирую...</>
+          ) : (
+            <>
+              <Image
+                src="/assets/icons/stars.svg"
+                alt="star"
+                width={12}
+                height={12}
+                className="object-contain"
+              />
+              Спросить ИИ
+            </>
+          )}
         </Button>
       </div>
       <Form {...form}>

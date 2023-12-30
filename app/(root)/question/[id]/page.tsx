@@ -104,7 +104,7 @@ const QuestionDetailsPage = async ({ params, searchParams }) => {
         filter={searchParams?.filter}
       />
       <AnswerForm
-        // question={questionDetails.content}
+        question={questionDetails.content}
         questionId={JSON.stringify(questionDetails._id)}
         authorId={JSON.stringify(user._id)}
       />
