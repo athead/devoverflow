@@ -6,8 +6,14 @@ import { HomePageFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getQuestions } from "@/lib/actions/question.action";
 import { SearchParamsProps } from "@/types";
+import { Metadata } from "next";
 import React from "react";
 
+export const metadata: Metadata = {
+  title: "Главная — devOverflow",
+  description:
+    "devOverflow это открытое сообщество разработчиков. Присоединяйся!",
+};
 const Home = async (props: SearchParamsProps) => {
   const { searchParams } = props;
   const { questions, isNext } = await getQuestions({

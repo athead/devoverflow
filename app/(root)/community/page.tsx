@@ -6,7 +6,14 @@ import { UserFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getAllUsers } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Сообщество — devOverflow",
+  description:
+    "devOverflow это открытое сообщество разработчиков. Присоединяйся!",
+};
 
 const CommunityPage = async (props: SearchParamsProps) => {
   const { searchParams } = props;

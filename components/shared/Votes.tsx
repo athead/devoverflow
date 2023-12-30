@@ -9,9 +9,9 @@ import {
 import { toggleSaveQuestion } from "@/lib/actions/user.action";
 import { nFormatter } from "@/lib/utils";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useCallback, useEffect } from "react";
+import { toast } from "../ui/use-toast";
 
 interface VotesProps {
   type: "question" | "answer";
@@ -39,17 +39,26 @@ const Votes = (props: VotesProps) => {
   const path = usePathname();
   const router = useRouter();
 
-  const handleSave = useCallback(async () => {
+  const handleSave = async () => {
     await toggleSaveQuestion({
       userId: JSON.parse(userId),
       questionId: JSON.parse(itemId),
       path,
     });
-  }, [path, itemId, userId]);
+    return toast({
+      title: `${!hasSaved ? "Добавлено в избранное" : "Удалено из избранного"}`,
+      variant: !hasSaved ? "default" : "destructive",
+    });
+  };
 
   const handleVote = useCallback(
     async (action: string) => {
-      if (!userId) return;
+      if (!userId)
+        return toast({
+          title: "Войдите",
+          description:
+            "Вы должны войти или зарегестрироваться для этого действия",
+        });
       if (action === "up") {
         if (type === "question") {
           await upvoteQuestion({
@@ -68,6 +77,10 @@ const Votes = (props: VotesProps) => {
             path,
           });
         }
+        toast({
+          title: `Ваш голос ${!hasUpVoted ? "учтен" : "отменен"}`,
+          variant: !hasUpVoted ? "default" : "destructive",
+        });
       } else if (action === "down") {
         if (type === "question") {
           await downvoteQuestion({
@@ -86,6 +99,10 @@ const Votes = (props: VotesProps) => {
             path,
           });
         }
+        toast({
+          title: `Ваш голос ${!hasDownVoted ? "учтен" : "отменен"}`,
+          variant: !hasDownVoted ? "default" : "destructive",
+        });
       }
       // toast
     },

@@ -25,6 +25,7 @@ interface PageHearedProps {
 }
 const PageHeader = (props: PageHearedProps) => {
   const { title, button, search, filter } = props;
+  const isSearchOrFilter = search || filter;
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -37,27 +38,29 @@ const PageHeader = (props: PageHearedProps) => {
           </Link>
         )}
       </div>
-      <div className="flex justify-between gap-5 max-sm:flex-col sm:items-center">
-        {search && (
-          <LocalSearchBar
-            route={search.href}
-            iconPosition="left"
-            imgSrc="/assets/icons/search.svg"
-            placeholder={search.placeholder || "Поиск..."}
-            otherClasses="flex-1"
-          />
-        )}
-        {filter && (
-          <Filter
-            filters={filter.values}
-            otherClasses="min-h-[56px] sm:min-w-[170px]"
-            containerClasses={
-              filter.type === "primary" ? "hidden max-md:flex" : ""
-            }
-            placeholder={filter.placeholder || "Фильтр"}
-          />
-        )}
-      </div>
+      {isSearchOrFilter && (
+        <div className="flex justify-between gap-5 max-sm:flex-col sm:items-center">
+          {search && (
+            <LocalSearchBar
+              route={search.href}
+              iconPosition="left"
+              imgSrc="/assets/icons/search.svg"
+              placeholder={search.placeholder || "Поиск..."}
+              otherClasses="flex-1"
+            />
+          )}
+          {filter && (
+            <Filter
+              filters={filter.values}
+              otherClasses="min-h-[56px] sm:min-w-[170px]"
+              containerClasses={
+                filter.type === "primary" ? "hidden max-md:flex" : ""
+              }
+              placeholder={filter.placeholder || "Фильтр"}
+            />
+          )}
+        </div>
+      )}
       {filter?.type === "primary" && (
         <TabFilter active={filter.values[1]} filters={filter.values} />
       )}
