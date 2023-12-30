@@ -135,8 +135,21 @@ export async function createQuestion(params: CreateQuestionParams) {
       $push: { tags: { $each: tagDocuments } },
     });
 
+    // create an interaction record for the user's ask_qustion action
+    await Interaction.create({
+      user: author,
+      action: "ask_question",
+      question: question._id,
+      tags: tagDocuments,
+    });
+
+    // incremente author's reputation for creating a question
+    await User.findByIdAndUpdate(author, { $inc: { reputation: 5 } });
+
     revalidatePath(path);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function upvoteQuestion(params: QuestionVoteParams) {
@@ -165,7 +178,15 @@ export async function upvoteQuestion(params: QuestionVoteParams) {
       throw new Error("Вопрос не найден");
     }
 
-    // increment repputations
+    // increment author's reputations by +1/-1 for upvoting/revoking an upvote to the question
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasUpVoted ? -1 : 1 },
+    });
+
+    // increment author's reputations by +10/-10 for reciving an upvote/downvote
+    await User.findByIdAndUpdate(question.author, {
+      $inc: { reputation: hasUpVoted ? -10 : 10 },
+    });
 
     revalidatePath(path);
     return { question };
@@ -201,7 +222,16 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
       throw new Error("Вопрос не найден");
     }
 
-    // increment repputations
+    // increment author's reputations by +1/-1 for upvoting/revoking an upvote to the question
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasDownVoted ? -1 : 1 },
+    });
+
+    // increment author's reputations by +10/-10 for reciving an upvote/downvote
+    await User.findByIdAndUpdate(question.author, {
+      $inc: { reputation: hasDownVoted ? -10 : 10 },
+    });
+
     revalidatePath(path);
     return { question };
   } catch (error) {

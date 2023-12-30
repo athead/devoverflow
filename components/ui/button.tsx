@@ -22,6 +22,8 @@ const buttonVariants = cva("paragraph-medium rounded-lg px-3 py-4 transition", {
       //   "text-dark100_light900 background-light700_dark300 shadow-none",
       // shadow: "paragraph-medium btn-secondary text-dark300_light900",
       tab: "tab",
+      globalTab:
+        "light-border-2 small-medium rounded-2xl px-5 py-2 capitalize dark:text-light-800 dark:hover:text-primary-500",
       //     "bg-secondary text-secondary-foreground hover:bg-secondary/80",
       //   ghost: "hover:bg-accent hover:text-accent-foreground",
       //   link: "text-primary underline-offset-4 hover:underline",

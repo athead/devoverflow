@@ -70,9 +70,20 @@ export async function createAnswer(params: CreateAnswerParams) {
     });
 
     // ass the answer to the questions
-    await Question.findByIdAndUpdate(question, {
+    const questionObj = await Question.findByIdAndUpdate(question, {
       $push: { answers: newAnswer._id },
     });
+
+    // interaction
+    await Interaction.create({
+      user: author,
+      action: "answer",
+      question,
+      answer: newAnswer._id,
+      tags: questionObj.tags,
+    });
+
+    await User.findByIdAndUpdate(author, { $inc: { reputation: 10 } });
 
     revalidatePath(path);
     return { newAnswer };
@@ -109,6 +120,13 @@ export async function upvoteAnswer(params: AnswerVoteParams) {
     }
 
     // increment repputations
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasUpVoted ? -2 : 2 },
+    });
+
+    await User.findByIdAndUpdate(answer.author, {
+      $inc: { reputation: hasUpVoted ? -10 : 10 },
+    });
 
     revalidatePath(path);
     return { answer };
@@ -145,6 +163,14 @@ export async function downvoteAnswer(params: AnswerVoteParams) {
     }
 
     // increment repputations
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasDownVoted ? -2 : 2 },
+    });
+
+    await User.findByIdAndUpdate(answer.author, {
+      $inc: { reputation: hasDownVoted ? -10 : 10 },
+    });
+
     revalidatePath(path);
     return { answer };
   } catch (error) {
