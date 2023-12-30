@@ -17,12 +17,14 @@ interface AllAnswersProps {
   userId: string;
   totalAnswers: number;
   page?: number;
-  filter?: number;
+  filter?: string;
 }
 const AllAnswers = async (props: AllAnswersProps) => {
-  const { questionId, userId, totalAnswers } = props;
+  const { questionId, userId, totalAnswers, page, filter } = props;
   const { answers } = await getAnswers({
     questionId,
+    page: page ? +page : 1,
+    sortBy: filter,
   });
 
   return (

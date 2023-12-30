@@ -17,11 +17,12 @@ import { revalidatePath } from "next/cache";
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
 import Answer from "@/database/answer.model";
+import { QuestionFilters, UserFilters } from "@/constants/filters";
 
 export async function getAllUsers(params: GetAllUsersParams) {
   try {
     connectToDatabase();
-    const { searchQuery } = params;
+    const { searchQuery, filter } = params;
 
     const query: FilterQuery<typeof User> = {};
 
@@ -32,7 +33,23 @@ export async function getAllUsers(params: GetAllUsersParams) {
       ];
     }
 
-    const users = await User.find(query).sort({ createdAt: -1 });
+    let sortOptions = {};
+    switch (filter) {
+      case UserFilters[0].value:
+        sortOptions = { createdAt: -1 };
+        break;
+      case UserFilters[1].value:
+        sortOptions = { createdAt: 1 };
+        break;
+      case UserFilters[2].value:
+        sortOptions = { reputation: -1 };
+        break;
+
+      default:
+        break;
+    }
+
+    const users = await User.find(query).sort(sortOptions);
 
     return { users };
   } catch (error) {
@@ -147,19 +164,38 @@ export async function getUserCollection(params: GetSavedQuestionsParams) {
       ? { title: { $regex: new RegExp(searchQuery, "i") } }
       : {};
 
-    const user = await User.findOne({ clerkId })
-      .populate({
-        path: "saved",
-        match: query,
-        options: {
-          sort: { createdAt: -1 },
-        },
-        populate: [
-          { path: "tags", model: Tag, select: "_id name" },
-          { path: "author", model: User, select: "_id clerkId name avatar" },
-        ],
-      })
-      .sort({ createdAt: -1 });
+    let sortOptions = {};
+    switch (filter) {
+      case QuestionFilters[0].value:
+        sortOptions = { createdAt: -1 };
+        break;
+      case QuestionFilters[1].value:
+        sortOptions = { createdAt: 1 };
+        break;
+      case QuestionFilters[2].value:
+        sortOptions = { upvotes: -1 };
+        break;
+      case QuestionFilters[3].value:
+        sortOptions = { views: -1 };
+        break;
+      case QuestionFilters[4].value:
+        sortOptions = { answers: -1 };
+        break;
+      default:
+        break;
+    }
+
+    const user = await User.findOne({ clerkId }).populate({
+      path: "saved",
+      match: query,
+      options: {
+        sort: sortOptions,
+      },
+      populate: [
+        { path: "tags", model: Tag, select: "_id name" },
+        { path: "author", model: User, select: "_id clerkId name avatar" },
+      ],
+    });
 
     if (!user) throw new Error("Пользователь не найден");
 

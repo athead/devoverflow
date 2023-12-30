@@ -10,16 +10,36 @@ import {
 import Tag, { ITag } from "@/database/tag.model";
 import { FilterQuery } from "mongoose";
 import Question from "@/database/question.model";
+import { TagFilters } from "@/constants/filters";
 
 export async function getAllTags(params: GetAllTagsParams) {
   try {
     connectToDatabase();
-    const { searchQuery } = params;
+    const { searchQuery, filter } = params;
     const query: FilterQuery<typeof Tag> = {};
     if (searchQuery) {
       query.$or = [{ name: { $regex: new RegExp(searchQuery, "i") } }];
     }
-    const tags = await Tag.find({}).sort({ createdAt: -1 });
+
+    let sortOptions = {};
+    switch (filter) {
+      case TagFilters[0].value:
+        sortOptions = { questions: -1 };
+        break;
+      case TagFilters[1].value:
+        sortOptions = { createdAt: -1 };
+        break;
+      case TagFilters[2].value:
+        sortOptions = { name: 1 };
+        break;
+      case TagFilters[3].value:
+        sortOptions = { createdAt: 1 };
+        break;
+      default:
+        break;
+    }
+
+    const tags = await Tag.find({}).sort(sortOptions);
 
     return { tags };
   } catch (error) {

@@ -9,7 +9,10 @@ import React from "react";
 
 const Home = async (props: SearchParamsProps) => {
   const { searchParams } = props;
-  const { questions } = await getQuestions({ searchQuery: searchParams.q });
+  const { questions } = await getQuestions({
+    searchQuery: searchParams.q,
+    filter: searchParams.filter,
+  });
   return (
     <>
       <div className="mt-10 flex w-full flex-col gap-6">

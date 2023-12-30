@@ -13,6 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+// TODO
 const QuestionDetailsPage = async ({ params, searchParams }) => {
   const questionDetails = await getQuestionById({
     questionId: params.id,
@@ -99,6 +100,8 @@ const QuestionDetailsPage = async ({ params, searchParams }) => {
         questionId={questionDetails._id}
         userId={user._id}
         totalAnswers={questionDetails.answers.length}
+        page={searchParams?.page}
+        filter={searchParams?.filter}
       />
       <AnswerForm
         // question={questionDetails.content}

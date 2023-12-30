@@ -12,17 +12,38 @@ import Question from "@/database/question.model";
 import { revalidatePath } from "next/cache";
 import User, { IUser } from "@/database/user.model";
 import Interaction from "@/database/interaction.model";
+import { AnswerFilters } from "@/constants/filters";
 
 export async function getAnswers(params: GetAnswersParams) {
   try {
     connectToDatabase();
 
     const { questionId, page, pageSize, sortBy } = params;
+
+    let sortOptions = {};
+    switch (sortBy) {
+      case AnswerFilters[0].value:
+        sortOptions = { upvotes: -1 };
+        break;
+      case AnswerFilters[1].value:
+        sortOptions = { upvotes: 1 };
+        break;
+      case AnswerFilters[2].value:
+        sortOptions = { createdAt: -1 };
+        break;
+      case AnswerFilters[3].value:
+        sortOptions = { createdAt: 1 };
+        break;
+
+      default:
+        break;
+    }
+
     const answers = await Answer.find({ question: questionId })
       .populate<{
         author: IUser;
       }>({ path: "author", model: User, select: "_id clerkId name avatar" })
-      .sort({ createdAt: -1 });
+      .sort(sortOptions);
 
     return { answers };
   } catch (error) {

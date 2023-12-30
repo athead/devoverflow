@@ -17,6 +17,7 @@ const CollectionPage = async (props: SearchParamsProps) => {
   const { questions } = await getUserCollection({
     clerkId: userId,
     searchQuery: searchParams.q,
+    filter: searchParams.filter,
   });
   //   console.log(questions);
   return (

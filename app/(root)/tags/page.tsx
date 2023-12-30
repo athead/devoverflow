@@ -10,7 +10,10 @@ import React from "react";
 const TagsPage = async (props: SearchParamsProps) => {
   const { searchParams } = props;
 
-  const { tags } = await getAllTags({ searchQuery: searchParams.q });
+  const { tags } = await getAllTags({
+    searchQuery: searchParams.q,
+    filter: searchParams.filter,
+  });
   return (
     <>
       <div className="mt-10 flex w-full flex-col gap-6">
