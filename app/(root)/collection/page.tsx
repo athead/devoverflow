@@ -1,6 +1,7 @@
 import QuestionCard from "@/components/cards/QuestionCard";
 import PageHeader from "@/components/layout/PageHeader";
 import NoResult from "@/components/shared/NoResult";
+import { Pagination } from "@/components/shared/Pagination";
 import { QuestionFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getUserCollection } from "@/lib/actions/user.action";
@@ -14,10 +15,11 @@ const CollectionPage = async (props: SearchParamsProps) => {
   const { searchParams } = props;
   if (!userId) redirect(PATHS.SIGN_IN);
 
-  const { questions } = await getUserCollection({
+  const { questions, isNext } = await getUserCollection({
     clerkId: userId,
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   });
   //   console.log(questions);
   return (
@@ -56,6 +58,12 @@ const CollectionPage = async (props: SearchParamsProps) => {
             linkText="Задать вопрос"
           />
         )}
+      </div>
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={isNext}
+        />
       </div>
     </>
   );

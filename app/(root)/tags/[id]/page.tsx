@@ -1,6 +1,7 @@
 import QuestionCard from "@/components/cards/QuestionCard";
 import PageHeader from "@/components/layout/PageHeader";
 import NoResult from "@/components/shared/NoResult";
+import { Pagination } from "@/components/shared/Pagination";
 import { QuestionFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getQuestionByTagId } from "@/lib/actions/tag.actions";
@@ -9,9 +10,9 @@ import React from "react";
 
 const TagDetailsPage = async (props: URLProps) => {
   const { params, searchParams } = props;
-  const { tagTitle, questions } = await getQuestionByTagId({
+  const { tagTitle, questions, isNext } = await getQuestionByTagId({
     tagId: params.id,
-    page: 1,
+    page: searchParams.page ? +searchParams.page : 1,
     searchQuery: searchParams.q,
   });
   return (
@@ -53,6 +54,12 @@ const TagDetailsPage = async (props: URLProps) => {
             linkText="К тегам"
           />
         )}
+      </div>
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={isNext}
+        />
       </div>
     </>
   );

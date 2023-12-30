@@ -1,6 +1,7 @@
 import QuestionCard from "@/components/cards/QuestionCard";
 import PageHeader from "@/components/layout/PageHeader";
 import NoResult from "@/components/shared/NoResult";
+import { Pagination } from "@/components/shared/Pagination";
 import { HomePageFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getQuestions } from "@/lib/actions/question.action";
@@ -9,9 +10,10 @@ import React from "react";
 
 const Home = async (props: SearchParamsProps) => {
   const { searchParams } = props;
-  const { questions } = await getQuestions({
+  const { questions, isNext } = await getQuestions({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   });
   return (
     <>
@@ -51,6 +53,12 @@ const Home = async (props: SearchParamsProps) => {
             linkText="Задать вопрос"
           />
         )}
+      </div>
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={isNext}
+        />
       </div>
     </>
   );

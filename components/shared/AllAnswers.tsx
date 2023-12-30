@@ -11,6 +11,7 @@ import {
 } from "@/lib/utils";
 import ParseHTML from "./ParseHTML";
 import Votes from "./Votes";
+import { Pagination } from "./Pagination";
 
 interface AllAnswersProps {
   questionId: string;
@@ -21,7 +22,7 @@ interface AllAnswersProps {
 }
 const AllAnswers = async (props: AllAnswersProps) => {
   const { questionId, userId, totalAnswers, page, filter } = props;
-  const { answers } = await getAnswers({
+  const { answers, isNext } = await getAnswers({
     questionId,
     page: page ? +page : 1,
     sortBy: filter,
@@ -81,6 +82,9 @@ const AllAnswers = async (props: AllAnswersProps) => {
             <ParseHTML data={answer.content} />
           </article>
         ))}
+      </div>
+      <div className="mt-10">
+        <Pagination pageNumber={page ? +page : 1} isNext={isNext} />
       </div>
     </div>
   );
