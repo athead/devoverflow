@@ -6,7 +6,12 @@ import { TagFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getAllTags } from "@/lib/actions/tag.actions";
 import { SearchParamsProps } from "@/types";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Теги — devOverflow",
+};
 
 const TagsPage = async (props: SearchParamsProps) => {
   const { searchParams } = props;
@@ -19,7 +24,7 @@ const TagsPage = async (props: SearchParamsProps) => {
 
   return (
     <>
-      <div className="mt-10 flex w-full flex-col gap-6">
+      <div className="flex w-full flex-col gap-6">
         <PageHeader
           title="Теги"
           search={{ placeholder: "Поиск тегов", href: PATHS.TAGS }}

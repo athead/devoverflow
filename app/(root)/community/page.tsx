@@ -25,7 +25,7 @@ const CommunityPage = async (props: SearchParamsProps) => {
 
   return (
     <>
-      <div className="mt-10 flex w-full flex-col gap-6">
+      <div className="flex w-full flex-col gap-6">
         <PageHeader
           title="Сообщество"
           search={{ placeholder: "Поиск пользователей", href: PATHS.COMMUNITY }}

@@ -7,7 +7,23 @@ import { PATHS } from "@/constants/paths";
 import { getQuestionByTagId } from "@/lib/actions/tag.actions";
 import { URLProps } from "@/types";
 import { Question } from "@/types/database";
+import { Metadata, ResolvingMetadata } from "next";
 import React from "react";
+
+export async function generateMetadata(
+  { params, searchParams }: URLProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { tagTitle } = await getQuestionByTagId({
+    tagId: params.id,
+    page: searchParams.page ? +searchParams.page : 1,
+    searchQuery: searchParams.q,
+  });
+
+  return {
+    title: `${tagTitle || "Тег"} — devOverflow`,
+  };
+}
 
 const TagDetailsPage = async (props: URLProps) => {
   const { params, searchParams } = props;

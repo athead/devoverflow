@@ -12,6 +12,20 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import AnswerTab from "@/components/profile/AnswerTab";
+import { Metadata, ResolvingMetadata } from "next";
+
+export async function generateMetadata(
+  { params, searchParams }: URLProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { user } = await getUserInfo({
+    userId: params.id,
+  });
+
+  return {
+    title: `Профиль пользователя ${user.username} — devOverflow`,
+  };
+}
 
 const ProfilePage = async (props: URLProps) => {
   const { params, searchParams } = props;

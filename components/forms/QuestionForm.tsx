@@ -24,6 +24,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { PATHS } from "@/constants/paths";
 import TextEditor from "../shared/TextEditor";
 import { Tag } from "@/types/database";
+import { toast } from "../ui/use-toast";
 
 interface QuestionFormProps {
   formType: "edit" | "create";
@@ -76,7 +77,15 @@ const QuestionForm = (props: QuestionFormProps) => {
         // navigate to home page
         router.push(PATHS.HOME);
       }
+      toast({
+        title: `Ваш вопрос создан`,
+        variant: "default",
+      });
     } catch (error) {
+      toast({
+        title: `Ошибка создания вопрос`,
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }

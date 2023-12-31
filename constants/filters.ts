@@ -1,17 +1,19 @@
-export const AnswerFilters = [
+import { FilterType } from "@/types";
+
+export const AnswerFilters: FilterType[] = [
   { name: "С высокой оценкой", value: "highestUpvotes" },
   { name: "С низкой оценкой", value: "lowestUpvotes" },
   { name: "Новые", value: "recent" },
   { name: "Старые", value: "old" },
 ];
 
-export const UserFilters = [
+export const UserFilters: FilterType[] = [
   { name: "Новые участники", value: "new_users" },
   { name: "Старые участники", value: "old_users" },
   { name: "Лучшие пользователи", value: "top_contributors" },
 ];
 
-export const QuestionFilters = [
+export const QuestionFilters: FilterType[] = [
   { name: "Самые новые", value: "most_recent" },
   { name: "Старые", value: "oldest" },
   { name: "По голосам", value: "most_voted" },
@@ -19,25 +21,32 @@ export const QuestionFilters = [
   { name: "По ответам", value: "most_answered" },
 ];
 
-export const TagFilters = [
+export const TagFilters: FilterType[] = [
   { name: "Популярные", value: "popular" },
   { name: "Новые", value: "recent" },
   { name: "По имени", value: "name" },
   { name: "Старые", value: "old" },
 ];
 
-export const HomePageFilters = [
+export const HomePageFilters: FilterType[] = [
   { name: "Новые", value: "newest" },
   { name: "Рекомендуемые", value: "recommended" },
   { name: "Популярные", value: "frequent" },
   { name: "Неотвеченные", value: "unanswered" },
 ];
 
-export const GlobalSearchFilters = [
+export const GlobalSearchFilters: FilterType[] = [
   { name: "Вопрос", value: "question" },
   { name: "Ответ", value: "answer" },
   { name: "Пользователь", value: "user" },
   { name: "Тег", value: "tag" },
+];
+
+export const JobPageFilters: FilterType[] = [
+  { name: "Полный день", value: "fulltime" },
+  { name: "Подработка", value: "parttime" },
+  { name: "Подрядчик", value: "contractor" },
+  { name: "Стажировка", value: "intern" },
 ];
 
 // export const AnswerFilters = [

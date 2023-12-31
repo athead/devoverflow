@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import { createAnswer } from "@/lib/actions/answer.action";
 import { usePathname } from "next/navigation";
+import { toast } from "../ui/use-toast";
 
 interface AnswerFormProps {
   question: string;
@@ -57,8 +58,16 @@ const AnswerForm = (props: AnswerFormProps) => {
         const editor = editorRef.current;
         editor.setContent("");
       }
+      toast({
+        title: `Ваш ответ сохранен`,
+        variant: "default",
+      });
     } catch (error) {
       console.log(error);
+      toast({
+        title: `Ошибка созранения ответа`,
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }

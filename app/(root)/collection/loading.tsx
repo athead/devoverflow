@@ -5,7 +5,7 @@ import React from "react";
 const Loading = () => {
   return (
     <section>
-      <div className="mt-10 flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
+      <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
         <PageHeader title="Сохраненные вопросы" />
       </div>
       <div className="mb-12 mt-6 flex flex-wrap gap-5">

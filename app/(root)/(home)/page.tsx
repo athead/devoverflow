@@ -51,7 +51,7 @@ const Home = async (props: SearchParamsProps) => {
 
   return (
     <>
-      <div className="mt-10 flex w-full flex-col gap-6">
+      <div className="flex w-full flex-col gap-6">
         <PageHeader
           title="Все вопросы"
           button={{ title: "Задать вопрос", href: PATHS.ASK_QUESTION }}

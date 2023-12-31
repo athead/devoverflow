@@ -6,7 +6,7 @@ import React from "react";
 const Loading = () => {
   return (
     <section>
-      <div className="mt-10 flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
+      <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
         <PageHeader
           title="Все вопросы"
           button={{ title: "Задать вопрос", href: PATHS.ASK_QUESTION }}

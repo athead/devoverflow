@@ -79,8 +79,9 @@ export async function getQuestionById(params: GetQuestionByIdParams) {
   try {
     connectToDatabase();
 
-    const { questionId } = params;
+    const { questionId, userId } = params;
 
+    const user = await User.findById(userId);
     const question = await Question.findById<IQuestion>(questionId)
       .populate<{ tags: ITag[] }>({
         path: "tags",
@@ -92,7 +93,35 @@ export async function getQuestionById(params: GetQuestionByIdParams) {
         model: User,
         select: "_id clerkId name avatar",
       });
-    // if (!question) throw new Error("Ошибка получения вопроса");
+
+    // Увеличиваем репутацию пользователя за просмотр
+    if (user) {
+      await User.findByIdAndUpdate(user, {
+        $inc: { reputation: 1 },
+      });
+
+      await Interaction.create({
+        user: user._id,
+        action: "view_question",
+        question: question?._id,
+      });
+    }
+
+    // увеличиваем репутацию пользователя за просомтр его вопроса
+    if (question) {
+      // create an interaction record for the user's ask_qustion action
+      await Interaction.create({
+        user: question?.author._id,
+        action: "view_question",
+        question: question?._id,
+      });
+
+      // incremente author's reputation for creating a question
+      await User.findByIdAndUpdate(question?.author._id, {
+        $inc: { reputation: 1 },
+      });
+    }
+    if (!question) throw new Error("Ошибка получения вопроса");
     return question;
   } catch (error) {
     console.log(error);
@@ -246,13 +275,28 @@ export async function deleteQuestion(params: DeleteQuestionParams) {
     connectToDatabase();
     const { path, questionId } = params;
 
-    const question = await Question.deleteOne({ _id: questionId });
+    const questionToDelete = await Question.findById(questionId);
+    const question = await Question.deleteOne({ _id: questionId }, {});
     await Answer.deleteMany({ question: questionId });
     await Interaction.deleteMany({ question: questionId });
     await Tag.updateMany(
       { question: questionId },
       { $pull: { question: questionId } }
     );
+
+    if (questionToDelete) {
+      await Interaction.create({
+        user: questionToDelete?.author._id,
+        action: "delete_question",
+        question: questionId,
+      });
+
+      // deccremente author's reputation for deleting a question
+      await User.findByIdAndUpdate(questionToDelete?.author._id, {
+        $dec: { reputation: 5 },
+      });
+    }
+
     revalidatePath(path);
     return { question };
   } catch (error) {

@@ -2,8 +2,13 @@ import QuestionForm from "@/components/forms/QuestionForm";
 import { PATHS } from "@/constants/paths";
 import { getUserById } from "@/lib/actions/user.action";
 import { auth } from "@clerk/nextjs";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Задать вопрос — devOverflow",
+};
 
 const AskQuestion = async () => {
   const { userId } = auth();

@@ -34,7 +34,12 @@ const Img = (props: ImageProps) => {
       />
       {!isLoaded && (
         <Skeleton
-          style={{ width: width + "px", height: height + "px", top: 0 }}
+          style={{
+            width: width + "px",
+            height: height + "px",
+            top: 0,
+            left: 0,
+          }}
           className={`${className} ${
             variant === "avatar" && "rounded-full"
           } absolute`}

@@ -3,7 +3,12 @@ import { getQuestionById } from "@/lib/actions/question.action";
 import { getUserById } from "@/lib/actions/user.action";
 import { ParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Редактировать вопрос — devOverflow",
+};
 
 const EditQuestionPage = async ({ params }: ParamsProps) => {
   const { userId } = auth();

@@ -32,9 +32,9 @@ export const Pagination = (props: PaginationProps) => {
       <Button
         disabled={pageNumber === 1}
         onClick={() => handleNavigation("prev")}
-        className="light-border-2 btn flex min-h-[36px] items-center justify-center gap-2 border"
+        className="light-border-2 btn flex min-h-[36px] items-center justify-center gap-2 border disabled:opacity-50"
       >
-        <p className="body-medium text-dark200_light800">Prev</p>
+        <p className="body-medium text-dark200_light800">Назад</p>
       </Button>
       <div className="flex items-center justify-center rounded-md bg-primary-500 px-3.5 py-2">
         <p className="body-semibold text-light-900">{pageNumber}</p>
@@ -42,9 +42,9 @@ export const Pagination = (props: PaginationProps) => {
       <Button
         disabled={!isNext}
         onClick={() => handleNavigation("next")}
-        className="light-border-2 btn flex min-h-[36px] items-center justify-center gap-2 border"
+        className="light-border-2 btn flex min-h-[36px] items-center justify-center gap-2 border disabled:opacity-50"
       >
-        <p className="body-medium text-dark200_light800">Next</p>
+        <p className="body-medium text-dark200_light800">Далее</p>
       </Button>
     </div>
   );

@@ -8,8 +8,13 @@ import { getUserCollection } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
 import { Question } from "@/types/database";
 import { auth } from "@clerk/nextjs";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Избранное — devOverflow",
+};
 
 const CollectionPage = async (props: SearchParamsProps) => {
   const { userId } = auth();
@@ -24,7 +29,7 @@ const CollectionPage = async (props: SearchParamsProps) => {
   });
   return (
     <>
-      <div className="mt-10 flex w-full flex-col gap-6">
+      <div className="flex w-full flex-col gap-6">
         <PageHeader
           title="Сохраненные вопросы"
           search={{ placeholder: "Поиск вопросов", href: PATHS.COLLECTION }}

@@ -195,6 +195,18 @@ export async function deleteAnswer(params: DeleteAnswerParams) {
     );
     await Interaction.deleteMany({ answer: answerId });
 
+    // interaction to delete answer
+    await Interaction.create({
+      user: answer.author._id,
+      action: "delete_answer",
+      answer: answer._id,
+    });
+
+    // deccremente author's reputation for deleting a question
+    await User.findByIdAndUpdate(answer.author._id, {
+      $dec: { reputation: 10 },
+    });
+
     revalidatePath(path);
     return { answer };
   } catch (error) {

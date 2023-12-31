@@ -18,6 +18,7 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { usePathname, useRouter } from "next/navigation";
 import { updateUser } from "@/lib/actions/user.action";
+import { toast } from "../ui/use-toast";
 
 interface ProfileFormProps {
   clerkId: string;
@@ -59,8 +60,16 @@ const ProfileForm = (props: ProfileFormProps) => {
         path: pathname,
       });
       router.back();
+      toast({
+        title: `Профиль обновлен`,
+        variant: "default",
+      });
     } catch (error) {
       console.log(error);
+      toast({
+        title: `Ошибка обновления профиля`,
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }

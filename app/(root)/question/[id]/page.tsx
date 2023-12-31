@@ -10,20 +10,42 @@ import { getUserById } from "@/lib/actions/user.action";
 import { timeDifferenceStringFromNow } from "@/lib/utils";
 import { URLProps } from "@/types";
 import { auth } from "@clerk/nextjs";
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const QuestionDetailsPage = async (props: URLProps) => {
-  const { params, searchParams } = props;
-  const questionDetails = await getQuestionById({
-    questionId: params.id,
-  });
+export async function generateMetadata(
+  { params, searchParams }: URLProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const { userId: clerkId } = auth();
   let user;
   if (clerkId) {
     user = await getUserById({ userId: clerkId });
   }
+  const questionDetails = await getQuestionById({
+    questionId: params.id,
+    userId: user._id,
+  });
+
+  return {
+    title: `${questionDetails.title || "Вопросы"} — devOverflow`,
+  };
+}
+
+const QuestionDetailsPage = async (props: URLProps) => {
+  const { params, searchParams } = props;
+  const { userId: clerkId } = auth();
+  let user;
+  if (clerkId) {
+    user = await getUserById({ userId: clerkId });
+  }
+
+  const questionDetails = await getQuestionById({
+    questionId: params.id,
+    userId: user._id,
+  });
 
   if (!questionDetails) return <div>Ошибка получения вопроса</div>;
   return (
