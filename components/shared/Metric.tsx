@@ -24,6 +24,7 @@ const Metric = (props: MetricProps) => {
         src={imgSrc}
         width={16}
         height={16}
+        style={{ width: "16px", height: "16px" }}
         alt={alt}
         className={`object-contain ${isAuthor ? "rounded-full" : ""}`}
       />

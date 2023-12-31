@@ -41,7 +41,8 @@ export default function RootLayout({
 }) {
   const prefersDark = cookies().get("x-theme")?.value === "dark";
   return (
-    <html lang="en" className={`${prefersDark ? "dark" : ""}`}>
+    // eslint-disable-next-line
+    <html lang="ru" className={`${prefersDark ? "dark" : ""}`}>
       <body className={`${inter.className} ${rubik.className}`}>
         <ClerkProvider
           localization={ruRU}

@@ -40,6 +40,7 @@ const LeftSidebar = () => {
                 alt={item.label}
                 width={20}
                 height={20}
+                style={{ width: "20px", height: "20px" }}
                 className={`${isActive ? "" : "invert-colors"}`}
               />
               <p
@@ -62,6 +63,7 @@ const LeftSidebar = () => {
                 alt="login"
                 width={20}
                 height={20}
+                style={{ width: "20px", height: "20px" }}
                 className="invert-colors lg:hidden"
               />
               <span className="primary-text-gradient max-lg:hidden">Войти</span>
@@ -74,6 +76,7 @@ const LeftSidebar = () => {
                 alt="sign up"
                 width={20}
                 height={20}
+                style={{ width: "20px", height: "20px" }}
                 className="invert-colors lg:hidden"
               />
               <span className="max-lg:hidden">Регистрация</span>

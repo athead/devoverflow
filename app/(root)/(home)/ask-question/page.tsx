@@ -15,7 +15,7 @@ const AskQuestion = async () => {
   return (
     <div>
       <h1 className="h1-bold text-dark100_light900">Задать вопрос</h1>
-      <div>
+      <div className="mt-9">
         <QuestionForm userId={JSON.stringify(user!._id)} formType="create" />
       </div>
     </div>

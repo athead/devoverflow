@@ -40,6 +40,7 @@ const Theme = ({ theme }: { theme: "light" | "dark" }) => {
               alt="sun"
               width={20}
               height={20}
+              style={{ width: "20px", height: "20px" }}
             />
           ) : (
             <Image
@@ -48,6 +49,7 @@ const Theme = ({ theme }: { theme: "light" | "dark" }) => {
               alt="moon"
               width={20}
               height={20}
+              style={{ width: "20px", height: "20px" }}
             />
           )}
         </MenubarTrigger>
@@ -55,7 +57,7 @@ const Theme = ({ theme }: { theme: "light" | "dark" }) => {
           {themes.map((item) => (
             <MenubarItem
               key={item.value}
-              className="flex cursor-pointer items-center gap-4 px-2.5 py-2 focus:bg-light-800 dark:focus:bg-dark-300"
+              className="flex cursor-pointer items-center gap-4 px-2.5 py-2 focus:bg-light-800 dark:focus:bg-dark-400"
               onClick={() => changeThemeHandler(item)}
             >
               <Image
@@ -63,6 +65,7 @@ const Theme = ({ theme }: { theme: "light" | "dark" }) => {
                 alt={item.value}
                 width={16}
                 height={16}
+                style={{ width: "16px", height: "16px" }}
                 className={`${mode === item.value && "active-theme"}`}
               />
               <p

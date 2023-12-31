@@ -11,7 +11,13 @@ const ProfileLink = (props: ProfileLinkProps) => {
   const { imgUrl, title, href } = props;
   return (
     <div className="flex-center gap-1">
-      <Image src={imgUrl} alt="icon" width={20} height={20} />
+      <Image
+        src={imgUrl}
+        alt="icon"
+        width={20}
+        height={20}
+        style={{ width: "20px", height: "20px" }}
+      />
       {href ? (
         <Link
           href={href}

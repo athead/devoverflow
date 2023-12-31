@@ -44,7 +44,7 @@ const TabFilter = (props: TabFilterProps) => {
           variant={"tab"}
           data-state={active === item.value ? "active" : ""}
           key={item.value}
-          onClick={() => {
+          onClickCapture={() => {
             handleFilterClick(item.value);
           }}
         >

@@ -10,6 +10,7 @@ const Logo = () => {
         src="/assets/images/site-logo.svg"
         width={23}
         height={23}
+        style={{ width: "23px", height: "23px" }}
         alt="devOverflow"
       />
       <p className="h2-bold text-dark100_light900 font-rubik">

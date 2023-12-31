@@ -18,6 +18,7 @@ const NoResult = (props: NoResultComponentProps) => {
         alt="No result"
         width={270}
         height={200}
+        style={{ width: "270px", height: "200px" }}
         className="block object-contain dark:hidden"
       />
       <Image
@@ -25,6 +26,7 @@ const NoResult = (props: NoResultComponentProps) => {
         alt="No result"
         width={270}
         height={200}
+        style={{ width: "270px", height: "200px" }}
         className="hidden object-contain dark:flex"
       />
       <h2 className="h2-bold text-dark200_light900 mt-8">{title}</h2>

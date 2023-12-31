@@ -29,6 +29,7 @@ const ProfilePage = async (props: URLProps) => {
             alt="profile picture"
             width={140}
             height={140}
+            style={{ width: "140px", height: "140px" }}
             className="rounded-full object-cover"
           />
 
@@ -94,15 +95,17 @@ const ProfilePage = async (props: URLProps) => {
               Ответы
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="top-posts" className="flex w-full flex-col gap-6">
+          <TabsContent value="top-posts">
             <QuestionTab
+              className="mt-5 flex w-full flex-col gap-6"
               searchParams={searchParams}
               userId={user._id}
               clerkId={clerkId}
             />
           </TabsContent>
-          <TabsContent value="answers" className="flex w-full flex-col gap-6">
+          <TabsContent value="answers">
             <AnswerTab
+              className="mt-5 flex w-full flex-col gap-6"
               searchParams={searchParams}
               userId={user._id}
               clerkId={clerkId}

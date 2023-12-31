@@ -6,6 +6,7 @@ import { QuestionFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getUserCollection } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
+import { Question } from "@/types/database";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -21,7 +22,6 @@ const CollectionPage = async (props: SearchParamsProps) => {
     filter: searchParams.filter,
     page: searchParams.page ? +searchParams.page : 1,
   });
-  //   console.log(questions);
   return (
     <>
       <div className="mt-10 flex w-full flex-col gap-6">
@@ -36,8 +36,7 @@ const CollectionPage = async (props: SearchParamsProps) => {
           }}
         />
         {questions.length > 0 ? (
-          // TODO
-          questions.map((question: any) => (
+          questions.map((question: Question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}

@@ -5,6 +5,7 @@ import RenderTag from "../RenderTag";
 import { getHotQuestions } from "@/lib/actions/question.action";
 import { PATHS } from "@/constants/paths";
 import { getPopularTags } from "@/lib/actions/tag.actions";
+import { Question } from "@/types/database";
 
 const RightSideBar = async () => {
   const hotQuestions = await getHotQuestions();
@@ -14,8 +15,7 @@ const RightSideBar = async () => {
       <div>
         <h3 className="h3-bold text-dark200_light900">Популярные вопросы</h3>
         <div className="mt-7 flex w-full flex-col gap-[30px]">
-          {/* TODO удалить any */}
-          {hotQuestions.map((question: any) => (
+          {hotQuestions.map((question: Question) => (
             <Link
               href={`${PATHS.QUESTION}${question._id}`}
               key={question._id}
@@ -29,6 +29,7 @@ const RightSideBar = async () => {
                 alt="go to"
                 width={20}
                 height={20}
+                style={{ width: "20px", height: "20px" }}
                 className="invert-colors"
               />
             </Link>

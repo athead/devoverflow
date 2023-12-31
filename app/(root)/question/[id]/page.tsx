@@ -8,13 +8,14 @@ import { PATHS } from "@/constants/paths";
 import { getQuestionById } from "@/lib/actions/question.action";
 import { getUserById } from "@/lib/actions/user.action";
 import { timeDifferenceStringFromNow } from "@/lib/utils";
+import { URLProps } from "@/types";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-// TODO
-const QuestionDetailsPage = async ({ params, searchParams }) => {
+const QuestionDetailsPage = async (props: URLProps) => {
+  const { params, searchParams } = props;
   const questionDetails = await getQuestionById({
     questionId: params.id,
   });
@@ -38,6 +39,7 @@ const QuestionDetailsPage = async ({ params, searchParams }) => {
               className="rounded-full"
               width={22}
               height={22}
+              style={{ width: "22px", height: "22px" }}
               alt="avatar"
             />
             <p className="paragraph-semibold text-dark300_light700">

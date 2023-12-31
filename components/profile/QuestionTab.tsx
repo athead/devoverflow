@@ -7,15 +7,16 @@ import { Pagination } from "../shared/Pagination";
 interface QuestionTabProps extends SearchParamsProps {
   userId: string;
   clerkId?: string | null;
+  className?: string;
 }
 const QuestionTab = async (props: QuestionTabProps) => {
-  const { searchParams, userId, clerkId } = props;
+  const { searchParams, userId, clerkId, className } = props;
   const { questions, isNext } = await getUserQuestions({
     userId,
     page: searchParams.page ? +searchParams.page : 1,
   });
   return (
-    <>
+    <div className={className}>
       {questions.map((question) => (
         <QuestionCard
           key={question._id}
@@ -36,7 +37,7 @@ const QuestionTab = async (props: QuestionTabProps) => {
           isNext={isNext}
         />
       </div>
-    </>
+    </div>
   );
 };
 

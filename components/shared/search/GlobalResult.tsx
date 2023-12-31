@@ -8,6 +8,7 @@ import Image from "next/image";
 import GlobalFilters from "./GlobalFilters";
 import { globalSearch } from "@/lib/actions/general.action";
 import { PATHS } from "@/constants/paths";
+import { SearchItemType } from "@/types/database";
 
 export const GlobalSearchModal = () => {
   const searchParams = useSearchParams();
@@ -71,7 +72,7 @@ export const GlobalSearchModal = () => {
         ) : (
           <div className="flex flex-col gap-2">
             {result.length > 0 ? (
-              result.map((item: any, index: number) => (
+              result.map((item: SearchItemType, index: number) => (
                 <Link
                   href={renderLink(item.type, item.id)}
                   key={item.type + item.id + index}
@@ -82,6 +83,7 @@ export const GlobalSearchModal = () => {
                     alt="tags"
                     width={18}
                     height={18}
+                    style={{ width: "18px", height: "18px" }}
                     className="invert-colors mt-1 object-contain"
                   />
                   <div className="flex flex-col">

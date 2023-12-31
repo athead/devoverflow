@@ -36,6 +36,7 @@ const EditDeleteAction = (props: EditDeleteActionProps) => {
           alt="Edit"
           width={14}
           height={14}
+          style={{ width: "14px", height: "14px" }}
           className="cursor-pointer object-contain"
           onClick={handleEdit}
         />

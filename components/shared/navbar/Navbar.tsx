@@ -1,11 +1,12 @@
 import React from "react";
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { ClerkLoading, SignedIn, UserButton } from "@clerk/nextjs";
 import Theme from "./Theme";
 import MobileNav from "./MobileNav";
 import GlobalSearch from "../search/GlobalSearch";
 import { cookies } from "next/headers";
 import Logo from "../Logo";
 import { PATHS } from "@/constants/paths";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Navbar = () => {
   const theme = cookies().get("x-theme")?.value;
@@ -16,6 +17,9 @@ const Navbar = () => {
       <div className="flex-between gap-5">
         <Theme theme={theme === "dark" ? "dark" : "light"} />
         <SignedIn>
+          <ClerkLoading>
+            <Skeleton className="h-10 w-10 rounded-full" />
+          </ClerkLoading>
           <UserButton
             afterSignOutUrl={PATHS.HOME}
             appearance={{

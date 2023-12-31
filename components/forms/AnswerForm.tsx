@@ -107,6 +107,7 @@ const AnswerForm = (props: AnswerFormProps) => {
                 alt="star"
                 width={12}
                 height={12}
+                style={{ width: "12px", height: "12px" }}
                 className="object-contain"
               />
               Спросить ИИ

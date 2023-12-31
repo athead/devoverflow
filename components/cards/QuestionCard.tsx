@@ -5,32 +5,13 @@ import Metric from "../shared/Metric";
 import { timeDifferenceStringFromNow } from "@/lib/utils";
 import { SignedIn } from "@clerk/nextjs";
 import EditDeleteAction from "../shared/EditDeleteAction";
-// import { Types } from "mongoose";
-
-export type Tag = {
-  _id: string;
-  name: string;
-};
-
-// export type User = {
-//   _id: Types.ObjectId;
-//   name: string;
-//   avatar: string;
-// };
+import { Tag, User } from "@/types/database";
 
 interface QuestionCardProps {
   _id: string;
   title: string;
-  tags: {
-    _id: string;
-    name: string;
-  }[];
-  author: {
-    _id: string;
-    name: string;
-    avatar: string;
-    clerkId: string;
-  };
+  tags: Tag[];
+  author: User;
   upvotes: number;
   views: number;
   answers: Array<object>;
@@ -71,7 +52,6 @@ const QuestionCard = (props: QuestionCardProps) => {
         </SignedIn>
       </div>
       <div className="mt-3.5 flex flex-wrap gap-2">
-        {/* TODO убрать any */}
         {tags.map((tag: Tag) => (
           <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
         ))}
@@ -86,27 +66,29 @@ const QuestionCard = (props: QuestionCardProps) => {
           isAuthor
           textStyles="body-medium text-dark400_light700"
         />
-        <Metric
-          imgSrc="/assets/icons/like.svg"
-          alt="upvotes"
-          value={upvotes}
-          namecases={["лайк", "лайка", "лайков"]}
-          textStyles="small-medium text-dark400_light800"
-        />
-        <Metric
-          imgSrc="/assets/icons/message.svg"
-          alt="answers"
-          value={answers.length}
-          namecases={["ответ", "ответа", "ответов"]}
-          textStyles="small-medium text-dark400_light800"
-        />
-        <Metric
-          imgSrc="/assets/icons/eye.svg"
-          alt="views"
-          value={views}
-          namecases={["просмотр", "просмотра", "просмотров"]}
-          textStyles="small-medium text-dark400_light800"
-        />
+        <div className="flex items-center gap-3 max-sm:flex-wrap max-sm:justify-start">
+          <Metric
+            imgSrc="/assets/icons/like.svg"
+            alt="upvotes"
+            value={upvotes}
+            namecases={["лайк", "лайка", "лайков"]}
+            textStyles="small-medium text-dark400_light800"
+          />
+          <Metric
+            imgSrc="/assets/icons/message.svg"
+            alt="answers"
+            value={answers.length}
+            namecases={["ответ", "ответа", "ответов"]}
+            textStyles="small-medium text-dark400_light800"
+          />
+          <Metric
+            imgSrc="/assets/icons/eye.svg"
+            alt="views"
+            value={views}
+            namecases={["просмотр", "просмотра", "просмотров"]}
+            textStyles="small-medium text-dark400_light800"
+          />
+        </div>
       </div>
     </div>
   );

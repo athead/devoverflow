@@ -68,11 +68,6 @@ const ProfileForm = (props: ProfileFormProps) => {
 
   return (
     <div>
-      <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
-        <h4 className="paragraph-semibold text-dark400_light800">
-          Введите Ваш ответ здесь
-        </h4>
-      </div>
       <Form {...form}>
         <form
           className="mt-9 flex w-full flex-col gap-9"
@@ -90,7 +85,7 @@ const ProfileForm = (props: ProfileFormProps) => {
                   <Input
                     placeholder="Имя"
                     {...field}
-                    className="no-focus paragraph-regular background-light700_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
+                    className="no-focus paragraph-regular background-light800_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
                   />
                 </FormControl>
                 <FormMessage className="text-red-500" />
@@ -109,7 +104,7 @@ const ProfileForm = (props: ProfileFormProps) => {
                   <Input
                     placeholder="Имя пользователя"
                     {...field}
-                    className="no-focus paragraph-regular background-light700_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
+                    className="no-focus paragraph-regular background-light800_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
                   />
                 </FormControl>
                 <FormMessage className="text-red-500" />
@@ -129,7 +124,7 @@ const ProfileForm = (props: ProfileFormProps) => {
                     type="url"
                     placeholder="Ссылка"
                     {...field}
-                    className="no-focus paragraph-regular background-light700_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
+                    className="no-focus paragraph-regular background-light800_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
                   />
                 </FormControl>
                 <FormMessage className="text-red-500" />
@@ -148,7 +143,7 @@ const ProfileForm = (props: ProfileFormProps) => {
                   <Input
                     placeholder="Откуда вы?"
                     {...field}
-                    className="no-focus paragraph-regular background-light700_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
+                    className="no-focus paragraph-regular background-light800_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
                   />
                 </FormControl>
                 <FormMessage className="text-red-500" />
@@ -166,7 +161,7 @@ const ProfileForm = (props: ProfileFormProps) => {
                 <Textarea
                   placeholder="Что бы Вы хотели сообщить о себе"
                   {...field}
-                  className="no-focus paragraph-regular background-light700_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
+                  className="no-focus paragraph-regular background-light800_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
                 ></Textarea>
                 <FormMessage className="text-red-500" />
               </FormItem>

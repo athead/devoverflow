@@ -16,6 +16,7 @@ const TagsPage = async (props: SearchParamsProps) => {
     filter: searchParams.filter,
     page: searchParams.page ? +searchParams.page : 1,
   });
+
   return (
     <>
       <div className="mt-10 flex w-full flex-col gap-6">
@@ -37,6 +38,7 @@ const TagsPage = async (props: SearchParamsProps) => {
               key={tag._id}
               _id={tag._id}
               name={tag.name}
+              description={tag.description}
               questionLength={tag.questions.length}
             />
           ))

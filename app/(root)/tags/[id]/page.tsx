@@ -6,6 +6,7 @@ import { QuestionFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getQuestionByTagId } from "@/lib/actions/tag.actions";
 import { URLProps } from "@/types";
+import { Question } from "@/types/database";
 import React from "react";
 
 const TagDetailsPage = async (props: URLProps) => {
@@ -32,8 +33,7 @@ const TagDetailsPage = async (props: URLProps) => {
           }}
         />
         {questions.length > 0 ? (
-          //   TODO добавить тип
-          questions.map((question: any) => (
+          questions.map((question: Question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}

@@ -128,6 +128,7 @@ const Votes = (props: VotesProps) => {
             }
             width={18}
             height={18}
+            style={{ width: "18px", height: "18px" }}
             alt="upvote"
             className="cursor-pointer"
             onClick={() => {
@@ -149,6 +150,7 @@ const Votes = (props: VotesProps) => {
             }
             width={18}
             height={18}
+            style={{ width: "18px", height: "18px" }}
             alt="downvote"
             className="cursor-pointer"
             onClick={() => {
@@ -171,6 +173,7 @@ const Votes = (props: VotesProps) => {
               }
               width={18}
               height={18}
+              style={{ width: "18px", height: "18px" }}
               alt="star"
               className="cursor-pointer"
               onClick={() => {

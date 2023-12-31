@@ -4,8 +4,13 @@ import NoResult from "@/components/shared/NoResult";
 import { Pagination } from "@/components/shared/Pagination";
 import { HomePageFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
-import { getQuestions } from "@/lib/actions/question.action";
+import {
+  getQuestions,
+  getRecommendedQuestions,
+} from "@/lib/actions/question.action";
 import { SearchParamsProps } from "@/types";
+import { Question } from "@/types/database";
+import { auth } from "@clerk/nextjs";
 import { Metadata } from "next";
 import React from "react";
 
@@ -16,11 +21,34 @@ export const metadata: Metadata = {
 };
 const Home = async (props: SearchParamsProps) => {
   const { searchParams } = props;
-  const { questions, isNext } = await getQuestions({
-    searchQuery: searchParams.q,
-    filter: searchParams.filter,
-    page: searchParams.page ? +searchParams.page : 1,
-  });
+  const { userId } = auth();
+
+  let questions: Question[] = [];
+  let isNext: boolean = false;
+  // if recommended
+  if (searchParams?.filter === HomePageFilters[1].value) {
+    if (userId) {
+      const result = await getRecommendedQuestions({
+        userId,
+        searchQuery: searchParams.q,
+        page: searchParams.page ? +searchParams.page : 1,
+      });
+      questions = result.questions as Question[];
+      isNext = result.isNext;
+    } else {
+      questions = [];
+      isNext = false;
+    }
+  } else {
+    const result = await getQuestions({
+      searchQuery: searchParams.q,
+      filter: searchParams.filter,
+      page: searchParams.page ? +searchParams.page : 1,
+    });
+    questions = result.questions as Question[];
+    isNext = result.isNext;
+  }
+
   return (
     <>
       <div className="mt-10 flex w-full flex-col gap-6">

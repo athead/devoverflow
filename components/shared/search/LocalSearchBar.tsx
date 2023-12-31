@@ -62,6 +62,7 @@ const LocalSearchBar = (props: CustomInputProps) => {
           alt="search icon"
           width={24}
           height={24}
+          style={{ width: "24px", height: "24px" }}
           className="cursor-pointer"
         />
       )}
@@ -72,7 +73,7 @@ const LocalSearchBar = (props: CustomInputProps) => {
         onChange={(e) => {
           setSearch(e.target.value);
         }}
-        className="paragraph-regular no-focus placeholder background-light800_darkgradient border-none shadow-none outline-none"
+        className="paragraph-regular no-focus placeholder text-dark400_light700 border-none bg-transparent shadow-none outline-none"
       />
       {iconPosition === "right" && imgSrc && (
         <Image
@@ -80,6 +81,7 @@ const LocalSearchBar = (props: CustomInputProps) => {
           alt="search icon"
           width={24}
           height={24}
+          style={{ width: "24px", height: "24px" }}
           className="cursor-pointer"
         />
       )}

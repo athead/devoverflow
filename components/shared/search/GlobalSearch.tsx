@@ -19,10 +19,10 @@ const GlobalSearch = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
-    const handleOutsideClick = (event: any) => {
+    const handleOutsideClick = (event: MouseEvent) => {
       if (
         searchContainerRef.current &&
-        !searchContainerRef.current.contains(event.target)
+        !searchContainerRef.current.contains(event.target as Node)
       ) {
         setModalIsOpen(false);
         setSearch("");
@@ -74,6 +74,7 @@ const GlobalSearch = () => {
           alt="search"
           width={24}
           height={24}
+          style={{ width: "24px", height: "24px" }}
           className="cursor-pointer"
         />
         <Input
@@ -83,7 +84,7 @@ const GlobalSearch = () => {
             handleInputChange(e.target.value);
           }}
           placeholder="Поиск"
-          className="paragraph-regular no-focus placeholder text-dark400_light700 background-light800_darkgradient border-none shadow-none outline-none"
+          className="paragraph-regular no-focus placeholder text-dark400_light700 border-none bg-transparent shadow-none outline-none"
         />
       </div>
       {modalIsOpen && <GlobalSearchModal />}
