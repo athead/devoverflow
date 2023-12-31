@@ -90,9 +90,16 @@ const AnswerForm = (props: AnswerFormProps) => {
         const editor = editorRef.current;
         editor.setContent(formattedAnswer);
       }
-      // toast
+      toast({
+        title: `Ответ сгенерирован ChatGPT`,
+        variant: "default",
+      });
     } catch (error) {
       console.log(error);
+      toast({
+        title: `Ошибка генерации ответа от ChatGPT`,
+        variant: "destructive",
+      });
     } finally {
       setIsSubmittingAI(false);
     }
