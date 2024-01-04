@@ -15,16 +15,14 @@
 [![Contributors](https://img.shields.io/github/contributors/athead/devoverflow?style=flat&color=orange&label=Contributors)](https://github.com/athead/devoverflow/graphs/contributors)
 ![Release](https://img.shields.io/github/release/athead/devoverflow.svg)
 ![PRs](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=shields)
-![deployment](https://img.shields.io/github/deployments/athead/devoverflow?logo=vercel&label=Website)
-[![Known Vulnerabilities](https://snyk.io/test/github/athead/devoverflow/badge.svg)](https://snyk.io/test/github/athead/devoverflow)
 
 ## 🌐 Демо
 
-Ознакомьтесь с демонстрацией проекта: [devOverflow](https://deverflow.vercel.app/)
+Демо проекта: [devOverflow](https://deverflow.vercel.app/)
 
 ## 📝 Описание
 
-**DevOverflow** это платформа вопросов и ответов, позволяющая разработчикам задавать вопросы, делиться знаниями и учиться друг у друга. Она построена с использованием Next.js, Tailwind CSS, Clerk, MongoDB и многого другого.
+**devOverflow** это платформа вопросов и ответов, позволяющая разработчикам задавать вопросы, делиться знаниями и учиться друг у друга. Она построена с использованием Next.js, Tailwind CSS, Clerk, MongoDB и многого другого.
 
 <details><summary><b>Структура папок</b></summary>
 
@@ -112,7 +110,7 @@ devoverflow/
 
 ## ✨ Используемые технологии
 
-<details><summary><b>вevOverflow</b> построен с использованием следующих технологий:</summary>
+<details><summary><b>devOverflow</b> разраобтан с использованием следующих технологий:</summary>
 
 - [TypeScript](https://www.typescriptlang.org/): TypeScript - это типизированный JavaScript.
 - [Next.js](https://nextjs.org/): Next.js - это фреймворк React для создания веб-приложений, статически генерирующих страницу на стороне сервера.
