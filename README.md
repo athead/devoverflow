@@ -8,7 +8,7 @@
 [![GitHub commits](https://img.shields.io/github/commit-activity/t/athead/devoverflow?style=social&logo=github)](https://github.com/athead/devoverflow/commits)
 [![Pull requests](https://img.shields.io/github/issues-pr/athead/devoverflow?style=social&logo=github)](https://github.com/athead/devoverflow/pulls)
 
-![demo](https://github.com/athead/devoverflow/images/github.jpg)
+![demo](https://raw.githubusercontent.com/athead/devoverflow/main/images/github.jpg)
 
 [![License](https://img.shields.io/github/license/athead/devoverflow?color=dddddd&labelColor=000000)](https://github.com/athead/devoverflow/blob/main/LICENSE)
 [![Top Language](https://img.shields.io/github/languages/top/athead/devoverflow?logo=github&logoColor=%23007ACC&label=TypeScript)](https://www.typescriptlang.org/)
