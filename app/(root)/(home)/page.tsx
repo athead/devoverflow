@@ -26,7 +26,7 @@ const Home = async (props: SearchParamsProps) => {
   let questions: Question[] = [];
   let isNext: boolean = false;
   // if recommended
-  if (searchParams?.filter === HomePageFilters[1].value) {
+  if (searchParams?.filter === HomePageFilters[3].value) {
     if (userId) {
       const result = await getRecommendedQuestions({
         userId,

@@ -43,8 +43,8 @@ const GlobalFilters = () => {
             variant={"globalTab"}
             className={`${
               active === item.value
-                ? "bg-primary-500 text-light-900"
-                : "bg-light-700 text-dark-400 hover:text-primary-500 dark:bg-dark-500"
+                ? "bg-primary-500 text-light-900 hover:text-primary-100 dark:hover:text-primary-100 "
+                : "bg-light-700 text-dark-400 hover:text-primary-500  dark:bg-dark-500"
             }`}
             key={item.value}
             onClick={() => handleTypeClick(item.value)}

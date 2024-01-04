@@ -9,6 +9,7 @@ import { formUrlQuery } from "@/lib/utils";
 
 import type { FilterType } from "@/types";
 import Switcher from "../ui/Swither";
+import { JobScheduleTypeFilters } from "@/constants/filters";
 
 const JobFilters = ({ filters }: { filters: FilterType[] }) => {
   const searchParams = useSearchParams();
@@ -57,9 +58,9 @@ const JobFilters = ({ filters }: { filters: FilterType[] }) => {
         </Button>
       ))}
       <div className="background-light800_dark300 mt-2 flex items-center rounded-lg px-3 py-2 shadow-none md:mt-0">
-        <Switcher query="remote" label="Remote" />
-        <Switcher query="wage" label="TBA" />
-        <Switcher query="skills" label="Skills" />
+        {JobScheduleTypeFilters.map((item) => (
+          <Switcher key={item.value} query={item.value} label={item.name} />
+        ))}
       </div>
     </div>
   );

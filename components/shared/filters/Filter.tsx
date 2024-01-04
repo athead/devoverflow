@@ -17,6 +17,8 @@ interface FilterComponentProps {
   placeholder?: string;
   otherClasses?: string;
   containerClasses?: string;
+  searchParamsKey?: string;
+  onChange?: (value: string) => void;
 }
 
 const Filter = (props: FilterComponentProps) => {
@@ -25,16 +27,19 @@ const Filter = (props: FilterComponentProps) => {
     placeholder = "Фильтр",
     containerClasses,
     otherClasses,
+    searchParamsKey = "filter",
+    onChange,
   } = props;
 
   const searchParams = useSearchParams();
   const router = useRouter();
-  const paramFilter = searchParams.get("filter");
+  const paramFilter = searchParams.get(searchParamsKey);
 
   const handleUpdateParams = (value: string) => {
+    if (onChange) return onChange(value);
     const newUrl = formUrlQuery({
       params: searchParams.toString(),
-      key: "filter",
+      key: searchParamsKey,
       value,
     });
     router.push(newUrl, { scroll: false });
@@ -46,7 +51,7 @@ const Filter = (props: FilterComponentProps) => {
         defaultValue={paramFilter || undefined}
       >
         <SelectTrigger
-          className={`body-regular light-border background-light800_dark300 text-dark400_light700 border px-5 py-2.5 ${otherClasses}`}
+          className={`body-regular light-border background-light800_dark300 text-dark500_light700 line-clamp-1 flex h-9 min-h-[56px] w-full items-center justify-between gap-3 rounded-md border border-slate-200 bg-transparent p-4 text-sm shadow-sm ring-offset-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus:ring-slate-300 sm:max-w-[210px] ${otherClasses}`}
         >
           <div className="line-clamp-1 flex-1 text-left">
             <SelectValue placeholder={placeholder} />

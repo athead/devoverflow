@@ -2,6 +2,7 @@ export interface SearchItemType {
   type: string;
   id: string;
   title: string;
+  typeName: string;
 }
 
 export interface Tag {

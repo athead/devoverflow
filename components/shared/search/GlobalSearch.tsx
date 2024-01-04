@@ -53,8 +53,8 @@ const GlobalSearch = () => {
           router.push(newUrl, { scroll: false });
         }
       }
-      return () => clearTimeout(delayDebounceFn);
     }, 300);
+    return () => clearTimeout(delayDebounceFn);
   }, [search, router, pathname, searchParams, query]);
 
   const handleInputChange = (value: string) => {

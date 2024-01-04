@@ -38,15 +38,17 @@ interface EditorProps {
   initialValue: string;
   onChange: (content: string) => void;
   onBlur: () => void;
+  editorRef?: React.MutableRefObject<TinyMCEEditor | null>;
 }
 
 // skin: theme === "dark" ? "oxide-dark" : "oxide",
 // content_css: theme === "dark" ? "dark" : "default",
 
 const TextEditor = (props: EditorProps) => {
-  const { theme, initialValue, onChange, onBlur } = props;
-  const editorDarkRef = useRef<TinyMCEEditor | null>(null);
-  const editorLightRef = useRef<TinyMCEEditor | null>(null);
+  const { theme, initialValue, onChange, onBlur, editorRef } = props;
+  const ownEditorRef = useRef<TinyMCEEditor | null>(null);
+  // const editorDarkRef = useRef<TinyMCEEditor | null>(null);
+  // const editorLightRef = useRef<TinyMCEEditor | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // useEffect(() => {
@@ -72,7 +74,25 @@ const TextEditor = (props: EditorProps) => {
           className="rounded-xl"
         />
       )}
-      {theme === "light" ? (
+      <Editor
+        id="tiny-mce-editor-light"
+        apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
+        onInit={(evt, editor) => {
+          editorRef
+            ? (editorRef.current = editor)
+            : (ownEditorRef.current = editor);
+          setIsLoading(false);
+        }}
+        initialValue={initialValue}
+        onBlur={onBlur}
+        onEditorChange={onChange}
+        init={{
+          ...editorOptions,
+          skin: theme === "dark" ? "oxide-dark" : "oxide",
+          content_css: theme === "dark" ? "dark" : "default",
+        }}
+      />
+      {/* {theme === "light" ? (
         <Editor
           id="tiny-mce-editor-light"
           apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
@@ -106,7 +126,7 @@ const TextEditor = (props: EditorProps) => {
             content_css: "dark",
           }}
         />
-      )}
+      )} */}
     </div>
   );
 };

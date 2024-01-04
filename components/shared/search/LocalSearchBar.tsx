@@ -9,8 +9,11 @@ interface CustomInputProps {
   route: string;
   iconPosition?: "left" | "right";
   imgSrc?: string;
+  searchParamsKey?: string;
   placeholder: string;
   otherClasses?: string;
+  debounce?: number;
+  onChange?: (value: string) => void;
 }
 
 const LocalSearchBar = (props: CustomInputProps) => {
@@ -20,22 +23,26 @@ const LocalSearchBar = (props: CustomInputProps) => {
     otherClasses,
     placeholder,
     route,
+    searchParamsKey = "q",
+    debounce = 300,
+    onChange,
   } = props;
 
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const query = searchParams.get("q");
+  const query = searchParams.get(searchParamsKey);
 
   const [search, setSearch] = useState(query || "");
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
+      if (onChange) return onChange(search);
       if (search) {
         const newUrl = formUrlQuery({
           params: searchParams.toString(),
-          key: "q",
+          key: searchParamsKey,
           value: search,
         });
         router.push(newUrl, { scroll: false });
@@ -43,14 +50,24 @@ const LocalSearchBar = (props: CustomInputProps) => {
         if (pathname === route) {
           const newUrl = removeKeysFromQuery({
             params: searchParams.toString(),
-            keys: ["q"],
+            keys: [searchParamsKey],
           });
           router.push(newUrl, { scroll: false });
         }
       }
-      return () => clearTimeout(delayDebounceFn);
-    }, 300);
-  }, [search, route, pathname, router, searchParams, query]);
+    }, debounce);
+    return () => clearTimeout(delayDebounceFn);
+  }, [
+    search,
+    route,
+    pathname,
+    router,
+    searchParams,
+    query,
+    onChange,
+    searchParamsKey,
+    debounce,
+  ]);
 
   return (
     <div

@@ -15,12 +15,17 @@ interface PageHearedProps {
   search?: {
     placeholder?: string;
     href: string;
+    searchParamsKey?: string;
+    debounce?: number;
+    onChange?: (value: string) => void;
   };
   filter?: {
     type: "primary" | "secondary";
     values: FilterType[];
     placeholder?: string;
+    searchParamsKey?: string;
     default: FilterType;
+    onChange?: (value: string) => void;
   };
 }
 const PageHeader = (props: PageHearedProps) => {
@@ -47,6 +52,9 @@ const PageHeader = (props: PageHearedProps) => {
               imgSrc="/assets/icons/search.svg"
               placeholder={search.placeholder || "Поиск..."}
               otherClasses="flex-1"
+              searchParamsKey={search.searchParamsKey}
+              debounce={search.debounce}
+              onChange={search.onChange}
             />
           )}
           {filter && (
@@ -56,7 +64,9 @@ const PageHeader = (props: PageHearedProps) => {
               containerClasses={
                 filter.type === "primary" ? "hidden max-md:flex" : ""
               }
+              searchParamsKey={filter.searchParamsKey}
               placeholder={filter.placeholder || "Фильтр"}
+              onChange={filter.onChange}
             />
           )}
         </div>

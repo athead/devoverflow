@@ -42,7 +42,7 @@ const AllAnswers = async (props: AllAnswersProps) => {
       </div>
       <div>
         {answers.map((answer) => (
-          <article key={answer._id} className="light-border border-b py-10">
+          <article key={answer._id} className="light-border border-b pt-10">
             <div className="mb-8 flex flex-col-reverse justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
               <Link
                 href={`${PATHS.PROFILE}/${answer.author.clerkId}`}
@@ -61,7 +61,7 @@ const AllAnswers = async (props: AllAnswersProps) => {
                     {answer.author.name}
                   </p>
                   <p className="small-regular text-light400_light500 ml-0.5 mt-0.5 line-clamp-1">
-                    <span className="max-sm:hidden"> - </span>
+                    <span className="max-sm:hidden"> — </span>
                     {timeDifferenceStringFromNow(answer.createdAt)}
                   </p>
                 </div>

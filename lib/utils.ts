@@ -2,8 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import qs from "query-string";
 import { BADGE_CRITERIA, CURRENCY_NOTATIONS } from "@/constants";
-import { BadgeCounts, FilterType } from "@/types";
-import { JobPageFilters } from "@/constants/filters";
+import { BadgeCounts } from "@/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -30,6 +29,14 @@ export const getNumberNamecasesString = (
   }
   return withNum ? `${num} ${namecases[2]}` : `${namecases[2]}`;
 };
+
+export function capitalizeFirstLetter(inputString: string): string {
+  if (inputString.length === 0) {
+    return inputString;
+  }
+
+  return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+}
 
 export const timeDifferenceStringFromNow = (previous: Date): string => {
   const current = new Date();
@@ -222,42 +229,26 @@ export const assignBadges = (params: BadgeParam) => {
   return badgeCounts;
 };
 
-export const employmentTypeConverter = (type: string): string => {
-  let employmentType: string = "";
-
-  JobPageFilters.forEach((filter: FilterType) => {
-    if (filter.value === type) {
-      employmentType = filter.name;
-    }
-  });
-
-  return employmentType;
-};
-
-export const getFormattedSalary = ({
-  min,
-  max,
-  currency,
-  period,
-}: {
-  min: number;
-  max: number;
-  currency: string;
-  period: string;
-}) => {
-  if (!min || !max) return null;
+export const getFormattedSalary = (
+  min: number,
+  max: number,
+  currency: string | null,
+  format: boolean = true
+) => {
+  if (!min && !max) return null;
 
   const salaryInfo = {
-    symbol: CURRENCY_NOTATIONS[currency] || "$",
-    low: salaryFormatter(min, 1),
-    high: salaryFormatter(max, 1),
-    per: period ? `/${period.toLowerCase()}ly` : "",
+    symbol: currency ? CURRENCY_NOTATIONS[currency] || "руб" : "",
+    low: format ? salaryFormatter(min, 1) : min,
+    high: format ? salaryFormatter(max, 1) : max,
   };
 
-  const { symbol, low, high, per } = salaryInfo;
-
-  const formattedSalary = `${symbol}${low} - ${symbol}${high}${per}`;
-
+  const { symbol, low, high } = salaryInfo;
+  let formattedSalary = "";
+  if (low && !high) formattedSalary = `от ${low} ${symbol}`;
+  else if (high && !low) formattedSalary = `до ${high} ${symbol}`;
+  else if (low === high) formattedSalary = `${low} ${symbol}`;
+  else formattedSalary = `${low} - ${high} ${symbol}`;
   return formattedSalary as string;
 };
 
@@ -284,4 +275,25 @@ const salaryFormatter = (num: number, digits: number) => {
 };
 export function isValidImage(url: string) {
   return /\.(jpg|jpeg|png|webp||svg)$/.test(url);
+}
+
+export function clearJobDescription(input: string): string {
+  if (!input) return "";
+  return input
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;/g, " ")
+    .replace(/✅/g, "")
+    .replace(/&laquo; /g, '"')
+    .replace(/&raquo; /g, '"')
+    .replace(/&mdash; /g, "-")
+    .trim();
+}
+
+export function formatDateFromTimestamp(timestamp: number): string {
+  const date = new Date(timestamp);
+  const day = ("0" + date.getDate()).slice(-2);
+  const month = ("0" + (date.getMonth() + 1)).slice(-2);
+  const year = date.getFullYear();
+
+  return `${day}.${month}.${year}`;
 }

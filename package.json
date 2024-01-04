@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "structure": "markdown-notes-tree"
   },
   "dependencies": {
     "@clerk/localizations": "^1.26.10",
@@ -29,6 +30,7 @@
     "autoprefixer": "10.4.16",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "cmdk": "^0.2.0",
     "cookies-next": "^4.1.0",
     "eslint": "8.54.0",
     "eslint-config-next": "14.0.3",
@@ -55,6 +57,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/prismjs": "^1.26.3"
+    "@types/prismjs": "^1.26.3",
+    "markdown-notes-tree": "^1.13.0"
   }
 }

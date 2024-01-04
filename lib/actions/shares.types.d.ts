@@ -2,47 +2,6 @@ import { Types } from "mongoose";
 
 import { IUser } from "@/mongodb";
 
-/**
- * Common interfaces used in actions
- */
-// interface ClerkId {
-//   clerkId: string;
-// }
-
-// interface UserId {
-//   userId: string;
-// }
-
-// interface QuestionId {
-//   questionId: string;
-// }
-
-// interface AnswerId {
-//   answerId: string;
-// }
-
-interface OptionalPage {
-  page?: number;
-}
-
-interface OptionalPageSize {
-  pageSize?: number;
-}
-
-interface OptionalSearch {
-  searchQuery?: string;
-}
-
-interface OptionalFilter {
-  filter?: string;
-}
-
-interface Searchable
-  extends OptionalPage,
-    OptionalPageSize,
-    OptionalSearch,
-    OptionalFilter {}
-
 export interface CreateAnswerParams {
   content: string;
   author: string; // User ID
@@ -170,11 +129,18 @@ export interface GetAllUsersParams {
   searchQuery?: string; // Add searchQuery parameter
 }
 
-export interface GetJobsParams extends Searchable {
-  location?: string;
-  remote?: boolean | string;
-  wage?: boolean | string;
-  skills?: boolean | string;
+export interface GetJobsOrderParams {}
+export interface GetJobsParams {
+  page?: number;
+  pageSize?: number;
+  title?: string;
+  titleType?: string;
+  scheduleType?: string;
+  busyType?: string;
+  regionCode?: string;
+  salaryMin?: number;
+  salaryMax?: number;
+  order?: string;
 }
 
 export interface UpdateUserParams {

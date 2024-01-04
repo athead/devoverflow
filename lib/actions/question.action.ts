@@ -48,9 +48,6 @@ export async function getQuestions(params: GetQuestionsParams) {
       case HomePageFilters[2].value:
         query.answers = { $size: 0 };
         break;
-      case HomePageFilters[3].value:
-        break;
-
       default:
         break;
     }

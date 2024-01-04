@@ -13,13 +13,14 @@ import { AnswerSchema } from "@/lib/validations";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Editor as TinyMCEEditor } from "tinymce";
-import { Editor } from "@tinymce/tinymce-react";
+// import { Editor } from "@tinymce/tinymce-react";
 import { useTheme } from "@/context/ThemeProvider";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { createAnswer } from "@/lib/actions/answer.action";
 import { usePathname } from "next/navigation";
-import { toast } from "../ui/use-toast";
+import { toast } from "@/components/ui/use-toast";
+import TextEditor from "../shared/TextEditor";
 
 interface AnswerFormProps {
   question: string;
@@ -142,7 +143,16 @@ const AnswerForm = (props: AnswerFormProps) => {
             render={({ field }) => (
               <FormItem className="flex w-full flex-col gap-3">
                 <FormControl className="mt-3.5">
-                  <Editor
+                  <TextEditor
+                    initialValue=""
+                    editorRef={editorRef}
+                    theme={theme}
+                    onBlur={field.onBlur}
+                    onChange={(content) => {
+                      field.onChange(content);
+                    }}
+                  />
+                  {/* <Editor
                     apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
                     onInit={(evt, editor) => (editorRef.current = editor)}
                     initialValue=""
@@ -178,7 +188,7 @@ const AnswerForm = (props: AnswerFormProps) => {
                       content_style:
                         "body { font-family:Inter; font-size:16px }",
                     }}
-                  />
+                  /> */}
                 </FormControl>
                 <FormMessage className="text-red-500" />
               </FormItem>

@@ -7,6 +7,7 @@ export default authMiddleware({
   publicRoutes: [
     "/",
     "/api/webhook",
+    "/api/trudvsem",
     "/questions/:id",
     "/tags",
     "/tags/:id",
@@ -14,7 +15,7 @@ export default authMiddleware({
     "/community",
     "/jobs",
   ],
-  ignoredRoutes: ["/api/webhook", "/api/chatgpt"],
+  ignoredRoutes: ["/api/webhook", "/api/trudvsem", "/api/chatgpt"],
 });
 
 export const config = {
