@@ -1,5 +1,4 @@
 # devOverflow 
-Next.js 14
 
 <!-- GitHub badges -->
 
