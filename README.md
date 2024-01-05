@@ -1,8 +1,7 @@
-# devOverflow 
+# devOverflow
 
 <!-- GitHub badges -->
 
-[![Latest release](https://img.shields.io/github/v/release/athead/devoverflow?label=Latest%20release&style=social)](https://github.com/athead/devoverflow/releases/tag/v0.1.0)
 [![Stars](https://img.shields.io/github/stars/athead/devoverflow?style=social)](https://github.com/athead/devoverflow/stargazers)
 [![Fork](https://img.shields.io/github/forks/athead/devoverflow?style=social)](https://github.com/athead/devoverflow/forks)
 [![GitHub commits](https://img.shields.io/github/commit-activity/t/athead/devoverflow?style=social&logo=github)](https://github.com/athead/devoverflow/commits)
