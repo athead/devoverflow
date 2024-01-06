@@ -269,19 +269,21 @@ const MultipleSelector = React.forwardRef<
     return (
       <Command
         onKeyDown={handleKeyDown}
-        className="overflow-visible bg-transparent"
+        className="background-light800_darkgradient overflow-visible"
         shouldFilter={!onSearch} // when onSearch is provided, we don't want to filter the options.
       >
         <div
           className={cn(
-            "group rounded-md border border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
+            "group rounded-xl border border-input px-3 py-2 text-sm ring-offset-background text-dark400_light700 placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 paragraph-regular no-focus placeholder border-none bg-transparent shadow-none outline-none",
+            // "group rounded-md border border-input px-3 py-3 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
             className
           )}
         >
-          <div className="flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-2">
             {selected.map((option) => {
               return (
                 <Badge
+                  variant={"noColor"}
                   key={option.value}
                   className={cn(
                     "data-[disabled]:bg-muted-foreground data-[disabled]:text-muted data-[disabled]:hover:bg-muted-foreground",
@@ -308,7 +310,7 @@ const MultipleSelector = React.forwardRef<
                     }}
                     onClick={() => handleUnselect(option)}
                   >
-                    <X className="text-muted-foreground hover:text-foreground h-3 w-3" />
+                    <X className="h-3 w-3 hover:opacity-50" />
                   </button>
                 </Badge>
               );
@@ -326,14 +328,14 @@ const MultipleSelector = React.forwardRef<
                   ? ""
                   : placeholder
               }
-              className="placeholder:text-muted-foreground ml-2 flex-1 bg-transparent outline-none"
+              className="h-8 w-10 flex-1 bg-transparent outline-none placeholder:ml-4"
               maxLength={maxTextLength}
             />
           </div>
         </div>
-        <div className="relative mt-2">
-          {open && (
-            <CommandList className="bg-popover text-popover-foreground absolute top-0 z-10 w-full rounded-md border bg-light-900 shadow-md outline-none animate-in dark:bg-dark-300">
+        {open && (
+          <div className="relative">
+            <CommandList className="bg-popover text-popover-foreground text-dark500_light700 small-regular absolute top-0 z-10 w-full rounded-md border border-none bg-light-900 shadow-md outline-none animate-in dark:bg-dark-300">
               {isLoading ? (
                 <>{loadingIndicator}</>
               ) : (
@@ -371,7 +373,7 @@ const MultipleSelector = React.forwardRef<
                                 onChange?.(newOptions);
                               }}
                               className={cn(
-                                "cursor-pointer",
+                                "cursor-pointer focus:bg-light-800 dark:focus:bg-dark-400 hover:bg-light-800 dark:hover:bg-dark-400",
                                 option.disable && "cursor-default opacity-30"
                               )}
                             >
@@ -385,8 +387,8 @@ const MultipleSelector = React.forwardRef<
                 </>
               )}
             </CommandList>
-          )}
-        </div>
+          </div>
+        )}
       </Command>
     );
   }

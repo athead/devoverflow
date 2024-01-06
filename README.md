@@ -285,7 +285,6 @@ npm run build
 - [Svix](https://svix.com/)
 - [TinyMCE](https://www.tiny.cloud/)
 - [OpenAI API](https://openai.com/blog/openai-api)
-- [RapidAPI](https://rapidapi.com/)
 - [Vercel](https://vercel.com/)
 - [JavaScript Mastery](https://www.jsmastery.pro/)
 

@@ -283,9 +283,10 @@ export function clearJobDescription(input: string): string {
     .replace(/<[^>]*>/g, "")
     .replace(/&nbsp;/g, " ")
     .replace(/✅/g, "")
-    .replace(/&laquo; /g, '"')
-    .replace(/&raquo; /g, '"')
-    .replace(/&mdash; /g, "-")
+    .replace(/&laquo;/g, '"')
+    .replace(/&raquo;/g, '"')
+    .replace(/&mdash;/g, "-")
+    .replace(/&bull;/g, "")
     .trim();
 }
 

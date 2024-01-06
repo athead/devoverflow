@@ -57,7 +57,7 @@ const LeftSidebar = () => {
       <SignedOut>
         <div className="flex flex-col gap-3">
           <Link href={PATHS.SIGN_IN}>
-            <Button size={"sm"} variant={"simpleSecondary"} block={"full"}>
+            <Button size={"default"} variant={"simpleSecondary"} block={"full"}>
               <Image
                 src="/assets/icons/account.svg"
                 alt="login"
@@ -70,7 +70,7 @@ const LeftSidebar = () => {
             </Button>
           </Link>
           <Link href={PATHS.SIGN_UP}>
-            <Button size={"sm"} variant={"simpleSecondary"} block={"full"}>
+            <Button size={"default"} variant={"simpleSecondary"} block={"full"}>
               <Image
                 src="/assets/icons/sign-up.svg"
                 alt="sign up"

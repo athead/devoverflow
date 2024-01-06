@@ -1,3 +1,4 @@
+import SkeletonQuestionCard from "@/components/cards/QuestionCard/Skeleton";
 import PageHeader from "@/components/layout/PageHeader";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PATHS } from "@/constants/paths";
@@ -25,7 +26,7 @@ const Loading = () => {
       </div>
       <div className="flex flex-col gap-6">
         {[...Array(10)].map((_, item) => (
-          <Skeleton key={item} className="h-48 w-full rounded-xl" />
+          <SkeletonQuestionCard key={item} />
         ))}
       </div>
     </section>

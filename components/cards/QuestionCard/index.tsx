@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React from "react";
-import RenderTag from "../shared/RenderTag";
-import Metric from "../shared/Metric";
+import RenderTag from "../../shared/RenderTag";
+import Metric from "../../shared/Metric";
 import { timeDifferenceStringFromNow } from "@/lib/utils";
 import { SignedIn } from "@clerk/nextjs";
-import EditDeleteAction from "../shared/EditDeleteAction";
+import EditDeleteAction from "../../shared/EditDeleteAction";
 import { Tag, User } from "@/types/database";
 
 interface QuestionCardProps {
@@ -37,7 +37,7 @@ const QuestionCard = (props: QuestionCardProps) => {
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
         <div>
           <Link href={`/question/${_id}`}>
-            <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-1 flex-1">
+            <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-2 flex-1">
               {title}
             </h3>
           </Link>

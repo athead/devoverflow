@@ -82,6 +82,7 @@ const MultiSelect = (props: FilterComponentProps) => {
       hidePlaceholderWhenSelected={true}
       placeholder={placeholder}
       onChange={setSelectedOptions}
+      badgeClassName="background-light700_dark400 text-light400_light500"
       emptyIndicator={
         <p className="text-center opacity-50">Выбраны все элементы</p>
       }

@@ -8,9 +8,9 @@ export const AnswerFilters: FilterType[] = [
 ];
 
 export const UserFilters: FilterType[] = [
-  { name: "Новые участники", value: "new_users" },
-  { name: "Старые участники", value: "old_users" },
-  { name: "Лучшие пользователи", value: "top_contributors" },
+  { name: "Новые", value: "new_users" },
+  { name: "Старые", value: "old_users" },
+  { name: "Лучшие", value: "top_contributors" },
 ];
 
 export const QuestionFilters: FilterType[] = [

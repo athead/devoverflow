@@ -18,7 +18,7 @@ import Logo from "../Logo";
 const NavContent = () => {
   const pathname = usePathname();
   return (
-    <section className="flex flex-col gap-6 pb-16 pt-12">
+    <section className="flex flex-col gap-6 pb-16 pt-12 max-md:gap-3 max-md:pb-3">
       {sidebarLinks.map((item) => {
         const isActive =
           (pathname.includes(item.route) && item.route.length > 1) ||
@@ -75,7 +75,7 @@ const MobileNav = () => {
           <SignedOut>
             <div className="flex flex-col gap-3">
               <SheetClose asChild>
-                <Link href="/sign-in">
+                <Link href="/sign-in" className="rounded-lg">
                   <Button
                     size={"sm"}
                     variant={"simpleSecondary"}
@@ -91,6 +91,7 @@ const MobileNav = () => {
                     size={"sm"}
                     variant={"simpleSecondary"}
                     block={"full"}
+                    className="rounded-lg"
                   >
                     <span>Регистрация</span>
                   </Button>

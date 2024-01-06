@@ -36,7 +36,10 @@ const PageHeader = (props: PageHearedProps) => {
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
         <h1 className="h1-bold text-dark100_light900">{title}</h1>
         {button && (
-          <Link className="flex justify-end max-sm:w-full" href={button.href}>
+          <Link
+            className="flex justify-end rounded-lg max-sm:w-full"
+            href={button.href}
+          >
             <Button size={"lg"} variant={"lightGradient"}>
               {button.title}
             </Button>

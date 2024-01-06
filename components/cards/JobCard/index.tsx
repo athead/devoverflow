@@ -2,10 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { getFormattedSalary, timeDifferenceStringFromNow } from "@/lib/utils";
-import Metric from "../shared/Metric";
-import { Badge } from "../ui/badge";
+import Metric from "../../shared/Metric";
+import { Badge } from "../../ui/badge";
 
-interface JobProps {
+export interface JobCardProps {
   title: string;
   description: string;
   location: string;
@@ -38,14 +38,7 @@ const JobCard = ({
   salaryMin,
   // education,
   link,
-}: JobProps) => {
-  // const imageUrl = isValidImage(employerLogo)
-  //   ? employerLogo
-  //   : "/assets/images/site-logo.svg";
-
-  // const location = `${city ? `${city}${state ? ", " : ""}` : ""}${state || ""}${
-  //   city && state && country ? ", " : ""
-  // }${country || ""}`;
+}: JobCardProps) => {
   const additionalInfo =
     metro.length > 0 || retrainingCapability || transportCompensationType;
   return (
