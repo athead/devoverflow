@@ -10,7 +10,7 @@ import { Tag, User } from "@/types/database";
 interface QuestionCardProps {
   _id: string;
   title: string;
-  description: string;
+  description?: string;
   tags: Tag[];
   author: User;
   upvotes: number;
@@ -58,9 +58,12 @@ const QuestionCard = (props: QuestionCardProps) => {
           <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
         ))}
       </div>
-      <p className="body-regular text-dark200_light900 mt-4 line-clamp-2">
-        {description}
-      </p>
+      {description && (
+        <p className="body-regular text-dark200_light900 mt-4 line-clamp-2">
+          {description}
+        </p>
+      )}
+
       <div className="flex-between mt-3 w-full flex-wrap gap-3">
         <Metric
           imgSrc={author.avatar}
