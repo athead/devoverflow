@@ -9,7 +9,7 @@ import {
   timeDifferenceStringFromNow,
   getNumberNamecasesString,
 } from "@/lib/utils";
-import ParseHTML from "./ParseHTML";
+import SyntaxHighlighter from "./ParseHTML";
 import Votes from "./Votes";
 import { Pagination } from "./Pagination";
 
@@ -78,7 +78,7 @@ const AllAnswers = async (props: AllAnswersProps) => {
                 />
               </div>
             </div>
-            <ParseHTML data={answer.content} />
+            <SyntaxHighlighter code={answer.content} />
           </article>
         ))}
       </div>

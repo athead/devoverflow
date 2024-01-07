@@ -5,6 +5,7 @@ import { Pagination } from "@/components/shared/Pagination";
 import { QuestionFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getUserCollection } from "@/lib/actions/user.action";
+import { clearHtmlCode } from "@/lib/utils";
 import { SearchParamsProps } from "@/types";
 import { Question } from "@/types/database";
 import { auth } from "@clerk/nextjs";
@@ -49,6 +50,7 @@ const CollectionPage = async (props: SearchParamsProps) => {
               tags={question.tags}
               author={question.author}
               upvotes={question.upvotes.length}
+              description={clearHtmlCode(question.content).substring(0, 400)}
               createdAt={question.createdAt}
               views={question.views}
               answers={question.answers}

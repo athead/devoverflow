@@ -170,7 +170,7 @@ const MultipleSelector = React.forwardRef<
         setSelected(newOptions);
         onChange?.(newOptions);
       },
-      [selected]
+      [selected, onChange]
     );
 
     const handleKeyDown = React.useCallback(
@@ -188,7 +188,7 @@ const MultipleSelector = React.forwardRef<
           }
         }
       },
-      [selected]
+      [selected, handleUnselect]
     );
 
     useEffect(() => {
@@ -207,7 +207,7 @@ const MultipleSelector = React.forwardRef<
       };
 
       exec();
-    }, [debouncedSearchTerm]);
+    }, [debouncedSearchTerm, onSearch, groupBy]);
 
     const CreatableItem = () => {
       if (!creatable) return undefined;
@@ -335,7 +335,7 @@ const MultipleSelector = React.forwardRef<
         </div>
         {open && (
           <div className="relative">
-            <CommandList className="bg-popover text-popover-foreground text-dark500_light700 small-regular absolute top-0 z-10 w-full rounded-md border border-none bg-light-900 shadow-md outline-none animate-in dark:bg-dark-300">
+            <CommandList className="text-dark500_light700 small-regular absolute top-0 z-10 w-full rounded-md border border-none bg-light-900 shadow-md outline-none animate-in dark:bg-dark-300">
               {isLoading ? (
                 <>{loadingIndicator}</>
               ) : (

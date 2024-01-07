@@ -39,9 +39,9 @@ const QuestionCard = (props: QuestionCardProps) => {
       <div className="flex flex-col items-start justify-between sm:flex-row">
         <div className="flex flex-col gap-1">
           <Link href={`/question/${_id}`}>
-            <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-2 flex-1">
+            <h2 className="sm:h2-semibold base-semibold text-dark200_light900 line-clamp-2 flex-1">
               {title}
-            </h3>
+            </h2>
           </Link>
           <span className="subtle-regular text-dark400_light700 line-clamp-1 sm:hidden">
             {timeDifferenceStringFromNow(createdAt)}

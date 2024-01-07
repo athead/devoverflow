@@ -1,5 +1,5 @@
 import React from "react";
-import { ClerkLoading, SignedIn, UserButton } from "@clerk/nextjs";
+import { ClerkLoaded, ClerkLoading, SignedIn, UserButton } from "@clerk/nextjs";
 import Theme from "./Theme";
 import MobileNav from "./MobileNav";
 import GlobalSearch from "../search/GlobalSearch";
@@ -20,13 +20,15 @@ const Navbar = () => {
           <ClerkLoading>
             <Skeleton className="h-7 w-7 rounded-full" />
           </ClerkLoading>
-          <UserButton
-            afterSignOutUrl={PATHS.HOME}
-            appearance={{
-              elements: { avatarBox: "h-7 w-7" },
-              variables: { colorPrimary: "#ff7000" },
-            }}
-          />
+          <ClerkLoaded>
+            <UserButton
+              afterSignOutUrl={PATHS.HOME}
+              appearance={{
+                elements: { avatarBox: "h-7 w-7" },
+                variables: { colorPrimary: "#ff7000" },
+              }}
+            />
+          </ClerkLoaded>
         </SignedIn>
         <MobileNav />
       </div>

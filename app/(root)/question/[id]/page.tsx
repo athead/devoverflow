@@ -1,7 +1,7 @@
 import AnswerForm from "@/components/forms/AnswerForm";
 import AllAnswers from "@/components/shared/AllAnswers";
 import Metric from "@/components/shared/Metric";
-import ParseHTML from "@/components/shared/ParseHTML";
+import SyntaxHighlighter from "@/components/shared/ParseHTML";
 import RenderTag from "@/components/shared/RenderTag";
 import Votes from "@/components/shared/Votes";
 import { PATHS } from "@/constants/paths";
@@ -109,7 +109,7 @@ const QuestionDetailsPage = async (props: URLProps) => {
           textStyles="small-regular text-dark400_light800"
         />
       </div>
-      <ParseHTML data={questionDetails.content} />
+      <SyntaxHighlighter code={questionDetails.content} />
       <div className="mt-8 flex flex-wrap gap-2">
         {questionDetails.tags.map((tag) => (
           <RenderTag

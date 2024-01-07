@@ -11,7 +11,7 @@ const Logo = () => {
         width={23}
         height={23}
         style={{ width: "23px", height: "23px" }}
-        alt="devOverflow"
+        alt="logo"
       />
       <p className="h2-bold text-dark100_light900 font-rubik">
         dev<span className="text-primary-500">Overflow</span>

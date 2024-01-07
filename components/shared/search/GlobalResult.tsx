@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ReloadIcon } from "@radix-ui/react-icons";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -64,7 +63,13 @@ export const GlobalSearchModal = () => {
         </p>
         {isLoading ? (
           <div className="flex-center flex-col px-5">
-            <ReloadIcon className="my-2 h-10 w-10 animate-spin text-primary-500" />
+            <Image
+              src="/assets/images/site-logo.svg"
+              width={20}
+              className="my-2 h-10 w-10 animate-spin text-primary-500"
+              height={20}
+              alt="reload"
+            />
             <p className="text-dark200_light800 body-regular">
               Ищем по базе знаний
             </p>
