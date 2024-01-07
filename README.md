@@ -15,9 +15,7 @@
 ![Release](https://img.shields.io/github/release/athead/devoverflow.svg)
 ![PRs](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=shields)
 
-<details><summary><b>Оптимизация</b></summary>
-![demo](https://raw.githubusercontent.com/athead/devoverflow/main/images/optimization.jpg)
-</details>
+<img src='https://raw.githubusercontent.com/athead/devoverflow/main/images/optimization.png' height='100'>
 
 ## 🌐 Демо
 
