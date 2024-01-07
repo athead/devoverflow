@@ -14,16 +14,16 @@ const Navbar = () => {
     <nav className="flex-between background-light900_dark200 fixed z-50 w-full gap-5 p-6 shadow-light-300 dark:shadow-none sm:px-12">
       <Logo />
       <GlobalSearch />
-      <div className="flex-between gap-5">
+      <div className="flex-between gap-3 md:gap-5">
         <Theme theme={theme === "dark" ? "dark" : "light"} />
         <SignedIn>
           <ClerkLoading>
-            <Skeleton className="h-10 w-10 rounded-full" />
+            <Skeleton className="h-7 w-7 rounded-full" />
           </ClerkLoading>
           <UserButton
             afterSignOutUrl={PATHS.HOME}
             appearance={{
-              elements: { avatarBox: "h-10 w-10" },
+              elements: { avatarBox: "h-7 w-7" },
               variables: { colorPrimary: "#ff7000" },
             }}
           />

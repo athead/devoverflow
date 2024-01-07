@@ -29,7 +29,7 @@ const AllAnswers = async (props: AllAnswersProps) => {
   });
 
   return (
-    <div className="mt-11">
+    <div className="mt-6">
       <div className="flex items-center justify-between">
         <h3 className="primary-text-gradient">
           {getNumberNamecasesString(
@@ -42,8 +42,8 @@ const AllAnswers = async (props: AllAnswersProps) => {
       </div>
       <div>
         {answers.map((answer) => (
-          <article key={answer._id} className="light-border border-b pt-10">
-            <div className="mb-8 flex flex-col-reverse justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
+          <article key={answer._id} className="light-border border-b pt-6">
+            <div className="mb-4 flex flex-col-reverse justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
               <Link
                 href={`${PATHS.PROFILE}/${answer.author.clerkId}`}
                 className="flex flex-1 items-start gap-1 sm:items-center"

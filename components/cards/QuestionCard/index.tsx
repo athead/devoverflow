@@ -10,6 +10,7 @@ import { Tag, User } from "@/types/database";
 interface QuestionCardProps {
   _id: string;
   title: string;
+  description: string;
   tags: Tag[];
   author: User;
   upvotes: number;
@@ -24,6 +25,7 @@ const QuestionCard = (props: QuestionCardProps) => {
     _id,
     answers,
     author,
+    description,
     createdAt,
     tags,
     title,
@@ -33,15 +35,15 @@ const QuestionCard = (props: QuestionCardProps) => {
   } = props;
   const showActionButtons = clerkId && clerkId === author.clerkId;
   return (
-    <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
-      <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
-        <div>
+    <div className="card-wrapper rounded-[10px] p-5 sm:px-11 md:p-9">
+      <div className="flex flex-col items-start justify-between sm:flex-row">
+        <div className="flex flex-col gap-1">
           <Link href={`/question/${_id}`}>
             <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-2 flex-1">
               {title}
             </h3>
           </Link>
-          <span className="subtle-regular text-dark400_light700 line-clamp-1 flex sm:hidden">
+          <span className="subtle-regular text-dark400_light700 line-clamp-1 sm:hidden">
             {timeDifferenceStringFromNow(createdAt)}
           </span>
         </div>
@@ -56,7 +58,10 @@ const QuestionCard = (props: QuestionCardProps) => {
           <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
         ))}
       </div>
-      <div className="flex-between mt-6 w-full flex-wrap gap-3">
+      <p className="body-regular text-dark200_light900 mt-4 line-clamp-2">
+        {description}
+      </p>
+      <div className="flex-between mt-3 w-full flex-wrap gap-3">
         <Metric
           imgSrc={author.avatar}
           alt="User"
@@ -72,21 +77,21 @@ const QuestionCard = (props: QuestionCardProps) => {
             alt="upvotes"
             value={upvotes}
             namecases={["лайк", "лайка", "лайков"]}
-            textStyles="small-medium text-dark400_light800"
+            textStyles="small-regular text-dark400_light800"
           />
           <Metric
             imgSrc="/assets/icons/message.svg"
             alt="answers"
             value={answers.length}
             namecases={["ответ", "ответа", "ответов"]}
-            textStyles="small-medium text-dark400_light800"
+            textStyles="small-regular text-dark400_light800"
           />
           <Metric
             imgSrc="/assets/icons/eye.svg"
             alt="views"
             value={views}
             namecases={["просмотр", "просмотра", "просмотров"]}
-            textStyles="small-medium text-dark400_light800"
+            textStyles="small-regular text-dark400_light800"
           />
         </div>
       </div>

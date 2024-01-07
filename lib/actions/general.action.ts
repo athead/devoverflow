@@ -51,7 +51,7 @@ export async function globalSearch(params: SearchParams) {
           ...queryResult.map((item) => ({
             title:
               type === "answer"
-                ? `Answers containing ${query}`
+                ? `Ответы, содержащие '${query}'`
                 : item[searchField],
             type,
             typeName,

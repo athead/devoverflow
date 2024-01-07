@@ -84,7 +84,7 @@ export const GlobalSearchModal = () => {
                     width={18}
                     height={18}
                     style={{ width: "18px", height: "18px" }}
-                    className="invert-colors mt-1 object-contain"
+                    className="invert-colors object-contain"
                   />
                   <div className="flex flex-col">
                     <p className="body-medium text-dark200_light800 line-clamp-1">

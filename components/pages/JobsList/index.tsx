@@ -5,7 +5,7 @@ import { PATHS } from "@/constants/paths";
 import { getJobs } from "@/lib/actions/job.action";
 import {
   capitalizeFirstLetter,
-  clearJobDescription,
+  clearHtmlCode,
   getNumberNamecasesString,
 } from "@/lib/utils";
 import { SearchParamsProps } from "@/types";
@@ -50,9 +50,7 @@ const JobsPageList = async (props: SearchParamsProps) => {
             <JobCard
               key={vacancy.id}
               title={capitalizeFirstLetter(vacancy.vacancyName)}
-              description={clearJobDescription(
-                vacancy.positionResponsibilities
-              )}
+              description={clearHtmlCode(vacancy.positionResponsibilities)}
               location={vacancy.stateRegion}
               metro={vacancy.metro}
               employment={vacancy.sourceType}

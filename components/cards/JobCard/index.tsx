@@ -43,14 +43,14 @@ const JobCard = ({
     metro.length > 0 || retrainingCapability || transportCompensationType;
   return (
     <div className="card-wrapper rounded-[10px]">
-      <div className="flex w-full flex-col gap-3 p-6">
+      <div className="flex w-full flex-col gap-3 p-5 md:p-6">
         <div className="flex w-full flex-row items-start justify-between">
           <div className="flex flex-col">
             <h3 className="sm:h3-semibold base-semibold text-dark200_light900 mb-2 line-clamp-2">
               {title}
             </h3>
             {employerName && (
-              <h4 className="paragraph-medium text-dark400_light700">
+              <h4 className="paragraph-medium text-dark400_light700 line-clamp-2">
                 {employerName}
               </h4>
             )}
@@ -59,7 +59,7 @@ const JobCard = ({
             </p>
           </div>
 
-          <Badge className="whitespace-nowrap rounded-xl uppercase">
+          <Badge className="rounded-xl uppercase md:whitespace-nowrap">
             {location}
           </Badge>
         </div>
@@ -97,6 +97,7 @@ const JobCard = ({
               alt="briefcase"
               value={employment}
               textStyles="small-medium text-light-500 text-center"
+              className="md:flex-center hidden gap-1"
             />
             <Metric
               imgSrc="/assets/icons/people.svg"
@@ -116,7 +117,7 @@ const JobCard = ({
           </div>
           <Link
             href={link || "/"}
-            className="flex items-center gap-2"
+            className="ml-auto flex items-center justify-end gap-2"
             target="_blank"
             rel="noopener noreferrer"
           >

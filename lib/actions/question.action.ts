@@ -401,7 +401,6 @@ export async function getRecommendedQuestions(params: RecommendedParams) {
       .limit(pageSize);
 
     const isNext = totalQuestions > skipAmount + recommendedQuestions.length;
-
     return { questions: recommendedQuestions, isNext };
   } catch (error) {
     console.error("Error getting recommended questions:", error);

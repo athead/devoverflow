@@ -83,7 +83,7 @@ export const timeDifferenceString = (current: Date, previous: Date): string => {
     );
   } else if (elapsed < msPerMonth) {
     return (
-      "примерно " +
+      // "примерно " +
       Math.round(elapsed / msPerDay) +
       ` ${getNumberNamecasesString(Math.round(elapsed / msPerDay), [
         "день",
@@ -93,7 +93,7 @@ export const timeDifferenceString = (current: Date, previous: Date): string => {
     );
   } else if (elapsed < msPerYear) {
     return (
-      "примерно " +
+      // "примерно " +
       Math.round(elapsed / msPerMonth) +
       ` ${getNumberNamecasesString(Math.round(elapsed / msPerMonth), [
         "месяц",
@@ -103,7 +103,7 @@ export const timeDifferenceString = (current: Date, previous: Date): string => {
     );
   } else {
     return (
-      "примерно " +
+      // "примерно " +
       Math.round(elapsed / msPerYear) +
       ` ${getNumberNamecasesString(Math.round(elapsed / msPerYear), [
         "год",
@@ -277,8 +277,9 @@ export function isValidImage(url: string) {
   return /\.(jpg|jpeg|png|webp||svg)$/.test(url);
 }
 
-export function clearJobDescription(input: string): string {
+export function clearHtmlCode(input: string): string {
   if (!input) return "";
+
   return input
     .replace(/<[^>]*>/g, "")
     .replace(/&nbsp;/g, " ")
@@ -287,6 +288,9 @@ export function clearJobDescription(input: string): string {
     .replace(/&raquo;/g, '"')
     .replace(/&mdash;/g, "-")
     .replace(/&bull;/g, "")
+    .replace(/&lt;/g, "'")
+    .replace(/&gt;/g, "'")
+    .replace(/\s\s+/g, " ")
     .trim();
 }
 

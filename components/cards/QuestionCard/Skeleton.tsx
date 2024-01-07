@@ -20,9 +20,9 @@ const SkeletonQuestionCard = () => {
           <Skeleton className="h-4 w-32 rounded" />
         </div>
         <div className="flex items-center gap-3 max-sm:flex-wrap max-sm:justify-start">
-          <Skeleton className="h-4 w-28 rounded-md" />
           <Skeleton className="h-4 w-24 rounded-md" />
-          <Skeleton className="h-4 w-28 rounded-md" />
+          <Skeleton className="h-4 w-16 rounded-md" />
+          <Skeleton className="h-4 w-24 rounded-md" />
         </div>
       </div>
     </div>

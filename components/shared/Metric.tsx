@@ -9,14 +9,24 @@ interface MetricProps {
   value: number | string;
   title?: string;
   namecases?: [string, string, string]; // one, two, five
-  textStyles: string;
+  textStyles?: string;
+  className?: string;
   href?: string;
   isAuthor?: boolean;
 }
 
 const Metric = (props: MetricProps) => {
-  const { alt, imgSrc, textStyles, value, namecases, title, href, isAuthor } =
-    props;
+  const {
+    alt,
+    imgSrc,
+    textStyles = "",
+    value,
+    namecases,
+    title,
+    href,
+    isAuthor,
+    className,
+  } = props;
 
   const content = (
     <>
@@ -28,7 +38,7 @@ const Metric = (props: MetricProps) => {
         alt={alt}
         className={`object-contain ${isAuthor ? "rounded-full" : ""}`}
       />
-      <p className={`${textStyles} flex items-center gap-1`}>
+      <p className={`${textStyles} flex items-center gap-1 whitespace-nowrap`}>
         {typeof value === "string" ? value : nFormatter(value, 1)}
         <span
           className={`small-regular line-clamp-1 ${
@@ -42,11 +52,11 @@ const Metric = (props: MetricProps) => {
   );
   if (href)
     return (
-      <Link href={href} className="flex-center gap-1">
+      <Link href={href} className={className || "flex-center gap-1"}>
         {content}
       </Link>
     );
-  return <div className="flex-center flex-wrap gap-1">{content}</div>;
+  return <div className={className || "flex-center gap-1"}>{content}</div>;
 };
 
 export default Metric;

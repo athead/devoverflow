@@ -7,6 +7,7 @@ import {
   getQuestions,
   getRecommendedQuestions,
 } from "@/lib/actions/question.action";
+import { clearHtmlCode } from "@/lib/utils";
 import { SearchParamsProps } from "@/types";
 import { Question } from "@/types/database";
 import { auth } from "@clerk/nextjs";
@@ -55,14 +56,15 @@ const QuestionsList = async (props: SearchParamsProps) => {
             createdAt={question.createdAt}
             views={question.views}
             answers={question.answers}
+            description={clearHtmlCode(question.content).substring(0, 400)}
           />
         ))
       ) : (
         <NoResult
           title="По Вашему запросу ничего не найдено"
-          description="Будь первым, кто прирвет тишину! Задай вопрос и запусти обсуждение. Твой
+          description="Вы можете задать вопрос и запустить обсуждение. Ваш
           вопрос может оказаться для кого-то отправной точкой стремительного
-          развития."
+          развития. 🚀"
           linkUrl={PATHS.ASK_QUESTION}
           linkText="Задать вопрос"
         />

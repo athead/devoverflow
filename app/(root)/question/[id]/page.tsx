@@ -89,24 +89,24 @@ const QuestionDetailsPage = async (props: URLProps) => {
         <Metric
           imgSrc="/assets/icons/clock.svg"
           alt="clock"
-          value={`Создан ${timeDifferenceStringFromNow(
+          value={`cоздан ${timeDifferenceStringFromNow(
             questionDetails.createdAt
           )}`}
-          textStyles="small-medium text-dark400_light800"
+          textStyles="small-regular text-dark400_light800"
         />
         <Metric
           imgSrc="/assets/icons/message.svg"
           alt="answers"
           value={questionDetails.answers.length}
           namecases={["ответ", "ответа", "ответов"]}
-          textStyles="small-medium text-dark400_light800"
+          textStyles="small-regular text-dark400_light800"
         />
         <Metric
           imgSrc="/assets/icons/eye.svg"
           alt="views"
           value={questionDetails.views}
           namecases={["просмотр", "просмотра", "просмотров"]}
-          textStyles="small-medium text-dark400_light800"
+          textStyles="small-regular text-dark400_light800"
         />
       </div>
       <ParseHTML data={questionDetails.content} />
@@ -120,13 +120,22 @@ const QuestionDetailsPage = async (props: URLProps) => {
           />
         ))}
       </div>
-      <AllAnswers
-        questionId={questionDetails._id}
-        userId={user._id}
-        totalAnswers={questionDetails.answers.length}
-        page={searchParams?.page}
-        filter={searchParams?.filter}
-      />
+      {questionDetails.answers.length > 0 ? (
+        <AllAnswers
+          questionId={questionDetails._id}
+          userId={user._id}
+          totalAnswers={questionDetails.answers.length}
+          page={searchParams?.page}
+          filter={searchParams?.filter}
+        />
+      ) : (
+        <div className="my-6">
+          <div className="flex items-center justify-between">
+            <h3 className="primary-text-gradient">Ответов пока нет</h3>
+          </div>
+        </div>
+      )}
+
       <AnswerForm
         question={questionDetails.content}
         questionId={JSON.stringify(questionDetails._id)}
