@@ -31,6 +31,16 @@ const editorOptions = {
     "codesample | bold italic forecolor | alignleft aligncenter " +
     "alignright alignjustify | bullist numlist",
   content_style: "body { font-family:Inter; font-size:16px }",
+  codesample_languages: [
+    { text: "HTML/XML", value: "markup" },
+    { text: "JavaScript", value: "javascript" },
+    { text: "JSX/TSX", value: "jsx" },
+    { text: "Json", value: "json" },
+    { text: "CSS", value: "css" },
+    { text: "PHP", value: "php" },
+    { text: "Python", value: "python" },
+    { text: "Java", value: "java" },
+  ],
 };
 
 interface EditorProps {

@@ -123,7 +123,7 @@ const QuestionDetailsPage = async (props: URLProps) => {
       {questionDetails.answers.length > 0 ? (
         <AllAnswers
           questionId={questionDetails._id}
-          userId={user._id}
+          userId={user?._id}
           totalAnswers={questionDetails.answers.length}
           page={searchParams?.page}
           filter={searchParams?.filter}

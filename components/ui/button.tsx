@@ -29,7 +29,7 @@ const buttonVariants = cva("paragraph-medium rounded-lg px-3 py-4 transition", {
       //   link: "text-primary underline-offset-4 hover:underline",
     },
     size: {
-      default: "px-5 py-2", // h-10 px-4 py-3
+      default: "px-4 py-2", // h-10 px-4 py-3
       sm: "small-medium min-h-[41px] px-4 py-3", // h-9 rounded-md px-3
       lg: "min-h-[46px] px-6 py-3", // h-11 rounded-md px-8
       icon: "h-10 w-10",

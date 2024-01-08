@@ -1,0 +1,176 @@
+.light code[class*="language-"],
+.light pre[class*="language-"] {
+  color: #393a34;
+  font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier,
+    monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  font-size: 0.9em;
+  line-height: 1.2em;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.light pre > code[class*="language-"] {
+  font-size: 1em;
+}
+
+.light pre[class*="language-"]::-moz-selection,
+.light pre[class*="language-"] ::-moz-selection,
+.light code[class*="language-"]::-moz-selection,
+.light code[class*="language-"] ::-moz-selection {
+  background: #c1def1;
+}
+
+.light pre[class*="language-"]::selection,
+.light pre[class*="language-"] ::selection,
+.light code[class*="language-"]::selection,
+.light code[class*="language-"] ::selection {
+  background: #c1def1;
+}
+
+/* Code blocks */
+.light pre[class*="language-"] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+  border: 1px solid #dddddd;
+  background-color: white;
+}
+
+/* Inline code */
+.light :not(pre) > code[class*="language-"] {
+  padding: 0.2em;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  background: #f8f8f8;
+  border: 1px solid #dddddd;
+}
+
+.light .token.comment,
+.light .token.prolog,
+.light .token.doctype,
+.light .token.cdata {
+  color: #008000;
+  font-style: italic;
+}
+
+.light .token.namespace {
+  opacity: 0.7;
+}
+
+.light .token.string {
+  color: #a31515;
+}
+
+.light .token.punctuation,
+.light .token.operator {
+  color: #393a34; /* no highlight */
+}
+
+.light .token.url,
+.light .token.symbol,
+.light .token.number,
+.light .token.boolean,
+.light .token.variable,
+.light .token.constant,
+.light .token.inserted {
+  color: #36acaa;
+}
+
+.light .token.atrule,
+.light .token.keyword,
+.light .token.attr-value,
+.light .language-autohotkey .token.selector,
+.light .language-json .token.boolean,
+.light .language-json .token.number,
+.light code[class*="language-css"] {
+  color: #0000ff;
+}
+
+.light .token.function {
+  color: #393a34;
+}
+
+.light .token.deleted,
+.light .language-autohotkey .token.tag {
+  color: #9a050f;
+}
+
+.light .token.selector,
+.light .language-autohotkey .token.keyword {
+  color: #00009f;
+}
+
+.light .token.important {
+  color: #e90;
+}
+
+.light .token.important,
+.light .token.bold {
+  font-weight: bold;
+}
+
+.light .token.italic {
+  font-style: italic;
+}
+
+.light .token.class-name,
+.light .language-json .token.property {
+  color: #2b91af;
+}
+
+.light .token.tag,
+.light .token.selector {
+  color: #800000;
+}
+
+.light .token.attr-name,
+.light .token.property,
+.light .token.regex,
+.light .token.entity {
+  color: #ff0000;
+}
+
+.light .token.directive.tag .tag {
+  background: #ffff00;
+  color: #393a34;
+}
+
+/* overrides color-values for the Line Numbers plugin
+  * http://prismjs.com/plugins/line-numbers/
+  */
+.light .line-numbers.line-numbers .line-numbers-rows {
+  border-right-color: #a5a5a5;
+}
+
+.light .line-numbers .line-numbers-rows > span:before {
+  color: #2b91af;
+}
+
+/* overrides color-values for the Line Highlight plugin
+ * http://prismjs.com/plugins/line-highlight/
+ */
+.light .line-highlight.line-highlight {
+  background: rgba(193, 222, 241, 0.2);
+  background: -webkit-linear-gradient(
+    left,
+    rgba(193, 222, 241, 0.2) 70%,
+    rgba(221, 222, 241, 0)
+  );
+  background: linear-gradient(
+    to right,
+    rgba(193, 222, 241, 0.2) 70%,
+    rgba(221, 222, 241, 0)
+  );
+}
