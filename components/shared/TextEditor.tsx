@@ -27,7 +27,7 @@ const editorOptions = {
     "table",
   ],
   toolbar:
-    "undo redo | " +
+    "undo redo | blocks | " +
     "codesample | bold italic forecolor | alignleft aligncenter " +
     "alignright alignjustify | bullist numlist",
   content_style: "body { font-family:Inter; font-size:16px }",
@@ -41,30 +41,10 @@ interface EditorProps {
   editorRef?: React.MutableRefObject<TinyMCEEditor | null>;
 }
 
-// skin: theme === "dark" ? "oxide-dark" : "oxide",
-// content_css: theme === "dark" ? "dark" : "default",
-
 const TextEditor = (props: EditorProps) => {
   const { theme, initialValue, onChange, onBlur, editorRef } = props;
   const ownEditorRef = useRef<TinyMCEEditor | null>(null);
-  // const editorDarkRef = useRef<TinyMCEEditor | null>(null);
-  // const editorLightRef = useRef<TinyMCEEditor | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //   if (theme === "dark") {
-  //     console.log(editorLightRef.current);
-  //     editorLightRef.current?.hide();
-  //     const content = editorLightRef.current?.getContent()
-  //     editorDarkRef.current?.show();
-  //     editorDarkRef.current?.setContent(content)
-  //   } else {
-  //     const content = editorDarkRef.current?.getContent()
-  //     editorDarkRef.current?.hide();
-  //     editorLightRef.current?.show();
-  //     editorDarkRef.current?.setContent(content)
-  //   }
-  // }, [theme]);
 
   return (
     <div className="relative">
@@ -76,6 +56,7 @@ const TextEditor = (props: EditorProps) => {
       )}
       <Editor
         id="tiny-mce-editor-light"
+        key={theme}
         apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
         onInit={(evt, editor) => {
           editorRef
@@ -89,44 +70,9 @@ const TextEditor = (props: EditorProps) => {
         init={{
           ...editorOptions,
           skin: theme === "dark" ? "oxide-dark" : "oxide",
-          content_css: theme === "dark" ? "dark" : "default",
+          content_css: theme === "dark" ? "dark" : "light",
         }}
       />
-      {/* {theme === "light" ? (
-        <Editor
-          id="tiny-mce-editor-light"
-          apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
-          onInit={(evt, editor) => {
-            editorLightRef.current = editor;
-            setIsLoading(false);
-          }}
-          initialValue={initialValue}
-          onBlur={onBlur}
-          onEditorChange={onChange}
-          init={{
-            ...editorOptions,
-            skin: "oxide",
-            content_css: "default",
-          }}
-        />
-      ) : (
-        <Editor
-          id="tiny-mce-editor-dark"
-          apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
-          onInit={(evt, editor) => {
-            editorDarkRef.current = editor;
-            setIsLoading(false);
-          }}
-          initialValue={initialValue}
-          onBlur={onBlur}
-          onEditorChange={onChange}
-          init={{
-            ...editorOptions,
-            skin: "oxide-dark",
-            content_css: "dark",
-          }}
-        />
-      )} */}
     </div>
   );
 };

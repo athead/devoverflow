@@ -26,7 +26,7 @@ export async function generateMetadata(
   }
   const questionDetails = await getQuestionById({
     questionId: params.id,
-    userId: user._id,
+    userId: user?._id,
   });
 
   return {
@@ -44,7 +44,7 @@ const QuestionDetailsPage = async (props: URLProps) => {
 
   const questionDetails = await getQuestionById({
     questionId: params.id,
-    userId: user._id,
+    userId: user?._id,
   });
 
   if (!questionDetails) return <div>Ошибка получения вопроса</div>;
@@ -72,11 +72,11 @@ const QuestionDetailsPage = async (props: URLProps) => {
             <Votes
               type="question"
               itemId={JSON.stringify(questionDetails._id)}
-              userId={JSON.stringify(user._id)}
+              userId={JSON.stringify(user?._id)}
               upvotes={questionDetails.upvotes.length}
-              hasUpVoted={questionDetails.upvotes.includes(user._id)}
+              hasUpVoted={questionDetails.upvotes.includes(user?._id)}
               downvotes={questionDetails.downvotes.length}
-              hasDownVoted={questionDetails.downvotes.includes(user._id)}
+              hasDownVoted={questionDetails.downvotes.includes(user?._id)}
               hasSaved={user?.saved.includes(questionDetails._id)}
             />
           </div>
@@ -135,11 +135,10 @@ const QuestionDetailsPage = async (props: URLProps) => {
           </div>
         </div>
       )}
-
       <AnswerForm
         question={questionDetails.content}
         questionId={JSON.stringify(questionDetails._id)}
-        authorId={JSON.stringify(user._id)}
+        authorId={JSON.stringify(user?._id)}
       />
     </>
   );

@@ -5,6 +5,7 @@ import { Pagination } from "@/components/shared/Pagination";
 import { QuestionFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getQuestionByTagId } from "@/lib/actions/tag.actions";
+import { clearHtmlCode } from "@/lib/utils";
 import { URLProps } from "@/types";
 import { Question } from "@/types/database";
 import { Metadata, ResolvingMetadata } from "next";
@@ -34,7 +35,7 @@ const TagDetailsPage = async (props: URLProps) => {
   });
   return (
     <>
-      <div className="mt-10 flex w-full flex-col gap-6">
+      <div className="flex w-full flex-col gap-6">
         <PageHeader
           title={tagTitle}
           search={{
@@ -57,6 +58,7 @@ const TagDetailsPage = async (props: URLProps) => {
               tags={question.tags}
               author={question.author}
               upvotes={question.upvotes.length}
+              description={clearHtmlCode(question.content).substring(0, 400)}
               createdAt={question.createdAt}
               views={question.views}
               answers={question.answers}

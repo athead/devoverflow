@@ -12,7 +12,7 @@ pre[class*="language-"] {
   text-shadow: none;
   font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono",
     monospace;
-  font-size: 1em;
+  font-size: 0.9em;
   line-height: 1.5;
   letter-spacing: 0.2px;
   white-space: pre;
@@ -45,10 +45,10 @@ code[class*="language-"] ::selection {
 }
 
 pre[class*="language-"] {
-  border: 1px solid #2a4555;
-  border-radius: 5px;
-  padding: 0.75em 0.5em;
-  margin: 0.2em 0.2em;
+  border: 1px solid #5c2800;
+  border-radius: 10px;
+  padding: 0.75em 1em;
+  margin: 1em 0.2em;
   overflow: auto;
 }
 

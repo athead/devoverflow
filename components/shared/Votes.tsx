@@ -40,6 +40,12 @@ const Votes = (props: VotesProps) => {
   const router = useRouter();
 
   const handleSave = async () => {
+    if (!userId)
+      return toast({
+        title: `Авторизуйтесь`,
+        description: "Вы должны быть авторизованы для этого действия",
+        variant: "default",
+      });
     await toggleSaveQuestion({
       userId: JSON.parse(userId),
       questionId: JSON.parse(itemId),
@@ -55,9 +61,8 @@ const Votes = (props: VotesProps) => {
     async (action: string) => {
       if (!userId)
         return toast({
-          title: "Войдите",
-          description:
-            "Вы должны войти или зарегестрироваться для этого действия",
+          title: "Авторизуйтесь",
+          description: "Вы должны быть авторизованы для этого действия",
         });
       if (action === "up") {
         if (type === "question") {
