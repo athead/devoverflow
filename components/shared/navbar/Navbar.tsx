@@ -7,6 +7,7 @@ import { cookies } from "next/headers";
 import Logo from "../Logo";
 import { PATHS } from "@/constants/paths";
 import { Skeleton } from "@/components/ui/skeleton";
+import { dark } from "@clerk/themes";
 
 const Navbar = () => {
   const theme = cookies().get("x-theme")?.value;
@@ -26,6 +27,7 @@ const Navbar = () => {
               appearance={{
                 elements: { avatarBox: "h-7 w-7" },
                 variables: { colorPrimary: "#ff7000" },
+                baseTheme: theme === "dark" ? dark : undefined,
               }}
             />
           </ClerkLoaded>

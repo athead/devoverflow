@@ -302,3 +302,8 @@ export function formatDateFromTimestamp(timestamp: number): string {
 
   return `${day}.${month}.${year}`;
 }
+
+export function formatTagString(inputString: string): string {
+  // Используем регулярное выражение для удаления всех символов, кроме букв и цифр
+  return inputString.replace(/[^a-zA-Zа-яА-Я0-9ёЁ.+]/g, "");
+}

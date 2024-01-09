@@ -43,7 +43,7 @@ export default function RootLayout({
     // eslint-disable-next-line
     <html lang="ru" className={`${prefersDark ? "dark" : ""}`}>
       {/* ${rubik.className} */}
-      <body className={`${inter.className}`}>  
+      <body className={`${inter.className}`}>
         <ClerkProvider
           localization={ruRU}
           appearance={{

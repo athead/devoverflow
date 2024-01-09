@@ -53,11 +53,13 @@ const QuestionCard = (props: QuestionCardProps) => {
           )}
         </SignedIn>
       </div>
-      <div className="mt-3.5 flex flex-wrap gap-2">
-        {tags.map((tag: Tag) => (
-          <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
-        ))}
-      </div>
+      {tags.length > 0 && (
+        <div className="mt-3.5 flex flex-wrap gap-2">
+          {tags.map((tag: Tag) => (
+            <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
+          ))}
+        </div>
+      )}
       {description && (
         <p className="body-regular text-dark200_light900 mt-4 line-clamp-2">
           {description}

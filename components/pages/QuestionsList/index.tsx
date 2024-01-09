@@ -54,8 +54,6 @@ const QuestionsList = async (props: SearchParamsProps) => {
             author={question.author}
             createdAt={question.createdAt}
             views={question.views}
-            // upvotes={question.upvotes.length}
-            // answers={question.answers.length}
             upvotes={question.numberOfUpvotes}
             answers={question.numberOfAnswers}
             description={clearHtmlCode(question.content).substring(0, 400)}
@@ -71,7 +69,7 @@ const QuestionsList = async (props: SearchParamsProps) => {
           linkText="Задать вопрос"
         />
       )}
-      <div className="mt-10">
+      <div className="mt-4">
         <Pagination
           pageNumber={searchParams?.page ? +searchParams.page : 1}
           isNext={isNext}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Editor as TinyMCEEditor } from "tinymce";
 import { Skeleton } from "../ui/skeleton";
@@ -40,6 +40,7 @@ const editorOptions = {
     { text: "PHP", value: "php" },
     { text: "Python", value: "python" },
     { text: "Java", value: "java" },
+    { text: "C++", value: "cpp" },
   ],
 };
 
@@ -56,34 +57,42 @@ const TextEditor = (props: EditorProps) => {
   const ownEditorRef = useRef<TinyMCEEditor | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    setIsLoading(true);
+  }, [theme]);
+
   return (
-    <div className="relative">
+    <>
       {isLoading && (
         <Skeleton
           style={{ height: 350, width: "100%" }}
           className="rounded-xl"
         />
       )}
-      <Editor
-        id="tiny-mce-editor-light"
-        key={theme}
-        apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
-        onInit={(evt, editor) => {
-          editorRef
-            ? (editorRef.current = editor)
-            : (ownEditorRef.current = editor);
-          setIsLoading(false);
-        }}
-        initialValue={initialValue}
-        onBlur={onBlur}
-        onEditorChange={onChange}
-        init={{
-          ...editorOptions,
-          skin: theme === "dark" ? "oxide-dark" : "oxide",
-          content_css: theme === "dark" ? "dark" : "light",
-        }}
-      />
-    </div>
+      <div className={isLoading ? "hidden" : "block"}>
+        <Editor
+          id="tiny-mce-editor-light"
+          key={theme}
+          apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
+          onInit={(evt, editor) => {
+            editorRef
+              ? (editorRef.current = editor)
+              : (ownEditorRef.current = editor);
+            setIsLoading(false);
+          }}
+          initialValue={initialValue}
+          onBlur={onBlur}
+          onEditorChange={onChange}
+          init={{
+            ...editorOptions,
+            skin: theme === "dark" ? "oxide-dark" : "oxide",
+            content_css: theme === "dark" ? "dark" : "light",
+            content_style:
+              "@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap'); body { font-family: Inter; }",
+          }}
+        />
+      </div>
+    </>
   );
 };
 

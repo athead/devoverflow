@@ -25,6 +25,7 @@ import { PATHS } from "@/constants/paths";
 import TextEditor from "../shared/TextEditor";
 import { Tag } from "@/types/database";
 import { toast } from "../ui/use-toast";
+import { formatTagString } from "@/lib/utils";
 
 interface QuestionFormProps {
   formType: "edit" | "create";
@@ -100,10 +101,13 @@ const QuestionForm = (props: QuestionFormProps) => {
     e: React.KeyboardEvent<HTMLInputElement>,
     field: any
   ) => {
-    if (e.key === "Enter" && field.name === "tags") {
+    if (
+      (e.key === "Enter" || e.key === "," || e.key === " ") &&
+      field.name === "tags"
+    ) {
       e.preventDefault();
       const tagInput = e.target as HTMLInputElement;
-      const tagValue = tagInput.value.trim().toUpperCase();
+      const tagValue = formatTagString(tagInput.value.trim()).toUpperCase();
       if (tagValue !== "") {
         if (tagValue.length < 2) {
           return form.setError("tags", {
@@ -159,7 +163,7 @@ const QuestionForm = (props: QuestionFormProps) => {
           control={form.control}
           name="explanation"
           render={({ field }) => (
-            <FormItem className="flex w-full flex-col gap-3">
+            <FormItem className="flex w-full flex-col">
               <FormLabel className="paragraph-semibold text-dark400_light800">
                 Подробное описание проблемы
                 <span className="text-primary-500">*</span>
@@ -175,8 +179,7 @@ const QuestionForm = (props: QuestionFormProps) => {
                 />
               </FormControl>
               <FormDescription className="body-regular mt-2.5 text-light-500">
-                Подробно опишите суть пробемы, будто вы обьясняете ее другому
-                человеку. Минимум 100 символов.
+                Подробно опишите суть пробемы. Минимум 100 символов.
               </FormDescription>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -228,7 +231,8 @@ const QuestionForm = (props: QuestionFormProps) => {
                 </>
               </FormControl>
               <FormDescription className="body-regular mt-2.5 text-light-500">
-                До 3 тегов, кратко описывающих запрос.
+                До 3 тегов, кратко описывающих запрос. Метки разделяются с
+                помощью запятой, Enter или пробела
               </FormDescription>
               <FormMessage className="text-red-500" />
             </FormItem>

@@ -13,6 +13,7 @@ import { auth } from "@clerk/nextjs";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
 export async function generateMetadata(
@@ -47,7 +48,7 @@ const QuestionDetailsPage = async (props: URLProps) => {
     userId: user?._id,
   });
 
-  if (!questionDetails) return <div>Ошибка получения вопроса</div>;
+  if (!questionDetails) return redirect("/404");
   return (
     <>
       <div className="flex-start w-full flex-col">
@@ -81,7 +82,7 @@ const QuestionDetailsPage = async (props: URLProps) => {
             />
           </div>
         </div>
-        <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
+        <h2 className="h2-semibold text-dark200_light900 mt-5 w-full text-left">
           {questionDetails.title}
         </h2>
       </div>
@@ -110,16 +111,19 @@ const QuestionDetailsPage = async (props: URLProps) => {
         />
       </div>
       <SyntaxHighlighter code={questionDetails.content} />
-      <div className="mt-8 flex flex-wrap gap-2">
-        {questionDetails.tags.map((tag) => (
-          <RenderTag
-            key={tag._id}
-            _id={tag._id}
-            name={tag.name}
-            showCount={false}
-          />
-        ))}
-      </div>
+      {questionDetails.tags.length > 0 && (
+        <div className="mt-8 flex flex-wrap gap-2">
+          {questionDetails.tags.map((tag) => (
+            <RenderTag
+              key={tag._id}
+              _id={tag._id}
+              name={tag.name}
+              showCount={false}
+            />
+          ))}
+        </div>
+      )}
+
       {questionDetails.answers.length > 0 ? (
         <AllAnswers
           questionId={questionDetails._id}

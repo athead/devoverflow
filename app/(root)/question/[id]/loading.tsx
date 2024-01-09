@@ -19,7 +19,7 @@ const Loading = () => {
             <Skeleton style={{ width: "18px", height: "18px" }} />
           </div>
         </div>
-        <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
+        <h2 className="h2-semibold text-dark200_light900 mt-5 w-full text-left">
           <Skeleton style={{ width: "50%", height: "30px" }} />
         </h2>
       </div>
@@ -30,7 +30,10 @@ const Loading = () => {
       </div>
       <Skeleton style={{ width: "30%", height: "20px" }} className="mb-2" />
       <Skeleton style={{ width: "80%", height: "20px" }} className="mb-2" />
-      <Skeleton style={{ width: "100%", height: "100px" }} className="mb-2" />
+      <Skeleton style={{ width: "100%", height: "400px" }} className="mb-2" />
+      <Skeleton style={{ width: "80%", height: "20px" }} className="mb-2" />
+      <Skeleton style={{ width: "70%", height: "20px" }} className="mb-2" />
+      <Skeleton style={{ width: "50%", height: "20px" }} className="mb-2" />
       <Skeleton style={{ width: "80%", height: "20px" }} className="mb-2" />
       <Skeleton style={{ width: "70%", height: "20px" }} className="mb-2" />
       <Skeleton style={{ width: "50%", height: "20px" }} className="mb-2" />

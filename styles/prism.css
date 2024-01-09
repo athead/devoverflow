@@ -4,7 +4,9 @@
  * Holi Theme for prism.js
  * @author Ayush Saini <@AyushCodes on Twitter>
  */
-
+.markdown {
+  font-size: 0.9rem;
+}
 /* code[class*="language-"],
 pre[class*="language-"] {
   color: #d6e7ff;
@@ -67,17 +69,17 @@ code[class*="language-"]::-webkit-scrollbar-thumb {
   -webkit-box-shadow: inset 0 0 6px rgba(89, 89, 89, 0.5);
 } */
 
-.markdown
+/* .markdown
   :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   margin-top: 0.2em;
   margin-bottom: 0.2em;
-}
+} */
 
-.markdown :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+/* .markdown :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   margin-top: 0.2em;
   margin-bottom: 0.2em;
-  text-indent: 1rem;
-}
+  text-indent: 1.5rem;
+} */
 /* 
 :not(pre) > code[class*="language-"] {
   color: #f0f6f6;

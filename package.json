@@ -15,6 +15,7 @@
   "dependencies": {
     "@clerk/localizations": "^1.26.10",
     "@clerk/nextjs": "^4.27.2",
+    "@clerk/themes": "^1.7.9",
     "@hookform/resolvers": "^3.3.2",
     "@next/bundle-analyzer": "^14.0.4",
     "@radix-ui/react-dialog": "^1.0.5",

@@ -24,7 +24,7 @@ export async function getQuestions(params: GetQuestionsParams) {
   try {
     connectToDatabase();
 
-    const { searchQuery, filter, page = 1, pageSize = 20 } = params;
+    const { searchQuery, filter, page = 1, pageSize = 10 } = params;
 
     // Calculate the number of posts to skip
     const skipAmount = (page - 1) * pageSize;
@@ -55,21 +55,6 @@ export async function getQuestions(params: GetQuestionsParams) {
         break;
     }
 
-    // const questions = await Question.find(query)
-    // .select('_id tags author title views upvotes downvotes answers createdAt')
-    //   .populate({
-    //     path: "tags",
-    //     model: Tag,
-    //     select: "_id name",
-    //   })
-    //   .populate({
-    //     path: "author",
-    //     model: User,
-    //     select: "_id clerkId name avatar",
-    //   })
-    //   .sort(sortOptions)
-    //   .skip(skipAmount)
-    //   .limit(pageSize);
     const questions = await Question.aggregate([
       { $match: query },
       {
