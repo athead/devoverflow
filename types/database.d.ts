@@ -54,4 +54,6 @@ export interface Question {
   answers: Answer[];
   createdAt: Date;
   updatedAt: Date;
+  numberOfUpvotes?: number;
+  numberOfAnswers?: number;
 }

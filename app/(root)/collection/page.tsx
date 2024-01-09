@@ -53,7 +53,7 @@ const CollectionPage = async (props: SearchParamsProps) => {
               description={clearHtmlCode(question.content).substring(0, 400)}
               createdAt={question.createdAt}
               views={question.views}
-              answers={question.answers}
+              answers={question.answers.length}
             />
           ))
         ) : (

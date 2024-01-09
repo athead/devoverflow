@@ -11,7 +11,7 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Теги — devOverflow",
+  title: "Метки — devOverflow",
 };
 
 const TagsPage = async (props: SearchParamsProps) => {
@@ -27,7 +27,7 @@ const TagsPage = async (props: SearchParamsProps) => {
     <>
       <div className="flex w-full flex-col gap-6">
         <PageHeader
-          title="Теги"
+          title="Метки"
           search={{ placeholder: "Поиск тегов", href: PATHS.TAGS }}
           filter={{
             type: "secondary",

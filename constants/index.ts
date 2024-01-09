@@ -31,7 +31,7 @@ export const sidebarLinks: SidebarLink[] = [
   {
     imgURL: "/assets/icons/tag.svg",
     route: PATHS.TAGS,
-    label: "Теги",
+    label: "Метки",
   },
   {
     imgURL: "/assets/icons/user.svg",

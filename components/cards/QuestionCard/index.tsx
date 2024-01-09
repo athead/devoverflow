@@ -13,9 +13,9 @@ interface QuestionCardProps {
   description?: string;
   tags: Tag[];
   author: User;
-  upvotes: number;
+  upvotes?: number;
   views: number;
-  answers: Array<object>;
+  answers?: number;
   createdAt: Date;
   clerkId?: string | null;
 }
@@ -85,7 +85,7 @@ const QuestionCard = (props: QuestionCardProps) => {
           <Metric
             imgSrc="/assets/icons/message.svg"
             alt="answers"
-            value={answers.length}
+            value={answers}
             namecases={["ответ", "ответа", "ответов"]}
             textStyles="small-regular text-dark400_light800"
           />

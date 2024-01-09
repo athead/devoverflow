@@ -15,7 +15,10 @@
 ![Release](https://img.shields.io/github/release/athead/devoverflow.svg)
 ![PRs](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=shields)
 
-<img src='https://raw.githubusercontent.com/athead/devoverflow/main/images/optimization.png' height='100'>
+## 🌐 Оптимизация
+
+При использовании локального сервера MongoDB
+<img src='https://raw.githubusercontent.com/athead/devoverflow/main/images/optimization.jpg' height='100'>
 
 ## 🌐 Демо
 
@@ -111,7 +114,7 @@ devoverflow/
 
 ## ✨ Используемые технологии
 
-<details><summary><b>devOverflow</b> разраобтан с использованием следующих технологий:</summary>
+<details><summary><b>devOverflow</b> разработан с использованием следующих технологий:</summary>
 
 - [TypeScript](https://www.typescriptlang.org/): TypeScript - это типизированный JavaScript.
 - [Next.js](https://nextjs.org/): Next.js - это фреймворк React для создания веб-приложений, статически генерирующих страницу на стороне сервера.

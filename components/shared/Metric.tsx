@@ -6,7 +6,7 @@ import React from "react";
 interface MetricProps {
   imgSrc: string;
   alt: string;
-  value: number | string;
+  value: number | string | undefined;
   title?: string;
   namecases?: [string, string, string]; // one, two, five
   textStyles?: string;
@@ -27,7 +27,7 @@ const Metric = (props: MetricProps) => {
     isAuthor,
     className,
   } = props;
-
+  if (value === undefined) return null;
   const content = (
     <>
       <Image

@@ -188,7 +188,7 @@ const QuestionForm = (props: QuestionFormProps) => {
           render={({ field }) => (
             <FormItem className="flex w-full flex-col">
               <FormLabel className="paragraph-semibold text-dark400_light800">
-                Теги <span className="text-primary-500">*</span>
+                Метки <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl className="mt-3.5">
                 <>

@@ -27,7 +27,7 @@ const QuestionTab = async (props: QuestionTabProps) => {
           author={question.author}
           upvotes={question.upvotes.length}
           views={question.views}
-          answers={question.answers}
+          answers={question.answers.length}
           createdAt={question.createdAt}
         />
       ))}

@@ -50,18 +50,61 @@ export async function getQuestions(params: GetQuestionsParams) {
         query.answers = { $size: 0 };
         break;
       default:
+        sortOptions = { createdAt: -1 };
         break;
     }
 
-    const questions = await Question.find(query)
-      .populate({
-        path: "tags",
-        model: Tag,
-      })
-      .populate({ path: "author", model: User })
-      .sort(sortOptions)
-      .skip(skipAmount)
-      .limit(pageSize);
+    // const questions = await Question.find(query)
+    // .select('_id tags author title views upvotes downvotes answers createdAt')
+    //   .populate({
+    //     path: "tags",
+    //     model: Tag,
+    //     select: "_id name",
+    //   })
+    //   .populate({
+    //     path: "author",
+    //     model: User,
+    //     select: "_id clerkId name avatar",
+    //   })
+    //   .sort(sortOptions)
+    //   .skip(skipAmount)
+    //   .limit(pageSize);
+    const questions = await Question.aggregate([
+      {
+        $project: {
+          tags: 1,
+          author: 1,
+          title: 1,
+          content: 1,
+          views: 1,
+          createdAt: 1,
+          numberOfUpvotes: { $size: "$upvotes" },
+          numberOfDownvotes: { $size: "$downvotes" },
+          numberOfAnswers: { $size: "$answers" },
+        },
+      },
+      {
+        $lookup: {
+          from: "tags",
+          localField: "tags",
+          foreignField: "_id",
+          as: "tags",
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "author",
+          foreignField: "_id",
+          as: "author",
+        },
+      },
+      { $unwind: "$author" },
+      { $match: query },
+      { $sort: sortOptions },
+      { $skip: skipAmount },
+      { $limit: pageSize },
+    ]);
 
     const totalQuestions = await Question.countDocuments(query);
     const isNext = totalQuestions > skipAmount + questions.length;
@@ -123,7 +166,7 @@ export async function getQuestionById(params: GetQuestionByIdParams) {
     return question;
   } catch (error) {
     console.log(error);
-    return redirect('/404');
+    return redirect("/404");
   }
 }
 

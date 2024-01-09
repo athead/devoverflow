@@ -40,7 +40,7 @@ module.exports = {
       },
       fontFamily: {
         inter: ["var(--font-inter)"],
-        rubik: ["var(--font-rubik)"],
+        // rubik: ["var(--font-rubik)"],
       },
       boxShadow: {
         "light-100":
@@ -73,5 +73,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"), 
+    require("@tailwindcss/typography")],
 };

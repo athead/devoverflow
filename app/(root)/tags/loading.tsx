@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 const Loading = () => {
   return (
     <section>
-      <PageHeader title="Теги" />
+      <PageHeader title="Метки" />
 
       <div className="mt-6 flex flex-wrap items-center justify-between gap-5">
         <Skeleton className="h-14 flex-1" />

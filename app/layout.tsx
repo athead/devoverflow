@@ -2,7 +2,7 @@ import "../styles/prism.css";
 import "./globals.css";
 import type { Metadata } from "next";
 // eslint-disable-next-line camelcase
-import { Inter, Rubik } from "next/font/google";
+import { Inter } from "next/font/google";
 import React from "react";
 import { cookies } from "next/headers";
 
@@ -12,23 +12,22 @@ import { ThemeProvider } from "@/context/ThemeProvider";
 
 const inter = Inter({
   subsets: ["cyrillic", "latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
 });
 
-const rubik = Rubik({
-  subsets: ["cyrillic", "latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-rubik",
-});
+// const rubik = Rubik({
+//   subsets: ["cyrillic", "latin"],
+//   weight: ["300", "400", "500", "600", "700", "800", "900"],
+//   variable: "--font-rubik",
+// });
 
 export const metadata: Metadata = {
   title: "devOverflow",
-  description: `devOverflow is a platform that over \
-  2 people visit every month to ask questions,\
-  learn, and share technical knowledge. Where developers \
-  and technologists share private knowledge with coworkers. \
-  Reach the world's largest audience of developers and technologists.`,
+  description: `devOverflow - это платформа, которую ежемесячно посещают более \
+  2 человек, чтобы задавать вопросы,
+  учиться и делиться техническими знаниями. Это площадка, где разработчики \
+  и инженеры делятся личными знаниями с коллегами.`,
   icons: {
     icon: "/assets/images/site-logo.svg",
   },
@@ -43,7 +42,8 @@ export default function RootLayout({
   return (
     // eslint-disable-next-line
     <html lang="ru" className={`${prefersDark ? "dark" : ""}`}>
-      <body className={`${inter.className} ${rubik.className}`}>
+      {/* ${rubik.className} */}
+      <body className={`${inter.className}`}>  
         <ClerkProvider
           localization={ruRU}
           appearance={{
