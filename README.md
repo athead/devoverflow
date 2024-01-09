@@ -15,10 +15,10 @@
 ![Release](https://img.shields.io/github/release/athead/devoverflow.svg)
 ![PRs](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=shields)
 
-## 🌐 Оптимизация
+## 🔥 Lighthouse
 
-При использовании локального сервера MongoDB
 <img src='https://raw.githubusercontent.com/athead/devoverflow/main/images/optimization.jpg' height='100'>
+* При использовании локального сервера MongoDB (Atlas + Vercel: Perfomance = 98)
 
 ## 🌐 Демо
 
