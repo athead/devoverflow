@@ -48,6 +48,7 @@ export async function getQuestions(params: GetQuestionsParams) {
         break;
       case HomePageFilters[2].value:
         query.answers = { $size: 0 };
+        sortOptions = { createdAt: -1 };
         break;
       default:
         sortOptions = { createdAt: -1 };
@@ -70,6 +71,7 @@ export async function getQuestions(params: GetQuestionsParams) {
     //   .skip(skipAmount)
     //   .limit(pageSize);
     const questions = await Question.aggregate([
+      { $match: query },
       {
         $project: {
           tags: 1,
@@ -100,7 +102,6 @@ export async function getQuestions(params: GetQuestionsParams) {
         },
       },
       { $unwind: "$author" },
-      { $match: query },
       { $sort: sortOptions },
       { $skip: skipAmount },
       { $limit: pageSize },
