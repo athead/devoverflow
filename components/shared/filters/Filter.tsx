@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
-import React from "react";
+import React, { Ref } from "react";
 import { formUrlQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -58,7 +58,15 @@ const Filter = (props: FilterComponentProps) => {
             <SelectValue placeholder={placeholder} />
           </div>
         </SelectTrigger>
-        <SelectContent className="text-dark500_light700 small-regular border-none bg-light-900 dark:bg-dark-300">
+        <SelectContent
+          ref={(ref: any) => {
+            if (!ref) return;
+            ref.ontouchstart = (e: TouchEvent) => {
+              e.preventDefault();
+            };
+          }}
+          className="text-dark500_light700 small-regular border-none bg-light-900 dark:bg-dark-300"
+        >
           <SelectGroup>
             {filters.map((filter) => (
               <SelectItem
