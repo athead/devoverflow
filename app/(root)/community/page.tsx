@@ -6,6 +6,7 @@ import { UserFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getAllUsers } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
+import { User } from "@/types/database";
 import { Metadata } from "next";
 import React from "react";
 
@@ -37,9 +38,9 @@ const CommunityPage = async (props: SearchParamsProps) => {
           }}
         />
       </div>
-      <section className="mt-12 flex flex-wrap gap-4">
+      <section className="mt-6 md:mt-10 flex flex-wrap gap-4">
         {users.length > 0 ? (
-          users.map((user) => <UserCard key={user.name} user={user} />)
+          users.map((user: User) => <UserCard key={user.name} user={user} />)
         ) : (
           <NoResult
             title="Пользователей не найдено"

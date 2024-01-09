@@ -6,12 +6,12 @@ const Loading = () => {
     <section>
       <PageHeader title="Теги" />
 
-      <div className="mb-12 mt-11 flex flex-wrap items-center justify-between gap-5">
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-5">
         <Skeleton className="h-14 flex-1" />
         <Skeleton className="h-14 w-28" />
       </div>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="mt-6 md:mt-10 flex flex-wrap gap-4">
         {[...Array(10)].map((_, item) => (
           <Skeleton
             key={item}

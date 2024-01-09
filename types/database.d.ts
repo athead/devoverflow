@@ -11,6 +11,7 @@ export interface Tag {
   description: string;
   questions: object[];
   followers: object[];
+  numberOfQuestions?: number;
   createdAt: Date;
   updatedAt: Date;
 }
