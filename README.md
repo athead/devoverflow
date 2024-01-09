@@ -198,7 +198,9 @@ npm run dev
 | `npm run build`     | Сборка в production режиме в `./dist/`               |
 | `npm run start`     | Локальный запуск production сборки                   |
 | `npm run lint`      | Запуск ESLint                                        |
+| `npm run analyze`   | Запуск Bundle analyzer                               |
 | `npm run structure` | Генерация структуры папок                            |
+
 
 ## 🔒 Переменные окружения
 

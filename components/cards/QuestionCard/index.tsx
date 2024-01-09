@@ -70,7 +70,7 @@ const QuestionCard = (props: QuestionCardProps) => {
           alt="User"
           value={author.name}
           title={` — ${timeDifferenceStringFromNow(createdAt)}`}
-          href={`/profile/${author._id}`}
+          href={`/profile/${author.clerkId}`}
           isAuthor
           textStyles="body-medium text-dark400_light700"
         />

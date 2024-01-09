@@ -131,7 +131,7 @@ code {
   -webkit-hyphens: auto;
   hyphens: auto;
 
-  padding: 2px;
+  /* padding: 2px; */
   color: #ff7000 !important;
 }
 

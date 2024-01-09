@@ -20,6 +20,7 @@ import Answer from "@/database/answer.model";
 import { QuestionFilters, UserFilters } from "@/constants/filters";
 import { BadgeCriteriaType } from "@/types";
 import { assignBadges } from "../utils";
+import { redirect } from "next/navigation";
 
 export async function getAllUsers(params: GetAllUsersParams) {
   try {
@@ -228,8 +229,9 @@ export async function getUserInfo(params: GetUserByIdParams) {
   try {
     connectToDatabase();
     const { userId } = params;
+    // clerk first
     const user = await User.findOne({ clerkId: userId });
-    if (!user) throw new Error("Пользователь не найден");
+    if (!user) throw new Error(`Пользователь ${userId} не найден`);
 
     const totalQuestions = await Question.countDocuments({ author: user._id });
     const totalAnswers = await Answer.countDocuments({ author: user._id });
@@ -304,7 +306,8 @@ export async function getUserInfo(params: GetUserByIdParams) {
     };
   } catch (error) {
     console.log(error);
-    throw new Error();
+    return redirect('/404');
+    // throw new Error(`Ошибка: ${error}`);
   }
 }
 

@@ -11,11 +11,12 @@ import Tag, { ITag } from "@/database/tag.model";
 import { FilterQuery } from "mongoose";
 import Question from "@/database/question.model";
 import { TagFilters } from "@/constants/filters";
+import { redirect } from "next/navigation";
 
 export async function getAllTags(params: GetAllTagsParams) {
   try {
     connectToDatabase();
-    const { searchQuery, filter, page = 1, pageSize = 10 } = params;
+    const { searchQuery, filter, page = 1, pageSize = 9 } = params;
 
     const skipAmount = (page - 1) * pageSize;
 
@@ -27,7 +28,7 @@ export async function getAllTags(params: GetAllTagsParams) {
     let sortOptions = {};
     switch (filter) {
       case TagFilters[0].value:
-        sortOptions = { questions: -1 };
+        sortOptions = { numberOfQuestions: -1 };
         break;
       case TagFilters[1].value:
         sortOptions = { createdAt: -1 };
@@ -39,13 +40,24 @@ export async function getAllTags(params: GetAllTagsParams) {
         sortOptions = { createdAt: 1 };
         break;
       default:
+        sortOptions = { numberOfQuestions: -1 };
         break;
     }
 
-    const tags = await Tag.find({})
-      .sort(sortOptions)
-      .skip(skipAmount)
-      .limit(pageSize);
+    const tags = await Tag.aggregate([
+      {
+        $project: {
+          name: 1,
+          questions: 1,
+          description: 1,
+          numberOfQuestions: { $size: "$questions" },
+        },
+      },
+      { $match: query },
+      { $sort: sortOptions },
+      { $skip: skipAmount },
+      { $limit: pageSize },
+    ]);
 
     const totalTags = await Tag.countDocuments(query);
     const isNext = totalTags > skipAmount + tags.length;
@@ -53,7 +65,7 @@ export async function getAllTags(params: GetAllTagsParams) {
     return { tags, isNext };
   } catch (error) {
     console.log(error);
-    throw new Error();
+    throw new Error(`${error}`);
   }
 }
 export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
@@ -120,7 +132,7 @@ export async function getQuestionByTagId(params: GetQuestionsByTagIdParams) {
     return { tagTitle: tag.name, questions, isNext };
   } catch (error) {
     console.log(error);
-    throw error;
+    return redirect("/404");
   }
 }
 

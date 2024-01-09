@@ -18,12 +18,12 @@ export async function generateMetadata(
   { params, searchParams }: URLProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { user } = await getUserInfo({
+  const res = await getUserInfo({
     userId: params.id,
   });
 
   return {
-    title: `Профиль пользователя ${user.username} — devOverflow`,
+    title: `Профиль пользователя ${res?.user?.username} — devOverflow`,
   };
 }
 

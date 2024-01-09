@@ -144,7 +144,7 @@ const AnswerForm = (props: AnswerFormProps) => {
       </div>
       <Form {...form}>
         <form
-          className="mt-6 flex w-full flex-col gap-10"
+          className="mt-6 flex w-full flex-col gap-4"
           onSubmit={form.handleSubmit(handleCreateAnswer)}
         >
           <FormField

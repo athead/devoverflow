@@ -85,7 +85,7 @@ const QuestionDetailsPage = async (props: URLProps) => {
           {questionDetails.title}
         </h2>
       </div>
-      <div className="mb-8 mt-5 flex flex-wrap gap-4">
+      <div className="mb-5 mt-3 flex flex-wrap gap-4">
         <Metric
           imgSrc="/assets/icons/clock.svg"
           alt="clock"

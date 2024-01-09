@@ -76,6 +76,7 @@ code[class*="language-"]::-webkit-scrollbar-thumb {
 .markdown :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   margin-top: 0.2em;
   margin-bottom: 0.2em;
+  text-indent: 1rem;
 }
 /* 
 :not(pre) > code[class*="language-"] {

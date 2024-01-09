@@ -5,7 +5,7 @@ import React from "react";
 import { Badge } from "../ui/badge";
 import RenderTag from "../shared/RenderTag";
 import Img from "../shared/ui/Img";
-import { User } from "@/types/database";
+import { Tag, User } from "@/types/database";
 
 interface UserCardProps {
   user: User;
@@ -15,7 +15,7 @@ const UserCard = async (props: UserCardProps) => {
   const { user } = props;
   const interactedTags = await getTopInteractedTags({ userId: user._id });
   return (
-    <div className="shadow-light100_darknone max-sx:min-w-full w-full xs:w-[260px]">
+    <div className="shadow-light100_darknone w-[calc(100%-1rem)] sm:w-[calc(50%-1rem)] lg:w-[calc(33.333333%-1rem)]">
       <article className="background-light900_dark200 light-border flex w-full flex-col items-center justify-center rounded-2xl border p-8">
         <Link
           href={`${PATHS.PROFILE}/${user.clerkId}`}
@@ -37,8 +37,8 @@ const UserCard = async (props: UserCardProps) => {
         <div className="mt-5">
           {interactedTags.length > 0 ? (
             <div className="flex items-center gap-2">
-              {interactedTags.map((tag) => (
-                <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
+              {interactedTags.map((tag: Tag) => (
+              <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
               ))}
             </div>
           ) : (

@@ -14,6 +14,7 @@ export default authMiddleware({
     "/profile/:id",
     "/community",
     "/jobs",
+    "/404"
   ],
   ignoredRoutes: ["/api/webhook", "/api/trudvsem", "/api/chatgpt"],
 });

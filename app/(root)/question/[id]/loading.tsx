@@ -23,7 +23,7 @@ const Loading = () => {
           <Skeleton style={{ width: "50%", height: "30px" }} />
         </h2>
       </div>
-      <div className="mb-8 mt-5 flex flex-wrap gap-4">
+      <div className="mb-5 mt-3 flex flex-wrap gap-4">
         <Skeleton style={{ width: "80px", height: "16px" }} />
         <Skeleton style={{ width: "40px", height: "16px" }} />
         <Skeleton style={{ width: "70px", height: "16px" }} />

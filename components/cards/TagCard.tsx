@@ -13,8 +13,9 @@ interface TagCardProps {
 const TagCard = (props: TagCardProps) => {
   const { _id, name, description, questionLength } = props;
   return (
-    <Link href={`${PATHS.TAGS}/${_id}`} className="shadow-light100_darknone">
-      <article className="background-light900_dark200 light-border flex w-full flex-col rounded-2xl border px-8 py-10 sm:w-[260px]">
+    <Link href={`${PATHS.TAGS}/${_id}`} className="shadow-light100_darknone w-[calc(100%-1rem)] sm:w-[calc(50%-1rem)] lg:w-[calc(33.333333%-1rem)]">
+      {/* sm:w-[260px] */}
+      <article className="background-light900_dark200 light-border flex flex-col rounded-2xl border px-8 py-10"> 
         <div className="background-light800_dark400 w-fit rounded-l px-5 py-1.5">
           <p className="paragraph-semibold text-dark300_light900">{name}</p>
         </div>

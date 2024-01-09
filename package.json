@@ -28,6 +28,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@tailwindcss/typography": "^0.5.10",
     "@tinymce/tinymce-react": "^4.3.2",
+    "@types/mongoose": "^5.11.97",
     "@types/node": "20.9.2",
     "@types/react": "18.2.37",
     "@types/react-dom": "18.2.15",

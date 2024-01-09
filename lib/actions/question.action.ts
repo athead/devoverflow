@@ -18,6 +18,7 @@ import Answer from "@/database/answer.model";
 import Interaction from "@/database/interaction.model";
 import { FilterQuery } from "mongoose";
 import { HomePageFilters } from "@/constants/filters";
+import { redirect } from "next/navigation";
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
@@ -122,7 +123,7 @@ export async function getQuestionById(params: GetQuestionByIdParams) {
     return question;
   } catch (error) {
     console.log(error);
-    throw error;
+    return redirect('/404');
   }
 }
 

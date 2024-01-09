@@ -6,6 +6,7 @@ import { TagFilters } from "@/constants/filters";
 import { PATHS } from "@/constants/paths";
 import { getAllTags } from "@/lib/actions/tag.actions";
 import { SearchParamsProps } from "@/types";
+import { Tag } from "@/types/database";
 import { Metadata } from "next";
 import React from "react";
 
@@ -38,7 +39,7 @@ const TagsPage = async (props: SearchParamsProps) => {
       </div>
       <section className="mt-12 flex flex-wrap gap-4">
         {tags.length > 0 ? (
-          tags.map((tag) => (
+          tags.map((tag: Tag) => (
             <TagCard
               key={tag._id}
               _id={tag._id}

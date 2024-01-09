@@ -19,7 +19,7 @@ const tagSchema = new Schema(
     },
     description: {
       type: String,
-      required: true,
+      default: "Без описания",
     },
     questions: [{ type: Types.ObjectId, ref: "Question" }],
     followers: [{ type: Types.ObjectId, ref: "User" }],
